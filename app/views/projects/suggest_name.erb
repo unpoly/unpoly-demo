@@ -1,0 +1,9 @@
+<h2 class="mb-4">Suggested project names</h2>
+
+<ul>
+  <% @names.each do |name| %>
+    <li>
+      <a up-emit="name:select" up-emit-props="<%= { name: name }.to_json %>"><%= name %></a>
+    </li>
+  <% end %>
+</ul>

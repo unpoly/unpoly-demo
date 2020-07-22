@@ -1,0 +1,28 @@
+<div class="row mb-4">
+  <div class="col">
+    <h2>All projects</h2>
+  </div>
+
+  <div class="col-sm-auto">
+    <%= link_to 'New project', new_project_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-location': project_path('$id'), 'up-on-accepting': "up.reload('.table')" %>
+  </div>
+</div>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Company</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= link_to project.name, project, 'up-layer': 'new', 'up-dismiss-location': companies_path, 'up-on-dismissing': 'up.reload(".table")' %></td>
+        <td><%= project.company.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

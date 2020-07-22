@@ -1,0 +1,25 @@
+<div class="row mb-4">
+  <div class="col">
+    <h2>All companies</h2>
+  </div>
+
+  <div class="col-sm-auto">
+    <%= link_to 'New company', new_company_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-location': company_path('$id'), 'up-on-accepting': "up.reload('.table')" %>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td><%= link_to company.name, company, 'up-layer': 'new', 'up-dismiss-location': companies_path %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
