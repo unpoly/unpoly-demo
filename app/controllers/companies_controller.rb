@@ -6,6 +6,7 @@ class CompaniesController < ApplicationController
 
   def create
     build_company
+    up.layer.emit('company:created')
     save_company(form: 'new')
   end
 

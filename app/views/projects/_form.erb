@@ -9,7 +9,7 @@
           <%= link_to 'Suggest name', suggest_name_projects_path,
             'up-layer': 'new',
             'up-accept-event': 'name:select',
-            'up-on-accepting': "up.fragment.get('#project_name').value = value.name"
+            'up-on-accepted': "up.fragment.get('#project_name').value = value.name"
           %>
         </span>
       </div>
@@ -25,7 +25,7 @@
           <%= link_to 'New company', new_company_path,
             'up-layer': 'new',
             'up-accept-location': company_path('$id'),
-            'up-on-accepting': "console.log('--- before validate, current layer is %o', up.layer.current); up.validate('form', { params: { 'project[company_id]': value.id } }); console.log('--- after validate')"
+            'up-on-accepted': "console.log('--- before validate, current layer is %o', up.layer.current); up.validate('form', { params: { 'project[company_id]': value.id } }); console.log('--- after validate')"
           %>
         </span>
       </div>

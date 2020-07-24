@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-sm-auto">
-    <%= link_to 'New project', new_project_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-location': project_path('$id'), 'up-on-accepting': "up.reload('.table')" %>
+    <%= link_to 'New project', new_project_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-location': project_path('$id'), 'up-on-accepted': "up.reload('.table')" %>
   </div>
 </div>
 
@@ -20,7 +20,7 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= link_to project.name, project, 'up-layer': 'new', 'up-dismiss-location': companies_path, 'up-on-dismissing': 'up.reload(".table")' %></td>
+        <td><%= link_to project.name, project, 'up-layer': 'new' %></td>
         <td><%= project.company.name %></td>
       </tr>
     <% end %>

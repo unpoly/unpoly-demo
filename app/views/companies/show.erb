@@ -13,16 +13,22 @@
   <dt>Name</dt>
   <dd><%= @company.name %></dd>
   <dt>Address</dt>
-  <dd><%= safe_join(@company.address.lines, '<br>'.html_safe) %></dd>
+  <dd>
+    <% if @company.address.present? %>
+      <%= safe_join(@company.address.lines, '<br>'.html_safe) %>
+    <% else %>
+      &mdash;
+    <% end %>
+  </dd>
 </dl>
 
 <% if @company.projects.present? %>
 
-  <h3>Projects</h3>
+  <h4>Projects</h4>
 
   <ul>
     <% @company.projects.each do |project| %>
-      <li><%= link_to project.name, project, 'up-layer': 'root' %></li>
+      <li><%= link_to project.name, project, 'up-layer': 'new' %></li>
     <% end %>
   </ul>
 

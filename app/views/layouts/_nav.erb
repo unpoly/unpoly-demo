@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand navbar-light bg-light fixed-top">
-  <a class="navbar-brand" href="#">ERP Demo</a>
+  <%= link_to 'ERP Demo', root_path, class: 'navbar-brand' %>
   <div class="navbar-nav">
     <%= link_to 'Projects', projects_path, class: 'nav-item nav-link', 'up-follow': '', 'up-alias' => project_path('*') %>
     <%= link_to 'Budgets', budgets_path, class: 'nav-item nav-link', 'up-follow': '', 'up-alias' => budget_path('*') %>

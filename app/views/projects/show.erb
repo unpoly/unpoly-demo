@@ -13,7 +13,7 @@
   <dt>Name</dt>
   <dd><%= @project.name %></dd>
   <dt>Company</dt>
-  <dd><%= link_to @project.company.name, @project.company, 'up-layer': 'root' %></dd>
+  <dd><%= link_to @project.company.name, @project.company, 'up-layer': 'new' %></dd>
 </dl>
 
 <div class="row mb-2">
@@ -27,7 +27,7 @@
         'up-layer': 'new',
         'up-accept-location': budget_path('$id'),
         'up-size': 'small',
-        'up-on-accepting': "up.reload('.budgets')",
+        'up-on-accepted': "up.reload('.budgets')",
         'up-context': { from_project_form: true }.to_json
       %>
     </div>
@@ -44,7 +44,7 @@
       <tbody>
         <% @project.budgets.each do |budget| %>
           <tr>
-            <td><%= link_to budget.name, budget, 'up-layer': 'new', 'up-size': 'small' %></td>
+            <td><%= link_to budget.name, budget, 'up-layer': 'new', 'up-size': 'small', 'up-context': { from_project_form: true }.to_json %></td>
             <td><%= budget.amount %></td>
           </tr>
         <% end %>
