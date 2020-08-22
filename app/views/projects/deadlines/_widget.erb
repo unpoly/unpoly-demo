@@ -1,0 +1,8 @@
+<div class="deadline-widget" id="deadline-widget-project-<%= project.id %> %>">
+  <% if project.deadline %>
+    <%= l project.deadline %>
+  <% else %>
+    none
+  <% end %>
+  <%= link_to 'set', edit_project_deadline_path(project) %>
+</div>

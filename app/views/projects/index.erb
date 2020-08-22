@@ -22,6 +22,7 @@
       <tr>
         <td><%= link_to project.name, project, 'up-layer': 'new' %></td>
         <td><%= project.company.name %></td>
+        <td><%= project_deadline(project) %></td>
       </tr>
     <% end %>
   </tbody>

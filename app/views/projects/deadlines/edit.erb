@@ -1,0 +1,4 @@
+<%= form_for @project, url: project_deadline_path(@project), class: 'deadline-widget', id: "deadline-widget-project-#{@project.id}", 'up-target': ':closest(.deadline-widget)' do |form| %>
+  <%= form.date_field :deadline %>
+  <%= form.submit 'set', class: 'btn btn-secondary btn-sm' %>
+<% end %>

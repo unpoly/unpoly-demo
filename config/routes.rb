@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     collection do
       get :suggest_name
     end
+
+    resource :deadline, only: [:edit, :update], controller: 'projects/deadlines'
   end
 
   resources :budgets
