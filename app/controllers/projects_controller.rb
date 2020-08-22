@@ -38,7 +38,7 @@ class ProjectsController < ApplicationController
   end
 
   def suggest_name
-    @names = (1..20).map { Project.suggest_name }
+    @names = (1..10).map { Project.suggest_name }
   end
 
   private

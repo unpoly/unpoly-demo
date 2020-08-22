@@ -7,7 +7,8 @@
       <div class="input-group-append">
         <span class="input-group-text">
           <%= link_to 'Suggest name', suggest_name_projects_path,
-            'up-layer': 'new',
+            'up-layer': 'popup',
+            'up-align': 'right',
             'up-accept-event': 'name:select',
             'up-on-accepted': "up.fragment.get('#project_name').value = value.name"
           %>

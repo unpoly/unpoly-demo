@@ -1,5 +1,3 @@
-<h2 class="mb-4">Suggested project names</h2>
-
 <% @names.each do |name| %>
   <a up-emit="name:select" up-emit-props="<%= { name: name }.to_json %>" class="btn btn-info text-light mb-2 mr-1"><%= name %></a>
 <% end %>
