@@ -26,7 +26,7 @@
           <%= link_to 'New company', new_company_path,
             'up-layer': 'new',
             'up-accept-location': company_path('$id'),
-            'up-on-accepted': "console.log('--- before validate, current layer is %o', up.layer.current); up.validate('form', { params: { 'project[company_id]': value.id } }); console.log('--- after validate')"
+            'up-on-accepted': "up.validate('form', { params: { 'project[company_id]': value.id } })"
           %>
         </span>
       </div>

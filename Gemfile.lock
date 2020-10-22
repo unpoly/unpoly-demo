@@ -1,7 +1,7 @@
 PATH
   remote: ../unpoly
   specs:
-    unpoly-rails (0.62.1)
+    unpoly-rails (1.0.0)
       memoized
       rails (>= 4.2)
 
