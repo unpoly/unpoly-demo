@@ -18,13 +18,13 @@ class Tenant < ApplicationRecord
   private
 
   def create_sample_records
-    10.times do
+    5.times do
       company = companies.create!(
         name: Faker::Company.name,
         address: sample_address
       )
 
-      (2..4).to_a.sample.times do
+      (2..3).to_a.sample.times do
         project = projects.create!(
           company: company,
           name: Project.suggest_name
