@@ -65,7 +65,7 @@ class CompaniesController < ApplicationController
   end
 
   def company_scope
-    Company.all
+    current_tenant.companies
   end
 
   def company_attributes

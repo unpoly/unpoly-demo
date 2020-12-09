@@ -64,7 +64,7 @@ class BudgetsController < ApplicationController
   end
 
   def budget_scope
-    Budget.all
+    current_tenant.budgets
   end
 
   def budget_attributes

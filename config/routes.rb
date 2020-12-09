@@ -9,4 +9,6 @@ Rails.application.routes.draw do
 
   resources :budgets
   resources :companies
+
+  get 'verify_tenant', to: 'tenants#verify', as: :verify_tenant
 end

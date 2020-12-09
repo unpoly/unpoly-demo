@@ -27,7 +27,7 @@
   <h4>Projects</h4>
 
   <ul>
-    <% @company.projects.each do |project| %>
+    <% @company.projects.natural_sort_by(&:name).each do |project| %>
       <li><%= link_to project.name, project, 'up-layer': 'new' %></li>
     <% end %>
   </ul>

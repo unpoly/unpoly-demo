@@ -1,6 +1,8 @@
 class Project < ActiveRecord::Base
-  has_many :budgets
+  belongs_to :tenant
   belongs_to :company
+  has_many :budgets
+
   accepts_nested_attributes_for :budgets
 
   validates :name, presence: true

@@ -68,7 +68,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_scope
-    Project.all
+    current_tenant.projects
   end
 
   def project_attributes
