@@ -8,6 +8,8 @@ class Project < ActiveRecord::Base
   validates :name, presence: true
   validates :company_id, presence: true
 
+  has_defaults star: false
+
   def self.suggest_name
     Faker::App.name
   end

@@ -73,7 +73,7 @@ class ProjectsController < ApplicationController
 
   def project_attributes
     if (attrs = params[:project])
-      attrs.permit(:name, :company_id)
+      attrs.permit(:name, :company_id, :star)
     else
       {}
     end
