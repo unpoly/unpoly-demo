@@ -1,0 +1,13 @@
+<div class="card task <%= 'done' if task.done? %>">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <div class="card-text"><b><%= task.text %></b></div>
+      </div>
+      <div class="col-sm-auto">
+        <%= link_to 'done', [:toggle_done, task], method: :patch, class: 'btn btn-sm btn-outline-info', 'up-target': '.task' %>
+        <%= link_to 'edit', [:edit, task], class: 'btn btn-sm btn-outline-secondary', 'up-target': '.task' %>
+      </div>
+    </div>
+  </div>
+</div>

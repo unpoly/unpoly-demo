@@ -26,3 +26,12 @@ body
     border-color: $danger
   .input-group &
     flex: 1 1 auto // Use available space when wrapping a .form-control inside an .input-group
+
+.task
+  &:not(.done)
+    border-color: $info
+
+  &.done
+    opacity: 0.5
+    .card-text
+      text-decoration: line-through

@@ -3,6 +3,7 @@ class Tenant < ApplicationRecord
   has_many :companies, dependent: :destroy
   has_many :budgets, dependent: :destroy
   has_many :projects, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 
   after_create :create_sample_records
 
@@ -38,6 +39,13 @@ class Tenant < ApplicationRecord
           )
         end
       end
+    end
+
+    30.times do
+      tasks.create!(
+        text: Faker::Lorem.sentence(word_count: 2,  random_words_to_add: 10),
+        created_at: rand(100).hours.ago
+      )
     end
   end
 

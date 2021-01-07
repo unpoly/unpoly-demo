@@ -1,0 +1,10 @@
+<%= form_for @task, html: { 'up-target': '.task', class: 'task card' } do |form| %>
+  <div class="card-body">
+    <div class="form-group mb-0">
+      <%= form.label :text, class: 'd-none' %>
+      <%= form.text_area :text, class: 'form-control', autofocus: true %>
+    </div>
+
+    <%= form.submit "Save", class: 'btn btn-primary mt-2' %>
+  </div>
+<% end %>
