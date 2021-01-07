@@ -20,7 +20,7 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= link_to project.name, project, 'up-layer': 'new' %></td>
+        <td><%= link_to project.name, project, 'up-layer': 'new', 'up-dismiss-location': projects_path %></td>
         <td><%= project.company.name %></td>
       </tr>
     <% end %>

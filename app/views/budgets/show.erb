@@ -18,7 +18,7 @@
   <dt>Project</dt>
   <dd>
     <% if @budget.project %>
-      <%= link_to @budget.project.name, @budget.project, 'up-layer': 'new' %>
+      <%= link_to @budget.project.name, @budget.project, 'up-layer': 'new', 'up-dismiss-location': projects_path %>
     <% else %>
       &mdash;
     <% end %>

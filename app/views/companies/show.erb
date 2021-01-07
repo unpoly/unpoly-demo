@@ -28,7 +28,7 @@
 
   <ul>
     <% @company.projects.natural_sort_by(&:name).each do |project| %>
-      <li><%= link_to project.name, project, 'up-layer': 'new' %></li>
+      <li><%= link_to project.name, project, 'up-layer': 'new', 'up-dismiss-location': projects_path %></li>
     <% end %>
   </ul>
 

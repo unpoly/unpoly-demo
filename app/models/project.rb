@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   belongs_to :tenant
   belongs_to :company
-  has_many :budgets
+  has_many :budgets, dependent: :destroy
 
   accepts_nested_attributes_for :budgets
 
