@@ -17,7 +17,7 @@ class CompaniesController < ApplicationController
   def update
     load_company
     build_company
-    save_company(form: 'update')
+    save_company(form: 'edit')
   end
 
   def show
