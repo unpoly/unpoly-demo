@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-sm-auto">
-    <%= link_to 'New project', new_project_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-location': project_path('$id'), 'up-on-accepted': "up.reload('.table')" %>
+    <%= link_to 'New project', new_project_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-location': project_path('$id'), 'up-on-accepted': "up.reload('.table', { focus: ':main' })" %>
   </div>
 </div>
 

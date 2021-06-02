@@ -3,7 +3,7 @@
   <div class="form-group">
     <%= form.label :name %>
     <div class="input-group">
-      <%= form.text_field :name, class: 'form-control' %>
+      <%= form.text_field :name, class: 'form-control', autocomplete: 'off' %>
       <div class="input-group-append">
         <span class="input-group-text">
           <%= link_to 'Suggest name', suggest_name_projects_path,
