@@ -23,4 +23,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  helper_method memoize def fragment_explainer
+    FragmentExplainer.new(self)
+  end
+
 end

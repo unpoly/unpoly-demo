@@ -19,6 +19,8 @@
     <div up-main class="container">
       <%= render_flashes %>
       <%= yield %>
+
+      <%= render 'layouts/fragment_explainer' %>
     </div>
 
     <%= javascript_include_tag 'application' %>
