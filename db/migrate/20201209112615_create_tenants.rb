@@ -2,6 +2,7 @@ class CreateTenants < ActiveRecord::Migration[6.0]
   def change
     create_table :tenants do |t|
       t.bigint :schema_version
+      t.timestamps
     end
 
     add_column :companies, :tenant_id, :integer

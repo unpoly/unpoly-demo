@@ -16,6 +16,13 @@ class Tenant < ApplicationRecord
     connection.migration_context.current_version
   end
 
+  def self.clean!
+    old_tenants = where('created_at < ?', 7.days.ago)
+    incompatible_tenants = where('schema_version != ?', schema_version)
+    cleanable_tenants = old_tenants.or(incompatible_tenants)
+    cleanable_tenants.find_each(&:destroy)
+  end
+
   private
 
   def create_sample_records
