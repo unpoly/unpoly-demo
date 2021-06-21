@@ -3,7 +3,6 @@ lock "~> 3.16.0"
 
 set :repo_url, 'git@github.com:unpoly/unpoly-demo.git'
 set :application, "unpoly-demo"
-set :repo_url, "git@example.com:me/my_repo.git"
 set :scm, :git
 
 # Default value for :log_level is :debug
