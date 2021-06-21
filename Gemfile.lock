@@ -76,6 +76,9 @@ GEM
       sshkit (>= 1.9.0)
     capistrano-bundler (2.0.1)
       capistrano (~> 3.1)
+    capistrano-opscomplete (1.0.0)
+      capistrano (>= 3.0, < 4.0.0)
+      rake
     capistrano-passenger (0.2.1)
       capistrano (~> 3.0)
     capistrano-rails (1.6.1)
@@ -113,7 +116,9 @@ GEM
       mimemagic (~> 0.3.2)
     memoized (1.0.2)
     method_source (1.0.0)
-    mimemagic (0.3.5)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.1)
@@ -217,6 +222,7 @@ DEPENDENCIES
   bootstrap
   byebug
   capistrano (~> 3.10)
+  capistrano-opscomplete
   capistrano-passenger
   capistrano-rails (~> 1.3)
   coffee-script
