@@ -2,15 +2,21 @@ module TourHelper
 
   def tour_dot(options = {}, &block)
     html = capture(&block).strip
+
+    # The margin looks nicer when the text is wrapped in <p> tags.
+    # Wrap the given HTML in a <p> if the callerr hasn't already done so.
     unless html.starts_with?('<')
       html = content_tag(:p, html)
     end
+
+    # Add a button to close the hint popup.
     html << <<~HTML.html_safe
       <p>
         <a href="#" up-dismiss class="btn btn-success btn-sm">OK</a>
       </p>
     HTML
-    
+
+    # The hint is just an Unpoly popup.
     attrs = {
       class: 'tour-dot',
       href: '#',
@@ -21,6 +27,7 @@ module TourHelper
       'up-class': 'tour-hint'
     }
 
+    # This is a hint to hide this dot on the root layer (see application.sass).
     if options[:overlay_only]
       attrs['overlay-only'] = ''
     end
