@@ -1,3 +1,13 @@
+<% if up.context[:from_company] %>
+  <% tour_dot do %>
+    <p>
+      This overlay reuses the form template that is also used for the
+      <%= link_to 'Projects', projects_path, 'up-layer': 'root' %> section
+      in the main navigation.
+    </p>
+  <% end %>
+<% end %>
+
 <%= form_for @project, html: { 'up-submit': '' } do |form| %>
 
   <div class="form-group">
@@ -7,18 +17,29 @@
       <div class="input-group-append">
         <span class="input-group-text">
           <%= link_to 'Suggest name', suggest_name_projects_path,
-            'up-layer': 'popup',
+            'up-layer': 'new popup',
             'up-align': 'right',
             'up-accept-event': 'name:select',
             'up-on-accepted': "up.fragment.get('#project_name').value = value.name"
           %>
+          <%= tour_dot(position: 'left') do %>
+            <p>The popup contains suggestions for a project name.</p>
+            <p>When a suggestion is clicked, the choice is communicated
+              back to the project form via a custom <code>name:select</code> event.</p>
+          <% end %>
         </span>
       </div>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group <%= 'd-none' if up.context[:from_company] %>">
     <%= form.label :company_id %>
+
+    <%= tour_dot do %>
+      The company select is hidden when this form is opened from the
+      company details of an existing company.
+    <% end %>
+
     <div class="input-group">
       <%= form.collection_select :company_id, Company.order(:name), :id, :name, { include_blank: '<Select a company>' }, class: 'custom-select' %>
       <div class="input-group-append">
@@ -28,6 +49,17 @@
             'up-accept-location': company_path('$id'),
             'up-on-accepted': "up.validate('form', { params: { 'project[company_id]': value.id } })"
           %>
+          <%= tour_dot(position: 'left') do %>
+            <p>
+              A new company can be created in an overlay while the incomplete project form
+              stays open in the background.
+            </p>
+            <p>
+              When a company was created successfully, the overlay is automatically closed.
+              The project form reloads the company select box so the new company appears
+              as a new option.
+            </p>
+          <% end %>
         </span>
       </div>
     </div>

@@ -52,3 +52,57 @@ body
 
 .fragment-explainer--cell
   flex: 0 0 auto
+
+  a
+    text-decoration: underline
+
+$tour-dot-color: $green
+
+.tour-dot
+  margin: 0 0.5rem
+  display: inline-block
+  vertical-align: middle
+  width: 10px
+  height: 10px
+  border-radius: 50%
+  background: $tour-dot-color
+  cursor: pointer
+  box-shadow: 0 0 0 rgba($tour-dot-color, 0.4)
+  animation: tour-dot-pulse 2s infinite
+  font-size: 0
+
+  &:hover
+    animation: none
+
+  &[overlay-only]
+    display: none
+
+    up-modal &,
+    up-drawer &
+      display: inline-block
+
+.btn.btn-sm
+  min-width: 50px
+
+// CSS pulse effect by Florin Pop:
+// https://www.florin-pop.com/blog/2019/03/css-pulse-effect/
+@keyframes tour-dot-pulse
+  0%
+    box-shadow: 0 0 0 0 transparentize($tour-dot-color, 0.4)
+  70%
+    box-shadow: 0 0 0 10px rgba($tour-dot-color, 0)
+  100%
+    box-shadow: 0 0 0 0 rgba($tour-dot-color, 0)
+
+//.driver-popover-title
+//  display: none !important
+
+$popup-spacing: 12px
+
+up-popup.tour-hint
+  margin: $popup-spacing
+
+up-popup-content
+  line-height: 1.3
+  *:last-child
+    margin-bottom: 0

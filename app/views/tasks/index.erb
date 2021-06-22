@@ -10,7 +10,7 @@
 </div>
 
 <div class="card-columns">
-  <% @tasks.each do |task| %>
-    <%= render task %>
+  <% @tasks.each_with_index do |task, i| %>
+    <%= render task, tour_dot: (i == 0) %>
   <% end %>
 </div>

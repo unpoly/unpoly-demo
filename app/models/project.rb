@@ -12,4 +12,8 @@ class Project < ActiveRecord::Base
     Faker::App.name
   end
 
+  def total_budget
+    budgets.sum(&:amount)
+  end
+
 end

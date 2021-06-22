@@ -17,7 +17,7 @@ class FragmentExplainer
   end
 
   def view_short_path
-    "#{controller_name}/#{view_name}.html.erb"
+    "#{controller_name}/#{view_name}.erb"
   end
 
   def view_path

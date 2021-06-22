@@ -4,6 +4,10 @@
   </div>
 
   <div class="col-sm-auto">
+    <%= tour_dot(position: 'left') do %>
+      <p>The form to create a new company opens in an overlay.</p>
+      <p>Once the form has been submitted successfully, the overlay is automatically closed and the companies table is reloaded.</p>
+    <% end %>
     <%= link_to 'New company', new_company_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-event': 'company:created', 'up-on-accepted': "up.reload('.table')" %>
   </div>
 </div>
@@ -16,9 +20,15 @@
   </thead>
 
   <tbody>
-    <% @companies.each do |company| %>
+    <% @companies.each_with_index do |company, i| %>
       <tr>
-        <td><%= link_to company.name, company, 'up-layer': 'new', 'up-dismiss-location': companies_path %></td>
+        <td>
+          <%= link_to company.name, company, 'up-layer': 'new', 'up-dismiss-location': companies_path %>
+
+          <%= tour_dot do %>
+            Note how the company details are opened in an overlay.
+          <% end if i == 0 %>
+        </td>
       </tr>
     <% end %>
   </tbody>

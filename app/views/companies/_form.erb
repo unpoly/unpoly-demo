@@ -17,4 +17,9 @@
 
   <%= form.submit "Save", class: 'btn btn-primary mt-2' %>
 
+  <%= tour_dot(overlay_only: true) do %>
+    <p>Saving an invalid form will re-render validation errors in the same overlay.</p>
+    <p>Links and forms always render in the same layer unless another layer is targeted explicitly.</p>
+  <% end %>
+
 <% end %>

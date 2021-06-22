@@ -5,6 +5,15 @@
         <div class="card-text"><b><%= task.text %></b></div>
       </div>
       <div class="col-sm-auto">
+        <%= tour_dot do %>
+          <p>
+            This screen shows many task boxes with the same selector
+            (<code>&lt;div class="task"&gt;</code>).
+          </p>
+          <p>
+            Note how changing a task will only update a single task box.
+          </p>
+        <% end if local_assigns[:tour_dot] %>
         <%= link_to 'done', [:toggle_done, task], method: :patch, class: 'btn btn-sm btn-outline-info', 'up-target': '.task' %>
         <%= link_to 'edit', [:edit, task], class: 'btn btn-sm btn-outline-secondary', 'up-target': '.task' %>
       </div>
