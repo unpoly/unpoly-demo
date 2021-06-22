@@ -129,7 +129,7 @@ GEM
       racc (~> 1.4)
     pg (1.2.2)
     popper_js (1.16.0)
-    puma (4.3.5)
+    puma (4.3.8)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
