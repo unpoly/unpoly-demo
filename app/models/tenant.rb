@@ -1,7 +1,6 @@
 class Tenant < ApplicationRecord
 
   has_many :companies, dependent: :destroy
-  has_many :budgets, dependent: :destroy
   has_many :projects, dependent: :destroy
   has_many :tasks, dependent: :destroy
 
@@ -33,18 +32,11 @@ class Tenant < ApplicationRecord
       )
 
       (2..3).to_a.sample.times do
-        project = projects.create!(
+        projects.create!(
           company: company,
-          name: Project.suggest_name
+          name: Project.suggest_name,
+          budget: ((1..150).to_a.sample * 1000),
         )
-
-        (2..3).to_a.sample.times do
-          budgets.create!(
-            project: project,
-            amount: ((1..150).to_a.sample * 1000),
-            name: Faker::Commerce.product_name
-          )
-        end
       end
     end
 

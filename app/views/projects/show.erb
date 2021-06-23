@@ -14,49 +14,6 @@
   <dd><%= @project.name %></dd>
   <dt>Company</dt>
   <dd><%= link_to @project.company.name, @project.company, 'up-layer': 'new', 'up-dismiss-location': projects_path %></dd>
+  <dt>Budget</dt>
+  <dd><%= number_to_currency(@project.budget, unit: '€') %></dd>
 </dl>
-
-<div class="row mb-2">
-  <div class="col">
-    <h4>Budgets</h4>
-  </div>
-
-  <div class="col-sm-auto">
-    <div class="col-sm-auto">
-      <%= tour_dot(position: 'left') do %>
-        When a new budget was created, the budget list is
-        reloaded automatically.
-      <% end %>
-      <%= link_to 'Add budget', new_budget_path(budget: { project_id: @project.id }), class: 'btn btn-primary btn-sm',
-        'up-layer': 'new',
-        'up-accept-location': budget_path('$id'),
-        'up-size': 'small',
-        'up-on-accepted': "up.reload('.budgets')",
-        'up-context': { from_project_form: true }.to_json
-      %>
-    </div>
-  </div>
-</div>
-
-<div class="budgets">
-  <% if @project.budgets.present? %>
-    <table class="table table-sm">
-      <thead>
-        <th>Budget</th>
-        <th>Amount</th>
-      </thead>
-      <tbody>
-        <% @project.budgets.natural_sort_by(&:name).each do |budget| %>
-          <tr>
-            <td><%= link_to budget.name, budget, 'up-layer': 'new', 'up-size': 'small', 'up-context': { from_project_form: true }.to_json, 'up-dismiss-location': budgets_path %></td>
-            <td><%= budget.amount %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <p>
-      This project has no budgets yet.
-    </p>
-  <% end %>
-</div>

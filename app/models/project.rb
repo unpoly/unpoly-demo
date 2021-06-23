@@ -1,19 +1,13 @@
 class Project < ActiveRecord::Base
   belongs_to :tenant
   belongs_to :company
-  has_many :budgets, dependent: :destroy
-
-  accepts_nested_attributes_for :budgets
 
   validates :name, presence: true
   validates :company_id, presence: true
+  validates :budget, numericality: { greater_than_or_equal_to: 100 }
 
   def self.suggest_name
     Faker::App.name
-  end
-
-  def total_budget
-    budgets.sum(&:amount)
   end
 
 end

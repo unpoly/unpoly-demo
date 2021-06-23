@@ -7,8 +7,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :budgets
-
   resources :companies
 
   resources :tasks do
