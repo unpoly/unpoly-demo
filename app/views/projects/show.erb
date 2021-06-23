@@ -1,6 +1,18 @@
 <div class="row mb-4">
   <div class="col">
-    <h2>Project #<%= @project.id %></h2>
+    <h2>
+      Project #<%= @project.id %>
+
+      <% if up.context[:from_company] %>
+        <%= tour_dot do %>
+          <p>
+            This overlay reuses the template that is also used for the
+            <%= link_to 'Projects', projects_path, 'up-layer': 'root' %> section
+            in the main navigation.
+          </p>
+        <% end %>
+      <% end %>
+    </h2>
   </div>
 
   <div class="col-sm-auto">

@@ -1,22 +1,20 @@
 <div class="card task <%= 'done' if task.done? %>" tabindex="0">
-  <div class="card-body">
-    <div class="row">
-      <div class="col">
-        <div class="card-text"><b><%= task.text %></b></div>
-      </div>
-      <div class="col-sm-auto">
-        <%= tour_dot do %>
-          <p>
-            This screen shows many task boxes with the same selector
-            (<code>&lt;div class="task"&gt;</code>).
-          </p>
-          <p>
-            Note how changing a task will only update a single task box.
-          </p>
-        <% end if local_assigns[:tour_dot] %>
-        <%= link_to 'done', [:toggle_done, task], method: :patch, class: 'btn btn-sm btn-outline-info', 'up-target': '.task' %>
-        <%= link_to 'edit', [:edit, task], class: 'btn btn-sm btn-outline-secondary', 'up-target': '.task' %>
-      </div>
+  <div class="card-body d-flex flex-column">
+    <div class="card-text flex-grow-1">
+      <b><%= task.text %></b>
+    </div>
+    <div class="flex-grow-0">
+      <%= link_to 'done', [:toggle_done, task], method: :patch, class: 'btn btn-sm btn-outline-info', 'up-target': '.task' %>
+      <%= link_to 'edit', [:edit, task], class: 'btn btn-sm btn-outline-secondary', 'up-target': '.task' %>
+      <%= tour_dot do %>
+        <p>
+          This screen shows many task boxes with the same selector
+          (<code>&lt;div class="task"&gt;</code>).
+        </p>
+        <p>
+          Note how changing a task will only update a single task box.
+        </p>
+      <% end if local_assigns[:tour_dot] %>
     </div>
   </div>
 </div>

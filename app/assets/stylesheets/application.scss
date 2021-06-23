@@ -1,0 +1,169 @@
+//= require unpoly
+//= require unpoly-bootstrap4
+
+@import 'bootstrap';
+@import 'helpers';
+
+@mixin block-spacing {
+  margin-top: spacer(3);
+  margin-bottom: spacer(3);
+}
+
+body {
+  margin: 5.5rem spacer(4) 7rem spacer(4);
+  overflow-y: scroll;
+}
+
+p {
+  margin-bottom: 0.8rem;
+}
+
+//*:focus
+//  outline: 2px solid orange // Make focus very visible to help test A11Y
+//
+//.up-active
+//  outline: 2px solid green !important
+
+.field_with_errors {  // display: inline-block
+  label {
+    color: $danger;
+  }
+  input,
+  textarea,
+  select {
+    border-color: $danger;
+  }
+  .input-group & {
+    flex: 1 1 auto; // Use available space when wrapping a .form-control inside an .input-group;
+  }
+}
+
+.tasks {
+  display: flex;
+  gap: spacer(3);
+  flex-wrap: wrap;
+}
+
+.task {
+  flex: 0 0 358px;
+  height: 180px;
+
+  &:not(.done) {
+    border-color: $info;
+  }
+  &.done {
+    opacity: 0.5;
+    .card-text {
+      text-decoration: line-through;
+    }
+  }
+}
+
+.fragment-explainer {
+  background-color: white;
+  padding: 1rem 1.7rem 1.05rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  border-top: 1px solid $gray-500;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 0.6rem 1.7rem;
+  flex-wrap: wrap;
+  line-height: 1.35;
+}
+.fragment-explainer--cell {
+  flex: 0 0 auto;
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+$tour-dot-color: $green;
+
+.tour-dot {
+  margin: 0 0.4rem;
+  display: inline-block;
+  //vertical-align: middle;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $tour-dot-color;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba($tour-dot-color, 0.4);
+  animation: tour-dot-pulse 2s infinite;
+  font-size: 0;
+
+  &:hover {
+    animation: none;
+  }
+  &[overlay-only] {
+    display: none;
+
+    up-modal &,
+    up-drawer & {
+      display: inline-block;
+    }
+  }
+  &.viewed {
+    animation: none;
+    filter: grayscale(100%);
+    opacity: 0.6;
+  }
+}
+.btn.btn-sm {
+  min-width: 50px;
+}
+
+// CSS pulse effect by Florin Pop:
+// https://www.florin-pop.com/blog/2019/03/css-pulse-effect/
+@keyframes tour-dot-pulse {
+  0% {
+    box-shadow: 0 0 0 0 transparentize($tour-dot-color, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba($tour-dot-color, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba($tour-dot-color, 0);
+  }
+};
+
+$popup-spacing: 12px;
+
+up-popup {
+  z-index: 1031;
+}
+
+up-popup.tour-hint {
+  margin: $popup-spacing;
+
+  code {
+    white-space: nowrap
+  }
+}
+
+up-popup-content {
+  line-height: 1.3;
+
+  p {
+    margin-bottom: 0.7rem;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+$new-fragment-color: #fd0;
+
+.new-fragment:not(.fragment-explainer):not(up-modal):not(up-popup) {
+  transition: background-color 1s ease;
+  background-color: rgba($new-fragment-color, 0);
+
+  &.inserted {
+    background-color: rgba($new-fragment-color, 0.7);
+  }
+}

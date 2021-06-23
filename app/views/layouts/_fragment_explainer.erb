@@ -1,23 +1,31 @@
 <div class="fragment-explainer" up-hungry up-fixed="bottom">
+
   <div class="fragment-explainer--cell">
     <small>Last update:</small>
     <br>
     <b>
       <% if fragment_explainer.up? %>
-        Fragment <code><%= fragment_explainer.up.target %></code>
+        Fragment <code><%= fragment_explainer.updated_selector %></code>
       <% else %>
         Full page load
       <% end %>
     </b>
   </div>
+
   <div class="fragment-explainer--cell">
     <small>View template:</small>
     <br>
-    <a href="<%= fragment_explainer.view_github_url %>"><code><%= fragment_explainer.view_short_path %></code></a>
+    <a href="<%= fragment_explainer.view_github_url %>" target="_blank">
+      <code><%= fragment_explainer.view_short_path %></code>
+    </a>
   </div>
+
   <div class="fragment-explainer--cell">
     <small>Controller:</small>
     <br>
-    <a href="<%= fragment_explainer.controller_github_url %>"><code><%= fragment_explainer.controller_short_path %></code></a>
+    <a href="<%= fragment_explainer.controller_github_url %>" target="_blank">
+      <code><%= fragment_explainer.controller_short_path %></code>
+    </a>
   </div>
+
 </div>

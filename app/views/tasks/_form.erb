@@ -1,10 +1,11 @@
 <%= form_for @task, html: { 'up-target': '.task', class: 'task card' } do |form| %>
-  <div class="card-body">
-    <div class="form-group mb-0">
+  <div class="card-body d-flex flex-column">
+    <div class="form-group flex-grow-1 mb-0">
       <%= form.label :text, class: 'd-none' %>
-      <%= form.text_area :text, class: 'form-control', autofocus: true %>
+      <%= form.text_area :text, class: 'form-control', autofocus: true, rows: 3 %>
     </div>
-
-    <%= form.submit "Save", class: 'btn btn-primary mt-2' %>
+    <div class="flex-grow-0">
+      <%= form.submit "Save", class: 'btn btn-primary mt-2' %>
+    </div>
   </div>
 <% end %>

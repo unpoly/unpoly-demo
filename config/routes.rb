@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'companies#index'
+  root to: 'pages#home'
 
   resources :projects do
     collection do

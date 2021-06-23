@@ -48,12 +48,11 @@ class CompaniesController < ApplicationController
     @company ||= company_scope.find(params[:id])
   end
 
-  def save_company(event: nil, form:)
+  def save_company(form:)
     if up.validate?
       @company.valid? # run validations
       render form
     elsif @company.save
-      up.layer.emit(event) if event
       redirect_to @company
     else
       render form, status: :bad_request

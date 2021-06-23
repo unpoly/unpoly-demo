@@ -54,7 +54,12 @@
         <% @company.projects.natural_sort_by(&:name).each_with_index do |project, i| %>
           <tr>
             <td>
-              <%= link_to project.name, project, 'up-layer': 'new', 'up-dismiss-location': projects_path %>
+              <%= link_to project.name, project,
+                'up-layer': 'new',
+                'up-dismiss-event': 'project:destroyed',
+                'up-on-dismissed': 'up.reload(".projects")',
+                'up-context': { from_company: true }.to_json
+              %>
               <%= tour_dot(overlay_only: true) do %>
                 <p>Opening the project will open another modal over this one.</p>
                 <p>Overlays can be stacked infinitely.</p>

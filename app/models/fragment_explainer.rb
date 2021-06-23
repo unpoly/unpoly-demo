@@ -40,19 +40,15 @@ class FragmentExplainer
     github_url(layout_path)
   end
 
-  def up_target
-    up.target
-  end
-
-  def title
-    if up?
-      "Updated fragment #{up_target}"
+  def updated_selector
+    if response.status.to_s.starts_with?('2')
+      up.target
     else
-      "Full page load"
+      up.fail_target
     end
   end
 
-  delegate :controller_name, :action_name, :up, :up?, to: :controller
+  delegate :controller_name, :action_name, :response, :up, :up?, to: :controller
 
   private
 

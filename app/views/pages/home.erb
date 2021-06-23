@@ -1,0 +1,79 @@
+<h2 class="mb-4">Unpoly Demo</h2>
+
+<p>
+  This is a small <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a>
+  application to show off <a href="https://unpoly.com">Unpoly</a>.
+</p>
+
+
+<p class="d-block d-sm-none text-danger">
+  We recommend viewing this demo on a PC or tablet.
+</p>
+
+<p>
+  Like all Unpoly applications, this demo is a classic web app that renders HTML on the server.
+  The app is enhanced to feel like a <a href="https://en.wikipedia.org/wiki/Single-page_application">single-page app</a>
+  by adding <code>[up]</code> attributes to links and forms. Aside from these attributes the server does not need to know about Unpoly in the frontend.
+</p>
+
+<h4 class="mt-4 mb-3">Fragments</h4>
+
+<p>
+  Much of Unpoly's magic lies in <b>updating page fragments</b> instead of making full page loads.
+  The server <b>still renders full HTML pages</b>, but we only use
+  the targeted fragments and discard the rest.
+</p>
+
+<p>
+  Under this model all DOM state outside the updated fragment is preserved.
+  Following links and forms feels smooth, without seeing flashes of incomplete content or losing scroll positions or incomplete form data.
+  Pages also load much faster since the DOM, CSS and JavaScript environments do not need to be
+  destroyed and recreated for every request.
+</p>
+
+<p>
+  New page fragments are highlighted with a <b>yellow flash</b>.
+  This flash is only visible in this demo.
+</p>
+
+
+<h4 class="mt-4 mb-3">The demo app</h4>
+
+<p>
+  The top navigation divides the app is into three sections:
+</p>
+
+<ul>
+  <li><b>Companies</b> is a CRUD interface for company records. A company can be assigned one or more projects.</li>
+  <li><b>Projects</b> is a CRUD interface for project records. Some of its templates are reused in the <i>Companies</i> section.</li>
+  <li><b>Tasks</b> is a simple TODO list, not connected to companies or projects.</li>
+</ul>
+
+<h4 class="mt-4 mb-3">Exploring the app</h4>
+
+<p>
+  Click on everything! All data is scoped to your session, so feel free to change and delete records.
+</p>
+
+<p>
+  Throughout the app you will see <b>green dots</b> <%= tour_dot { 'This is a hint!' } %>.
+  Clicking on a dot will reveal a hint about what you can discover here.
+</p>
+
+<h4 class="mt-4 mb-3">Source code</h4>
+
+<p>
+  We encourage you to use your browser's DevTools to inspect the HTML. Take a closer look at links, forms and their <code>[up]</code> attributes.
+</p>
+
+<p>
+  The bar at the bottom of the screen shows links to the server-side code that rendered the last HTML response.
+  The entire application code can be cloned from the <a href="https://github.com/unpoly/unpoly-demo">unpoly-demo</a> repository.
+  <b>Don't be scared by it being a Ruby app!</b> It only makes a few SQL queries and renders HTML using a template language similar to PHP, Moustache or Pug.
+</p>
+
+<p>
+  The frontend contains <a href="https://github.com/unpoly/unpoly-demo/blob/master/app/assets/javascripts/application.js">no significant JavaScript</a>
+  aside from Unpoly itself. The CSS is <a href="https://github.com/unpoly/unpoly-demo/blob/master/app/assets/stylesheets/application.sass">just Bootstrap 4</a>
+  with minimal tweaks.
+</p>
