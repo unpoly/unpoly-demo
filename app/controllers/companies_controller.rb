@@ -6,7 +6,7 @@ class CompaniesController < ApplicationController
 
   def create
     build_company
-    save_company(event: 'company:created', form: 'new')
+    save_company(form: 'new')
   end
 
   def edit

@@ -4,6 +4,11 @@
   </div>
 
   <div class="col-sm-auto">
+    <%= tour_dot(overlay_only: true) do %>
+      <p>Note how the <i>Edit</i> link renders within this overlay.</p>
+      <p>Links and forms always update their own layer unless another layer is targeted explicitly.</p>
+    <% end %>
+
     <%= link_to 'Edit', [:edit, @company], class: 'btn btn-primary', 'up-follow': '' %>
     <%= link_to 'Delete', @company, method: :delete, 'up-follow': '', 'up-confirm' => 'Really delete?', class: 'btn btn-danger mr-3'  %>
   </div>

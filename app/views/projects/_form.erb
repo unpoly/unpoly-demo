@@ -13,9 +13,16 @@
             'up-on-accepted': "up.fragment.get('#project_name').value = value.name"
           %>
           <%= tour_dot(position: 'left') do %>
-            <p>The popup contains suggestions for a project name.</p>
-            <p>When a suggestion is clicked, the choice is communicated
+            <p>
+              The link opens a popup with suggestions for a project name.
+            </p>
+            <p>
+              When a suggestion is clicked, the choice is communicated
               back to the project form via a custom <code>name:select</code> event.</p>
+            <p>
+              The <i>Suggest name</i> link has an <code>[up-on-accepted]</code>
+              attribute that copies the suggestion into the project form.
+            </p>
           <% end %>
         </span>
       </div>
@@ -40,9 +47,14 @@
               stays open in the background.
             </p>
             <p>
+              The <i>New company</i> also defines a <i>close condition</i> using an <code>[up-accept-location]</code> attribute.
+              This causes the overlay to automatically close when it reaches the URL of a newly created company.
+            </p>
+
+            <p>
               When a company was created successfully, the overlay is automatically closed.
               The project form reloads the company select box so the new company appears
-              as a new option.
+              as an option.
             </p>
           <% end %>
         </span>
