@@ -17,7 +17,7 @@
         The <code>[up-on-accepted]</code> attribute causes the company list below to reload when the overlay closes.
       </p>
     <% end %>
-    <%= link_to 'New company', new_company_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-location': companies_path('$id'), 'up-on-accepted': "up.reload('.table', { focus: ':main' })" %>
+    <%= link_to 'New company', new_company_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-location': company_path('$id'), 'up-on-accepted': "up.reload('.table', { focus: ':main' })" %>
   </div>
 </div>
 
