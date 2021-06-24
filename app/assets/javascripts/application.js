@@ -3,8 +3,8 @@
 
 // Accelerate all links so the demo feels snappy.
 // We still assign out [up-follow] manually so there's less magic for demo viewers.
-up.link.config.instantSelectors.unshift('a')
-up.link.config.preloadSelectors.unshift('a[href]')
+up.link.config.instantSelectors.unshift('a[up-follow]')
+up.link.config.preloadSelectors.unshift('a[up-follow]')
 
 // Enable more logging for curious users.
 up.log.enable()
