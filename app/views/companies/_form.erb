@@ -15,11 +15,23 @@
     </div>
   </div>
 
-  <%= form.submit "Save", class: 'btn btn-primary mt-2' %>
+  <div class="d-flex align-items-center">
+    <div class="flex-grow-1">
+      <%= form.submit "Save", class: 'btn btn-primary mt-2' %>
 
-  <%= tour_dot(overlay_only: true) do %>
-    <p>Saving an invalid form will re-render validation errors in the same overlay.</p>
-    <p>Links and forms always render in the same layer unless another layer is targeted explicitly.</p>
-  <% end %>
+      <% if @company.new_record? %>
+        <%= tour_dot(overlay_only: true) do %>
+          <p>Saving an invalid form will re-render validation errors in the same overlay.</p>
+          <p>Links and forms always render in the same layer unless another layer is targeted explicitly.</p>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div>
+      <% if local_assigns[:cancel_path] %>
+        <%= link_to 'Cancel', cancel_path, class: 'btn btn-outline-secondary', 'up-follow': '' %>
+      <% end %>
+    </div>
+  </div>
 
 <% end %>
