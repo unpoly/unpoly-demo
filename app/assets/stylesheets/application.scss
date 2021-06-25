@@ -92,8 +92,7 @@ $tour-dot-color: $green;
   border-radius: 50%;
   background: $tour-dot-color;
   cursor: pointer;
-  box-shadow: 0 0 0 rgba($tour-dot-color, 0.4);
-  animation: tour-dot-pulse 2s infinite;
+  box-shadow: 0 0 0 4px rgba($tour-dot-color, 0.3);
   font-size: 0;
 
   &:hover {
@@ -116,20 +115,6 @@ $tour-dot-color: $green;
 .btn.btn-sm {
   min-width: 50px;
 }
-
-// CSS pulse effect by Florin Pop:
-// https://www.florin-pop.com/blog/2019/03/css-pulse-effect/
-@keyframes tour-dot-pulse {
-  0% {
-    box-shadow: 0 0 0 0 transparentize($tour-dot-color, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba($tour-dot-color, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba($tour-dot-color, 0);
-  }
-};
 
 $popup-spacing: 12px;
 
