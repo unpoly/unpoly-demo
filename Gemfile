@@ -51,6 +51,13 @@ group :development do
   gem 'capistrano-opscomplete', require: false
 end
 
+group :test do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+end
+
+
 # group :test do
 #   # Adds support for Capybara system testing and selenium driver
 #   gem 'capybara', '>= 2.15'
