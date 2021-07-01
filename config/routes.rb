@@ -19,4 +19,8 @@ Rails.application.routes.draw do
   end
 
   get 'verify_tenant', to: 'tenants#verify', as: :verify_tenant
+
+  match '/slow_image.png', via: :get, to: 'pages#slow_image'
+  match '/slow_font.ttf', via: :get, to: 'pages#slow_font'
+
 end

@@ -8,6 +8,35 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
 
     <%= favicon_link_tag("favicon.png") %>
+
+    <script>
+      console.error("In head the readyState is " + document.readyState)
+      // document.addEventListener('click', function(event) {
+      //   console.error("When a form was clicked the readyState is " + document.readyState)
+      //   event.target.style.backgroundColor = 'yellow'
+      // })
+      // let interval = setInterval(function() {
+      //   console.error("readyState is " + document.readyState)
+      //   if (document.readyState == 'complete') {
+      //     clearInterval(interval)
+      //   }
+      // }, 100)
+
+      function heavyWork() {
+        console.error("before heavy work")
+        let dp = new DOMParser();
+        let s = ""; for (var i = 0; i < 1000; i++) { s += dp.parseFromString(document.body.innerHTML, "text/html").body.innerHTML }
+        console.error("after heavy work")
+        return s
+      }
+
+      setInterval(heavyWork, 700)
+
+      window.addEventListener('load', function() {
+        console.error("load event! readyState is " + document.readyState)
+      })
+    </script>
+
   </head>
 
   <body>

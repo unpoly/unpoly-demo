@@ -55,6 +55,7 @@ group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'selenium-webdriver'
+  # gem 'capybara-lockstep'
 end
 
 
