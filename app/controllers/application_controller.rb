@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  memoize def current_tenant
+  helper_method memoize def current_tenant
     if (tenant_id = session[:tenant_id].presence)
       Tenant.for_current_schema.where(id: tenant_id).first
     end
