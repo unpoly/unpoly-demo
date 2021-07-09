@@ -3,13 +3,23 @@ describe 'flaky' do
   scenario 'flaky', js: true do
     visit root_path
 
-    1000.times do
-      execute_script('console.error("interruption from test")')
-    end
+    puts evaluate_script('document.readyState')
+    puts evaluate_script('getComputedStyle(document.body).backgroundColor')
 
-    page.driver.browser.manage.logs.get(:browser).each do |msg|
-      puts "BROWSER CONSOLE: #{msg}"
-    end
+    # expect(page).to have_css('.msg', text: 'new text', wait: 5)
+
+    div = find('.msg')
+    puts "Found .msg!"
+    expect(div).to have_text('new text', wait: 6)
+    puts "Spec done"
+
+    # 1000.times do
+    #   execute_script('console.error("interruption from test")')
+    # end
+    #
+    # page.driver.browser.manage.logs.get(:browser).each do |msg|
+    #   puts "BROWSER CONSOLE: #{msg}"
+    # end
 
     # puts "==================="
     #

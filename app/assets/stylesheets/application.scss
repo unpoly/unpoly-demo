@@ -15,10 +15,11 @@
 }
 
 body {
-  font-family: 'Slow';
+  xfont-family: 'Slow';
   margin: 5.5rem spacer(4) 7rem spacer(4);
   overflow-y: scroll;
-  /* background-image: url(/slow_image.png?rnd=23423423423) */
+  xbackground-image: url(/slow_image.png?rnd=23423423423);
+  xbackground-color: yellow !important;
 }
 
 p {

@@ -5,7 +5,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1'>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%#= stylesheet_link_tag 'application', media: 'all' %>
+
+<!--    <link rel="stylesheet" href="/slow_style.css">-->
 
     <%= favicon_link_tag("favicon.png") %>
 
@@ -22,6 +24,7 @@
       //   }
       // }, 100)
 
+      /*
       function heavyWork() {
         console.error("before heavy work")
         let dp = new DOMParser();
@@ -31,10 +34,22 @@
       }
 
       setInterval(heavyWork, 700)
+      */
 
       window.addEventListener('load', function() {
         console.error("load event! readyState is " + document.readyState)
       })
+
+      setTimeout(function() {
+        let container = document.querySelector('.container')
+        let oldMsg = document.querySelector('.msg')
+        oldMsg.remove()
+        let newMsg = document.createElement('div')
+        newMsg.classList.add('msg')
+        newMsg.innerText = 'new text'
+        // container.appendChild(newMsg)
+      }, 3000)
+
     </script>
 
   </head>
@@ -44,6 +59,10 @@
     <%= render 'layouts/nav' %>
 
     <div up-main class="container">
+      <div class="msg">
+        old text
+      </div>
+
       <%= render_flashes %>
       <%= yield %>
 
@@ -51,5 +70,7 @@
     </div>
 
     <%= javascript_include_tag 'application' %>
+
+    <!-- <script src="/slow_script.js" async></script> -->
   </body>
 </html>

@@ -22,5 +22,9 @@ Rails.application.routes.draw do
 
   match '/slow_image.png', via: :get, to: 'pages#slow_image'
   match '/slow_font.ttf', via: :get, to: 'pages#slow_font'
+  match '/slow_style.css', via: :get, to: 'pages#slow_style'
+  match '/slow_script.js', via: :get, to: 'pages#slow_script'
+  match '/slow_script2.js', via: :get, to: 'pages#slow_script2'
+  match '/slow_script3.js', via: :get, to: 'pages#slow_script3'
 
 end
