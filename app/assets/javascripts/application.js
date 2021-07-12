@@ -33,10 +33,24 @@ up.compiler('loading-indicator', (element) => {
 
     function moveNext() {
       step++
-      if (width < 90) width++
+
+      if (width < 80) {
+        if (Math.random() < 0.15) {
+          // Peak at 7..12
+          width += 7 + 5 * Math.random()
+        } else {
+          // Normal pulse at 1.5..2
+          width += 1.5 + 0.5 * Math.random()
+        }
+      } else {
+        document.body.style.backgroundColor = "yellow"
+        width += Math.random() * 0.13 * (100 - width)
+      }
       moveTo(width)
-      timeout = setTimeout(moveNext, transitionDelay + step * 30)
+
+      timeout = setTimeout(moveNext, transitionDelay + step * 40)
     }
+
     moveNext()
   }
 
