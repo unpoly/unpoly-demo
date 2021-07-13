@@ -231,7 +231,7 @@ GEM
     tilt (2.0.10)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
-    unpoly-rails (2.0.1)
+    unpoly-rails (2.1.0)
       memoized
       rails (>= 3.2)
     web-console (4.0.4)
