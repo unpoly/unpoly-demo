@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
     load_project
     if @project.destroy
       up.layer.emit('project:destroyed')
-      redirect_to companies_path
+      redirect_to projects_path
     else
       redirect_to @project, alert: 'Could not delete project'
     end
