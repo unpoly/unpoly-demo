@@ -32,7 +32,7 @@
     <% @companies.each_with_index do |company, i| %>
       <tr>
         <td>
-          <%= link_to company.name, company, 'up-layer': 'new', 'up-dismiss-location': companies_path %>
+          <%= link_to company.name, company, 'up-layer': 'new', 'up-dismiss-event': 'company:destroyed', 'up-on-dismissed': 'up.reload(".table")' %>
 
           <%= tour_dot do %>
             The link to the company details has an <code>[up-layer=new]</code> attribute.
