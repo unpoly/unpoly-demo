@@ -33,6 +33,7 @@ yarn-debug.log*
 
 /.idea
 /db/schema.rb
+/db/*.sqlite3
 
 /coverage
 
