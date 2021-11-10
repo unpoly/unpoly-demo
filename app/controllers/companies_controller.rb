@@ -31,6 +31,7 @@ class CompaniesController < ApplicationController
   def destroy
     load_company
     if @company.destroy
+      up.layer.emit('company:destroyed')
       redirect_to companies_path
     else
       redirect_to @company, alert: 'Could not delete company'
