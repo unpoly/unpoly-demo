@@ -221,6 +221,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sqlite3 (1.4.2)
     sshkit (1.21.2)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -274,6 +275,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
+  sqlite3
   terser
   tzinfo-data
   unpoly-rails (~> 2.0)
