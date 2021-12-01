@@ -1,8 +1,8 @@
 class Tenant < ApplicationRecord
 
-  has_many :companies, dependent: :destroy
-  has_many :projects, dependent: :destroy
-  has_many :tasks, dependent: :destroy
+  has_many :companies, dependent: :delete_all
+  has_many :projects, dependent: :delete_all
+  has_many :tasks, dependent: :delete_all
 
   after_create :create_sample_records
 
