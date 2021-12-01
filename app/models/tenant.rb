@@ -40,7 +40,7 @@ class Tenant < ApplicationRecord
       end
     end
 
-    30.times do
+    18.times do
       tasks.create!(
         text: Faker::Lorem.sentence(word_count: 2,  random_words_to_add: 10),
         created_at: rand(100).hours.ago
