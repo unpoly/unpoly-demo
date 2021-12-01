@@ -36,6 +36,10 @@
       setInterval(heavyWork, 700)
       */
 
+      window.addEventListener('DOMContentLoaded', function() {
+        console.error("DOMContentLoaded event! readyState is " + document.readyState)
+      })
+
       window.addEventListener('load', function() {
         console.error("load event! readyState is " + document.readyState)
       })
@@ -52,9 +56,19 @@
 
     </script>
 
+    <!--
+    <script type="module" src="/slow_script4.js"></script>
+    <script type="module" src="/fast_script.js"></script>
+    -->
+
+    <!-- <script type="module" src="/slow_script4.js"></script> -->
+    <script async src="/slow_script5.js"></script>
+
   </head>
 
   <body>
+
+
     <loading-indicator></loading-indicator>
     <%= render 'layouts/nav' %>
 
@@ -71,6 +85,5 @@
 
     <%= javascript_include_tag 'application' %>
 
-    <!-- <script src="/slow_script.js" async></script> -->
   </body>
 </html>

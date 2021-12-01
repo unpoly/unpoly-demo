@@ -26,5 +26,8 @@ Rails.application.routes.draw do
   match '/slow_script.js', via: :get, to: 'pages#slow_script'
   match '/slow_script2.js', via: :get, to: 'pages#slow_script2'
   match '/slow_script3.js', via: :get, to: 'pages#slow_script3'
+  match '/slow_script4.js', via: :get, to: 'pages#slow_script4'
+  match '/slow_script5.js', via: :get, to: 'pages#slow_script5'
+  match '/fast_script.js', via: :get, to: 'pages#fast_script'
 
 end

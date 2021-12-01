@@ -50,6 +50,31 @@ class PagesController < ApplicationController
     # render body: 'console.log("hello from script 2"); document.body.style.backgroundImage = "url(/slow_image.png)"', content_type: 'text/javascript'
   end
 
+  def slow_script4
+    sleep 2
+    render body: <<~JS, content_type: 'text/javascript'
+      console.log("hello from slow script 4")
+      setTimeout(function() { console.log("one task after slow script 4") })
+
+      document.addEventListener('DOMContentLoaded', () => console.log("DOMContentLoaded from slow script 4"))
+    JS
+  end
+
+  def slow_script5
+    sleep 6
+    render body: <<~JS, content_type: 'text/javascript'
+      console.log("hello from slow script 5")
+
+      document.addEventListener('DOMContentLoaded', () => console.log("DOMContentLoaded from slow script 5"))
+    JS
+  end
+
+  def fast_script
+    render body: <<~JS, content_type: 'text/javascript'
+      console.log("hello from fast script")
+    JS
+  end
+
   def slow_style
     sleep 2
     render body: <<~CSS, content_type: 'text/css'
