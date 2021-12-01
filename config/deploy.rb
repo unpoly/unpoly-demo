@@ -21,5 +21,7 @@ set :ssh_options, {
   forward_agent: true
 }
 
+set :whenever_roles, [:cron]
+
 # Install new Ruby version if not already installed
 after 'deploy:updating', 'opscomplete:ruby:ensure'
