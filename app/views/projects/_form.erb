@@ -1,4 +1,4 @@
-<%= form_for @project, html: { 'up-submit': '' } do |form| %>
+<%= form_for @project, html: { 'up-submit': '', 'up-validate': '' } do |form| %>
 
   <div class="form-group">
     <%= form.label :name %>
@@ -27,6 +27,7 @@
         </span>
       </div>
     </div>
+    <%= form.error_message :name %>
   </div>
 
   <div class="form-group <%= 'd-none' if up.context[:from_company] %>">
@@ -60,6 +61,8 @@
         </span>
       </div>
     </div>
+
+    <%= form.error_message :company_id %>
   </div>
 
   <div class="form-group">
@@ -70,6 +73,7 @@
         <span class="input-group-text">€</span>
       </span>
     </div>
+    <%= form.error_message :budget %>
   </div>
 
   <div class="d-flex align-items-center">

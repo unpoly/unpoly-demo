@@ -1,18 +1,19 @@
-<%= form_for @company, html: { 'up-submit': '' } do |form| %>
+<%= form_for @company, html: { 'up-submit': '', 'up-validate': '' } do |form| %>
 
   <div class="form-group">
     <%= form.label :name %>
+    <%= tour_dot do %>
+      <p>The form is being validated on the server as you're completing fields.</p>
+      <p>Try entering a duplicate company name and focusing the next field..</p>
+    <% end %>
     <%= form.text_field :name, class: 'form-control' %>
+    <%= form.error_message :name %>
   </div>
 
   <div class="form-group">
     <%= form.label :address %>
-    <div class="input-group">
-      <%= form.text_area :address, class: 'form-control', rows: 6 %>
-<!--      <span class="input-group-append">-->
-<!--        <span class="input-group-text">TODO: Map link</span>-->
-<!--      </span>-->
-    </div>
+    <%= form.text_area :address, class: 'form-control', rows: 6 %>
+    <%= form.error_message :address %>
   </div>
 
   <div class="d-flex align-items-center">

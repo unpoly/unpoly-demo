@@ -27,7 +27,7 @@ class Tenant < ApplicationRecord
   def create_sample_records
     5.times do
       company = companies.create!(
-        name: Faker::Company.name,
+        name: Faker::Company.unique.name,
         address: sample_address
       )
 

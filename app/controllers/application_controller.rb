@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Memoized
 
   before_action :create_missing_tenant
+  after_action :reset_faker
 
   private
 
@@ -25,6 +26,13 @@ class ApplicationController < ActionController::Base
 
   helper_method memoize def fragment_explainer
     FragmentExplainer.new(self)
+  end
+
+  def reset_faker
+    # The model is asking Faker to produce unique names in Tenent.create, Project.suggest_name, etc.
+    # We must periodically release the list of used names or Faker will eventually throw errors.
+    # See https://github.com/faker-ruby/faker#ensuring-unique-values
+    Faker::UniqueGenerator.clear
   end
 
 end

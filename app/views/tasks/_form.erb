@@ -3,6 +3,7 @@
     <div class="form-group flex-grow-1 mb-0">
       <%= form.label :text, class: 'd-none' %>
       <%= form.text_area :text, class: 'form-control', autofocus: true, rows: 3 %>
+      <%= form.error_message :text %>
     </div>
     <div class="flex-grow-0">
       <%= form.submit "Save", class: 'btn btn-primary mt-2' %>

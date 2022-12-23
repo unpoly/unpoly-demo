@@ -24,17 +24,23 @@ p {
 //.up-active
 //  outline: 2px solid green !important
 
-.field_with_errors {  // display: inline-block
+.field_with_errors {
   label {
     color: $danger;
   }
+
   input,
   textarea,
   select {
     border-color: $danger;
   }
+
   .input-group & {
     flex: 1 1 auto; // Use available space when wrapping a .form-control inside an .input-group;
+  }
+
+  &:has(label) {
+    display: inline-block;
   }
 }
 
