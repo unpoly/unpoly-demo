@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   include Memoized
 
+  before_action :reset_faker
   before_action :create_missing_tenant
-  after_action :reset_faker
 
   private
 
