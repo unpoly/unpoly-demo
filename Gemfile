@@ -21,7 +21,7 @@ gem 'faker'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # gem 'unpoly-rails', path: '../unpoly'
-gem 'unpoly-rails', '~> 2.0'
+gem 'unpoly-rails', '~> 3.0'
 gem 'bootstrap'
 
 gem 'has_defaults'
