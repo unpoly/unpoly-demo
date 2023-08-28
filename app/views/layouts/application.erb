@@ -5,8 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1'>
+    <%= javascript_include_tag 'application', defer: true %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-
     <%= favicon_link_tag("favicon.png") %>
   </head>
 
@@ -20,7 +20,5 @@
 
       <%= render 'layouts/fragment_explainer' %>
     </div>
-
-    <%= javascript_include_tag 'application' %>
   </body>
 </html>
