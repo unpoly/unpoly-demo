@@ -21,3 +21,11 @@ window.addEventListener('load', (event) => {
     up.util.timer(1000, () => fragment.classList.remove('new-fragment'))
   })
 })
+
+up.on('up:assets:changed', function() {
+  up.element.show(document.querySelector('#new-version'))
+})
+
+up.compiler('.alert', function(alert) {
+  up.util.timer(3000, () => up.destroy(alert, { animation: 'move-to-top' }))
+})

@@ -57,14 +57,14 @@ class TasksController < ApplicationController
     @task ||= task_scope.build
     @task.attributes = task_attributes
   end
-  
+
   def save_task(event: nil, form:)
     if up.validate?
       @task.valid? # run validations
       render form
     elsif @task.save
       up.layer.emit(event) if event
-      redirect_to @task
+      redirect_to @task, notice: 'Task saved successfully'
     else
       render form, status: :bad_request
     end

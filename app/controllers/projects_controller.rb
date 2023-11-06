@@ -58,7 +58,7 @@ class ProjectsController < ApplicationController
       @project.valid? # run validations
       render form
     elsif @project.save
-      redirect_to @project
+      redirect_to @project, notice: 'Project saved successfully'
     else
       render form, status: :bad_request
     end

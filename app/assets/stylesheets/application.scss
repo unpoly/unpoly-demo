@@ -158,3 +158,16 @@ $new-fragment-color: #fd0;
     background-color: rgba($new-fragment-color, 0.7);
   }
 }
+
+[up-flashes] {
+  position: fixed;
+  top: 0.4rem;
+  right: 1rem;
+  z-index: 99999;
+
+  .alert {
+    padding: 0.5rem 0.7rem;
+    margin: 0;
+  }
+}
+

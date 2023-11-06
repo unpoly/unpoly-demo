@@ -54,7 +54,7 @@ class CompaniesController < ApplicationController
       @company.valid? # run validations
       render form
     elsif @company.save
-      redirect_to @company
+      redirect_to @company, notice: 'Company saved successfully'
     else
       render form, status: :bad_request
     end

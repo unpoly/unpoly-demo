@@ -1,6 +1,6 @@
 module FlashesHelper
 
-  def render_flashes
+  def flashes
     html = ''.html_safe
     flash.map do |type, message|
       html << content_tag(:div, message, class: "#{bootstrap_flash_classes(type)} mb-3", role: 'alert')
@@ -12,7 +12,7 @@ module FlashesHelper
     case type.to_s
     when 'notice'
       'success'
-    when 'error'
+    when 'error', 'alert'
       'danger'
     else
       'info'
