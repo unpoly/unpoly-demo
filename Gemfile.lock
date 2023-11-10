@@ -249,7 +249,7 @@ GEM
     timeout (0.3.2)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
-    unpoly-rails (3.2.2)
+    unpoly-rails (3.5.0)
       actionpack (>= 3.2)
       activesupport (>= 3.2)
       memoized

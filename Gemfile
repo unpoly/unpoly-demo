@@ -20,7 +20,7 @@ gem 'faker'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-# gem 'unpoly-rails', path: '../unpoly'
+# gem 'unpoly-rails', path: '../unpoly-rails'
 gem 'unpoly-rails', '~> 3.0'
 gem 'bootstrap'
 
