@@ -150,7 +150,7 @@ up-popup-content {
 
 $new-fragment-color: #fd0;
 
-.new-fragment:not(.fragment-explainer):not(up-modal):not(up-popup) {
+.new-fragment:not(.fragment-explainer):not(up-modal):not(up-popup):not([up-flashes]) {
   transition: background-color 1s ease;
   background-color: rgba($new-fragment-color, 0);
 
