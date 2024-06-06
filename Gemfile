@@ -21,7 +21,7 @@ gem 'faker'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # gem 'unpoly-rails', path: '../unpoly-rails'
-gem 'unpoly-rails', '~> 3.0'
+gem 'unpoly-rails', '~> 3.8.0.rc1'
 gem 'bootstrap'
 
 gem 'minidusen'
