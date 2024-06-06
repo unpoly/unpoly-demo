@@ -24,6 +24,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'unpoly-rails', '~> 3.0'
 gem 'bootstrap'
 
+gem 'minidusen'
+
 gem 'has_defaults'
 
 gem 'database_cleaner'

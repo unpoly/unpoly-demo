@@ -18,11 +18,9 @@ p {
   margin-bottom: 0.8rem;
 }
 
-//*:focus
-//  outline: 2px solid orange // Make focus very visible to help test A11Y
-//
-//.up-active
-//  outline: 2px solid green !important
+//*:focus {
+//  outline: 2px solid orange !important; // Make focus very visible to help test A11Y
+//}
 
 .field_with_errors {
   label {
@@ -42,6 +40,11 @@ p {
   &:has(label) {
     display: inline-block;
   }
+
+  &:has(label.d-none) {
+    display: none;
+  }
+
 }
 
 .tasks {
@@ -58,7 +61,7 @@ p {
     border-color: $info;
   }
   &.done {
-    opacity: 0.5;
+    opacity: 0.6;
     .card-text {
       text-decoration: line-through;
     }
@@ -92,7 +95,6 @@ $tour-dot-color: $green;
 .tour-dot {
   margin: 0 0.4rem;
   display: inline-block;
-  //vertical-align: middle;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -118,6 +120,7 @@ $tour-dot-color: $green;
     opacity: 0.6;
   }
 }
+
 .btn.btn-sm {
   min-width: 50px;
 }
@@ -125,7 +128,7 @@ $tour-dot-color: $green;
 $popup-spacing: 12px;
 
 up-popup {
-  z-index: 1031;
+  z-index: 1070;
 }
 
 up-popup.tour-hint {
@@ -159,11 +162,18 @@ $new-fragment-color: #fd0;
   }
 }
 
-[up-flashes] {
+#new-version {
+  position: fixed;
+  top: 0.75rem;
+  right: 1rem;
+  z-index: 1050;
+}
+
+[up-flashes], .flashes-explainer {
   position: fixed;
   top: 0.4rem;
   right: 1rem;
-  z-index: 99999;
+  z-index: 1050;
 
   .alert {
     padding: 0.5rem 0.7rem;
@@ -171,3 +181,13 @@ $new-fragment-color: #fd0;
   }
 }
 
+.flashes-explainer {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #666;
+  border-radius: 0.25rem;
+
+  #new-version:not([hidden]) + & {
+    display: none;
+  }
+}

@@ -1,9 +1,6 @@
 <nav class="navbar navbar-expand navbar-light bg-light fixed-top">
-  <%= link_to 'Unpoly Demo', root_path, class: 'navbar-brand', 'up-follow': '' %>
+  <%= link_to 'Unpoly Demo', root_path, class: 'navbar-brand', 'up-follow': true %>
   <div class="navbar-nav">
-    <%= link_to 'Companies', companies_path, class: 'nav-item nav-link', 'up-follow': '', 'up-alias' => company_path('*') %>
-    <%= link_to 'Projects', projects_path, class: 'nav-item nav-link', 'up-follow': '', 'up-alias' => project_path('*') %>
-    <%= link_to 'Tasks', tasks_path, class: 'nav-item nav-link', 'up-follow': '', 'up-alias' => task_path('*') %>
     <span class="nav-link">
       <%= tour_dot do %>
         <p>Navigation links have the <code>[up-follow]</code> attribute. Clicking such links only updates a <b>page fragment</b>. The remaining DOM is not changed.</p>
@@ -11,11 +8,10 @@
         <p>In this demo new fragments are highlighted with a <b>yellow flash</b>. Try switching between navigation sections.</p>
       <% end %>
     </span>
+    <%= link_to 'Companies', companies_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => company_path('*') %>
+    <%= link_to 'Projects', projects_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => project_path('*') %>
+    <%= link_to 'Tasks', tasks_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => task_path('*') %>
   </div>
 
-  <div class="m-0 ml-auto text-info" id="new-version" hidden>
-    A newer version is available!
-    <a href="javascript:location.reload()" class="btn btn-info btn-sm ml-2">Reload</a>
-  </div>
 
 </nav>

@@ -6,6 +6,24 @@
   <div class="col-sm-auto">
     <%= tour_dot(position: 'left') do %>
       <p>
+        The search form has an <code>[up-target=".table"]</code> attribute.
+        This causes the submission results to update the <code>&lt;table class="table"&gt;</code> element below.
+      </p>
+
+      <p>
+        The form also has an <code>[up-autosubmit]</code> attribute.
+        This automatically submits the user while the user is typing.
+      </p>
+    <% end %>
+
+    <%= form_tag companies_path, method: :get, 'up-target': '.table', 'up-autosubmit': true, class: 'd-inline-block' do %>
+      <input type="search" class="form-control" name="query" placeholder="Search…" autocomplete="off" size="14">
+    <% end %>
+  </div>
+
+  <div class="col-sm-auto">
+    <%= tour_dot(position: 'left') do %>
+      <p>
         The <i>New company</i> button has an <code>[up-layer=new]</code> attribute.
         This causes the link destination to open in an overlay.
       </p>
@@ -17,6 +35,7 @@
         The <code>[up-on-accepted]</code> attribute causes the company list below to reload when the overlay closes.
       </p>
     <% end %>
+
     <%= link_to 'New company', new_company_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-location': company_path('$id'), 'up-on-accepted': "up.reload('.table', { focus: ':main' })" %>
   </div>
 </div>

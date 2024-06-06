@@ -4,6 +4,10 @@ class Task < ApplicationRecord
 
   has_defaults done: false
 
+  def open?
+    !done?
+  end
+
   def toggle_done!
     update!(done: !done?)
   end

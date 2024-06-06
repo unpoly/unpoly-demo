@@ -9,8 +9,8 @@
       <p>Links and forms always update their own layer unless another layer is targeted explicitly.</p>
     <% end %>
 
-    <%= link_to 'Edit', [:edit, @company], class: 'btn btn-primary', 'up-follow': '' %>
-    <%= link_to 'Delete', @company, method: :delete, 'up-follow': '', 'up-confirm' => 'Really delete?', class: 'btn btn-danger mr-3'  %>
+    <%= link_to 'Edit', [:edit, @company], class: 'btn btn-primary', 'up-follow': true %>
+    <%= link_to 'Delete', @company, method: :delete, 'up-follow': true, 'up-confirm' => 'Really delete?', class: 'btn btn-danger mr-3'  %>
   </div>
 </div>
 
@@ -35,8 +35,13 @@
   <div class="col-sm-auto">
     <div class="col-sm-auto">
       <%= tour_dot(position: 'left') do %>
-        When a new project was created, the project list is
-        reloaded automatically.
+        <p>
+          This button re-uses the project form that we already built for the <i>Projects</i> tab.
+        </p>
+
+        <p>
+          When a new project was created, the overlay closes and the project list is reloaded.
+        </p>
       <% end %>
       <%= link_to 'Add project', new_project_path(project: { company_id: @company.id }), class: 'btn btn-primary btn-sm',
         'up-layer': 'new',

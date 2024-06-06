@@ -3,7 +3,7 @@ module FlashesHelper
   def flashes
     html = ''.html_safe
     flash.map do |type, message|
-      html << content_tag(:div, message, class: "#{bootstrap_flash_classes(type)} mb-3", role: 'alert')
+      html << content_tag(:div, message, class: bootstrap_flash_classes(type), role: 'alert')
     end
     html
   end

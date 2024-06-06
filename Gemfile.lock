@@ -104,11 +104,13 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.2.3)
+    concurrent-ruby (1.3.1)
     crass (1.0.6)
     database_cleaner (1.7.0)
     date (3.3.3)
     diff-lcs (1.4.4)
+    edge_rider (2.3.0)
+      activerecord (>= 3.2)
     erubi (1.12.0)
     execjs (2.7.0)
     faker (2.22.0)
@@ -118,7 +120,7 @@ GEM
       activesupport (>= 5.0)
     has_defaults (0.4.4)
       activerecord
-    i18n (1.14.1)
+    i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
@@ -135,10 +137,14 @@ GEM
       net-smtp
     marcel (1.0.2)
     memoized (1.1.1)
-    method_source (1.0.0)
+    method_source (1.1.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.5)
-    minitest (5.21.2)
+    mini_portile2 (2.8.7)
+    minidusen (0.11.0)
+      activerecord (>= 3.2)
+      activesupport (>= 3.2)
+      edge_rider (>= 0.2.5)
+    minitest (5.23.1)
     msgpack (1.3.3)
     net-imap (0.3.4)
       date
@@ -161,8 +167,8 @@ GEM
     public_suffix (4.0.6)
     puma (4.3.8)
       nio4r (~> 2.0)
-    racc (1.7.3)
-    rack (2.2.8)
+    racc (1.8.0)
+    rack (2.2.9)
     rack-test (2.1.0)
       rack (>= 1.3)
     rails (6.1.7.2)
@@ -192,7 +198,7 @@ GEM
       method_source
       rake (>= 12.2)
       thor (~> 1.0)
-    rake (13.1.0)
+    rake (13.2.1)
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -245,7 +251,7 @@ GEM
       net-ssh (>= 2.8.0)
     terser (1.1.3)
       execjs (>= 0.3.0, < 3)
-    thor (1.3.0)
+    thor (1.3.1)
     tilt (2.0.10)
     timeout (0.3.2)
     tzinfo (2.0.6)
@@ -267,7 +273,7 @@ GEM
       chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.12)
+    zeitwerk (2.6.15)
 
 PLATFORMS
   ruby
@@ -287,6 +293,7 @@ DEPENDENCIES
   has_defaults
   jbuilder
   listen (~> 3.2)
+  minidusen
   pg
   puma
   rails (~> 6.0)

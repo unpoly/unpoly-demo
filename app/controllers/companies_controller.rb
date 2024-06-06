@@ -61,7 +61,10 @@ class CompaniesController < ApplicationController
   end
 
   def load_companies
-    @companies = company_scope.order(:name).to_a
+    @companies = company_scope
+      .search(params[:query])
+      .order(:name)
+      .to_a
   end
 
   def company_scope

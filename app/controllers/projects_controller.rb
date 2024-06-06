@@ -58,6 +58,7 @@ class ProjectsController < ApplicationController
       @project.valid? # run validations
       render form
     elsif @project.save
+      up.layer.emit('project:saved')
       redirect_to @project, notice: 'Project saved successfully'
     else
       render form, status: :bad_request
