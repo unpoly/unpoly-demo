@@ -256,7 +256,7 @@ GEM
     timeout (0.3.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    unpoly-rails (3.8.0.rc1)
+    unpoly-rails (3.8.0)
       actionpack (>= 3.2)
       activesupport (>= 3.2)
       memoized
@@ -305,7 +305,7 @@ DEPENDENCIES
   sqlite3
   terser
   tzinfo-data
-  unpoly-rails (~> 3.8.0.rc1)
+  unpoly-rails (~> 3.8.0)
   web-console (>= 3.3.0)
   whenever
 
