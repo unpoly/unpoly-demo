@@ -22,7 +22,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # gem 'unpoly-rails', path: '../unpoly-rails'
 gem 'unpoly-rails', '~> 3.8.0'
-gem 'bootstrap'
+
+gem 'bootstrap', '>=5.0.0'
 
 gem 'minidusen'
 

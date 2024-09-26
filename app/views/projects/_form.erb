@@ -34,7 +34,7 @@
     <%= form.label :company_id %>
 
     <div class="input-group">
-      <%= form.collection_select :company_id, current_tenant.companies.order(:name), :id, :name, { include_blank: '<Select a company>' }, class: 'custom-select' %>
+      <%= form.collection_select :company_id, current_tenant.companies.order(:name), :id, :name, { include_blank: '<Select a company>' }, class: 'form-select' %>
       <div class="input-group-append">
         <span class="input-group-text">
           <%= link_to 'New company', new_company_path,

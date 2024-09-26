@@ -1,10 +1,12 @@
 //= require unpoly
-//= require unpoly-bootstrap4
+//= require unpoly-bootstrap5
 
 // Accelerate all links so the demo feels snappy.
 // We still assign out [up-follow] manually so there's less magic for demo viewers.
 up.link.config.instantSelectors.unshift('a[href]')
 up.link.config.preloadSelectors.unshift('a[href]')
+
+up.form.config.groupSelectors.unshift('.form-group')
 
 // Enable more logging for curious users.
 up.log.enable()

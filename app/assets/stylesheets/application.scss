@@ -1,5 +1,7 @@
 //= require unpoly
 //= require unpoly-bootstrap4
+//= require roboto
+//= require roboto-mono
 
 @import 'bootstrap';
 @import 'helpers';
@@ -7,6 +9,19 @@
 @mixin block-spacing {
   margin-top: spacer(3);
   margin-bottom: spacer(3);
+}
+
+:root {
+  --bs-font-sans-serif: 'Roboto', sans-serif;
+  --bs-font-monospace: 'Roboto Mono', monospace;
+}
+
+a {
+  --bs-link-decoration: none;
+}
+
+.navbar {
+  --bs-navbar-padding-x: 1rem;
 }
 
 body {
@@ -45,6 +60,10 @@ p {
     display: none;
   }
 
+}
+
+.form-group {
+  margin-bottom: spacer(3);
 }
 
 .tasks {
