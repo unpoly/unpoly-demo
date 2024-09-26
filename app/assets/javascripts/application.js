@@ -18,6 +18,7 @@ up.on('up:link:follow', '.tour-dot', (event, element) => { element.classList.add
 window.addEventListener('load', () => {
   // Show the yellow flash when a new fragment was inserted.
   up.on('up:fragment:inserted', (event, fragment) => {
+    if (fragment.matches('.fragment-explainer, [up-flashes], .btn-spinner')) return
     if (fragment.querySelector('.placeholder')) return
     showInsertedFlash(fragment)
   })
@@ -26,13 +27,13 @@ window.addEventListener('load', () => {
 window.showInsertedFlash = function(fragment) {
   fragment = up.fragment.get(fragment)
 
-  if (fragment.matches('up-modal')) fragment = fragment.querySelector('up-modal-box')
-  if (fragment.matches('up-drawer')) fragment = fragment.querySelector('up-drawer-box')
-  if (fragment.matches('up-popup')) fragment = fragment.querySelector('up-popup-box')
+  if (fragment.matches('up-modal, up-modal main')) fragment = fragment.closest('up-modal').querySelector('up-modal-box')
+  if (fragment.matches('up-drawer, up-drawer main')) fragment = fragment.closest('up-drawer').querySelector('up-drawer-box')
+  if (fragment.matches('up-popup, up-popup main')) fragment = fragment.closest('up-popup').querySelector('up-popup-box')
 
   fragment.classList.add('new-fragment', 'inserted')
   up.util.timer(0, () => fragment.classList.remove('inserted'))
-  up.util.timer(1000, () => fragment.classList.remove('new-fragment'))
+  up.util.timer(750, () => fragment.classList.remove('new-fragment'))
 }
 
 // Prompt user to reload when frontend assets changeds on the server.
@@ -45,13 +46,15 @@ up.compiler('.alert', function(alert) {
   up.util.timer(4000, () => up.destroy(alert, { animation: 'move-to-top' }))
 })
 
-up.on('up:link:follow', '.navbar a', ({ renderOptions }) => {
-  renderOptions.skeleton = '#index-skeleton'
-})
-
 up.on('up:link:follow', '.table a[up-layer*=new]', ({ renderOptions }) => {
   renderOptions.skeleton = '#form-skeleton'
 })
+
+up.preview('btn-spinner', function(preview) {
+  preview.insert(preview.origin, 'afterbegin', '<span class="btn-spinner"></span>')
+})
+
+up.fragment.config.navigateOptions.cache = false
 
 up.compiler('.rtt', (fragment, _data, { response }) => {
   let { rtt, request } = response

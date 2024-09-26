@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand navbar-light bg-light fixed-top">
-  <%= link_to 'Unpoly Demo', root_path, class: 'navbar-brand', 'up-follow': true %>
+  <%= link_to 'Unpoly Demo', root_path, class: 'navbar-brand', 'up-follow': true, 'up-skeleton': '#index-skeleton' %>
   <div class="navbar-nav">
     <span class="nav-link">
       <%= tour_dot do %>
@@ -11,10 +11,9 @@
         </p>
       <% end %>
     </span>
-    <%= link_to 'Companies', companies_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => company_path('*') %>
-    <%= link_to 'Projects', projects_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => project_path('*') %>
-    <%= link_to 'Tasks', tasks_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => task_path('*') %>
+    <%= link_to 'Companies', companies_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => company_path('*'), 'up-skeleton': '#index-skeleton' %>
+    <%= link_to 'Projects', projects_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => project_path('*'), 'up-skeleton': '#index-skeleton' %>
+    <%= link_to 'Tasks', tasks_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => task_path('*'), 'up-skeleton': '#index-skeleton' %>
   </div>
-
 
 </nav>

@@ -9,8 +9,8 @@
       <p>Links and forms always update their own layer unless another layer is targeted explicitly.</p>
     <% end %>
 
-    <%= link_to 'Edit', [:edit, @company], class: 'btn btn-primary', 'up-follow': true %>
-    <%= link_to 'Delete', @company, method: :delete, 'up-follow': true, 'up-confirm' => 'Really delete?', class: 'btn btn-danger me-3'  %>
+    <%= link_to 'Edit', [:edit, @company], class: 'btn btn-primary', 'up-follow': true, 'up-skeleton': '#form-skeleton' %>
+    <%= link_to 'Delete', @company, method: :delete, 'up-follow': true, 'up-confirm' => 'Really delete?', 'up-preview': 'btn-spinner', class: 'btn btn-danger me-3' %>
   </div>
 </div>
 
@@ -45,15 +45,16 @@
       <% end %>
       <%= link_to 'Add project', new_project_path(project: { company_id: @company.id }), class: 'btn btn-primary btn-sm',
         'up-layer': 'new',
+        'up-skeleton': '#form-skeleton',
         'up-accept-location': project_path('$id'),
-        'up-on-accepted': "up.reload('.projects')",
+        'up-on-accepted': "up.reload('#projects', { skeleton: '#table-skeleton' })",
         'up-context': { from_company: true }.to_json
       %>
     </div>
   </div>
 </div>
 
-<div class="projects">
+<div id="projects">
   <% if @company.projects.present? %>
     <table class="table table-sm">
       <thead>
@@ -66,8 +67,9 @@
             <td>
               <%= link_to project.name, project,
                 'up-layer': 'new',
+                'up-skeleton': '#show-skeleton',
                 'up-dismiss-event': 'project:destroyed',
-                'up-on-dismissed': 'up.reload(".projects")',
+                'up-on-dismissed': "up.reload('#projects', { skeleton: '#table-skeleton' })",
                 'up-context': { from_company: true }.to_json
               %>
               <%= tour_dot(overlay_only: true) do %>

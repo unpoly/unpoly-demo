@@ -7,6 +7,7 @@
       <div class="input-group-append">
         <span class="input-group-text">
           <%= link_to 'Suggest name', suggest_name_projects_path,
+            'up-skeleton': '#popup-spinner',
             'up-layer': 'new popup',
             'up-align': 'right',
             'up-accept-event': 'name:select',
@@ -30,7 +31,7 @@
     <%= form.error_message :name %>
   </div>
 
-  <div class="form-group <%= 'd-none' if up.context[:from_company] %>">
+  <div class="form-group <%= 'd-none' if up.context[:from_company] %>" id="company-form-group">
     <%= form.label :company_id %>
 
     <div class="input-group">
@@ -38,9 +39,10 @@
       <div class="input-group-append">
         <span class="input-group-text">
           <%= link_to 'New company', new_company_path,
+            'up-skeleton': '#form-skeleton',
             'up-layer': 'new',
             'up-accept-location': company_path('$id'),
-            'up-on-accepted': "up.validate('form', { params: { 'project[company_id]': value.id } })"
+            'up-on-accepted': "up.validate('#company-form-group', { params: { 'project[company_id]': value.id }, skeleton: '#form-skeleton' })"
           %>
           <%= tour_dot(position: 'left') do %>
             <p>
@@ -76,7 +78,7 @@
     <%= form.error_message :budget %>
   </div>
 
-  <div class="d-flex align-items-center">
+  <div class="d-flex align-items-center mt-4">
     <div class="flex-grow-1">
       <%= form.submit "Save", class: 'btn btn-primary' %>
 

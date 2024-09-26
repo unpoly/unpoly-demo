@@ -1,0 +1,17 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th><%= placeholder 'Name' %></th>
+    <th><%= placeholder 'Company' %></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% 12.times do%>
+    <tr>
+      <td><%= placeholder Faker::App.name %></span></td>
+      <td><%= placeholder Faker::Company.name %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

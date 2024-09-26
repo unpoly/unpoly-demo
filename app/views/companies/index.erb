@@ -1,4 +1,4 @@
-<div class="row mb-4">
+<div class="row gx-2 mb-4">
   <div class="col">
     <h2>All companies</h2>
   </div>
@@ -6,18 +6,27 @@
   <div class="col-sm-auto">
     <%= tour_dot(position: 'left') do %>
       <p>
-        The search form has an <code>[up-target=".table"]</code> attribute.
-        This causes the submission results to update the <code>&lt;table class="table"&gt;</code> element below.
+        The search form has an <code>[up-target="#companies"]</code> attribute.
+        This causes the submission results to update the <code>&lt;div id="companies"&gt;</code> element below.
       </p>
 
       <p>
         The form also has an <code>[up-autosubmit]</code> attribute.
         This automatically submits the user while the user is typing.
       </p>
+
+      <p>
+        Forms and links assigned an <code>.up-active</code> class while loading.
+        We use this class for the stripe animation on the search field.
+      </p>
     <% end %>
 
-    <%= form_tag companies_path, method: :get, 'up-target': '.table', 'up-autosubmit': true, class: 'd-inline-block' do %>
-      <input type="search" class="form-control" name="query" placeholder="Search…" autocomplete="off" size="14">
+    <%= form_tag companies_path, method: :get, class: 'd-inline-block',
+      'up-target': '#companies',
+      'up-autosubmit': true do
+    %>
+      <input type="search" class="form-control" name="query" placeholder="Search…" autocomplete="off" size="17">
+      <span class="search-spinner"></span>
     <% end %>
   </div>
 
@@ -36,29 +45,41 @@
       </p>
     <% end %>
 
-    <%= link_to 'New company', new_company_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-location': company_path('$id'), 'up-on-accepted': "up.reload('.table', { focus: ':main' })" %>
+    <%= link_to 'New company', new_company_path, class: 'btn btn-primary',
+      'up-layer': 'new',
+      'up-skeleton': '#form-skeleton',
+      'up-accept-location': company_path('$id'),
+      'up-on-accepted': "up.reload('#companies', { skeleton: '#table-skeleton' })"
+    %>
   </div>
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @companies.each_with_index do |company, i| %>
+<div id="companies">
+  <table class="table">
+    <thead>
       <tr>
-        <td>
-          <%= link_to company.name, company, 'up-layer': 'new', 'up-dismiss-event': 'company:destroyed', 'up-on-dismissed': 'up.reload(".table")' %>
-
-          <%= tour_dot do %>
-            The link to the company details has an <code>[up-layer=new]</code> attribute.
-            This causes the link destination to open in an overlay.
-          <% end if i == 0 %>
-        </td>
+        <th>Name</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @companies.each_with_index do |company, i| %>
+        <tr>
+          <td>
+            <%= link_to company.name, company,
+              'up-layer': 'new',
+              'up-skeleton': '#show-skeleton',
+              'up-dismiss-event': 'company:destroyed',
+              'up-on-dismissed': "up.reload('#companies', { skeleton: '#table-skeleton' })"
+            %>
+
+            <%= tour_dot do %>
+              The link to the company details has an <code>[up-layer=new]</code> attribute.
+              This causes the link destination to open in an overlay.
+            <% end if i == 0 %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -18,25 +18,39 @@
       </p>
     <% end %>
 
-    <%= link_to 'New project', new_project_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-location': project_path('$id'), 'up-on-accepted': "up.reload('.table', { focus: ':main' })" %>
+    <%= link_to 'New project', new_project_path, class: 'btn btn-primary',
+      'up-skeleton': '#form-skeleton',
+      'up-layer': 'new',
+      'up-accept-location': project_path('$id'),
+      'up-on-accepted': "up.reload('#projects', { skeleton: '#table-skeleton' })"
+    %>
   </div>
 </div>
 
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Company</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
+<div id="projects">
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= link_to project.name, project, 'up-layer': 'new', 'up-accept-event': 'project:destroyed project:updated', 'up-on-accepted': 'up.reload(".table")' %></td>
-        <td><%= project.company.name %></td>
+        <th>Name</th>
+        <th>Company</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td>
+            <%= link_to project.name, project,
+              'up-layer': 'new',
+              'up-accept-event': 'project:destroyed project:updated',
+              'up-on-accepted': "up.reload('#projects')"
+            %>
+          </td>
+          <td>
+            <%= project.company.name %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

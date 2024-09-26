@@ -21,8 +21,8 @@
       <p>Links and forms always update their own layer unless another layer is targeted explicitly.</p>
     <% end %>
 
-    <%= link_to 'Edit', [:edit, @project], class: 'btn btn-primary', 'up-follow': true %>
-    <%= link_to 'Delete', @project, method: :delete, 'up-follow': true, 'up-confirm' => 'Really delete?', class: 'btn btn-danger mr-3'  %>
+    <%= link_to 'Edit', [:edit, @project], 'up-follow': true, 'up-skeleton': '#form-skeleton', class: 'btn btn-primary' %>
+    <%= link_to 'Delete', @project, method: :delete, 'up-follow': true, 'up-preview': 'btn-spinner', 'up-confirm' => 'Really delete?', class: 'btn btn-danger mr-3'  %>
   </div>
 </div>
 

@@ -166,13 +166,13 @@ up-popup-content {
     margin-bottom: 0.7rem;
   }
 
-  *:last-child {
+  :not(.popup-spinner):last-child {
     margin-bottom: 0;
   }
 }
 
 
-.new-fragment:not(.fragment-explainer):not([up-flashes]) {
+.new-fragment {
   $new-fragment-color: #fc2;
   $new-fragment-opacity: 0.6;
 
@@ -230,4 +230,73 @@ up-popup-content {
 .placeholder {
   opacity: 0.1;
   border-radius: 15px;
+}
+
+@mixin spinner($width, $color) {
+  display: inline-block;
+  vertical-align: middle;
+  width: $width;
+  aspect-ratio: 1;
+  position: relative;
+
+  // Have the rotating square in an :after element so the
+  // bounding box of the actual element remains a steady rectangle.
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid rgba($color, 1.0);
+    border-bottom-color: rgba($color, 0.2);
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+
+}
+
+.btn-spinner {
+  @include spinner(1em, white);
+  margin-top: -0.15em;
+}
+
+.btn .btn-spinner {
+  margin-right: 0.4em;
+}
+
+.popup-spinner {
+  @include spinner(2.5rem, $info);
+  margin: 0.5rem 3rem 6rem 0.5rem;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+$search-active-stripe-color: rgba(200, 230, 255, 0.3);
+
+input[type=search].up-active {
+  background-image:
+    repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 1rem,
+        $search-active-stripe-color 1rem,
+        $search-active-stripe-color 2rem
+    );
+  background-size: 2000% 2000%;
+  animation: barberpole 200s linear infinite;
+}
+
+@keyframes barberpole {
+  100% {
+    background-position: -1000% 1000%;
+  }
 }

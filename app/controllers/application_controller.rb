@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def emulate_latency
-    # sleep 1
+    sleep 1
   end
 
 end

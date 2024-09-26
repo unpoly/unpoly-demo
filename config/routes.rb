@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   get 'skeletons/index', to: 'skeletons#index'
+  get 'skeletons/table', to: 'skeletons#table'
   get 'skeletons/show', to: 'skeletons#show'
   get 'skeletons/form', to: 'skeletons#form'
 
