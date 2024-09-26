@@ -18,11 +18,22 @@ up.on('up:link:follow', '.tour-dot', (event, element) => { element.classList.add
 window.addEventListener('load', () => {
   // Show the yellow flash when a new fragment was inserted.
   up.on('up:fragment:inserted', (event, fragment) => {
-    fragment.classList.add('new-fragment', 'inserted')
-    up.util.timer(0, () => fragment.classList.remove('inserted'))
-    up.util.timer(1000, () => fragment.classList.remove('new-fragment'))
+    if (fragment.querySelector('.placeholder')) return
+    showInsertedFlash(fragment)
   })
 })
+
+window.showInsertedFlash = function(fragment) {
+  fragment = up.fragment.get(fragment)
+
+  if (fragment.matches('up-modal')) fragment = fragment.querySelector('up-modal-box')
+  if (fragment.matches('up-drawer')) fragment = fragment.querySelector('up-drawer-box')
+  if (fragment.matches('up-popup')) fragment = fragment.querySelector('up-popup-box')
+
+  fragment.classList.add('new-fragment', 'inserted')
+  up.util.timer(0, () => fragment.classList.remove('inserted'))
+  up.util.timer(1000, () => fragment.classList.remove('new-fragment'))
+}
 
 // Prompt user to reload when frontend assets changeds on the server.
 up.on('up:assets:changed', function() {

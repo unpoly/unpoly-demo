@@ -170,14 +170,29 @@ up-popup-content {
   }
 }
 
-$new-fragment-color: #fd0;
 
-.new-fragment:not(.fragment-explainer):not(up-modal):not(up-popup):not([up-flashes]) {
-  transition: background-color 1s ease;
-  background-color: rgba($new-fragment-color, 0);
+.new-fragment:not(.fragment-explainer):not([up-flashes]) {
+  $new-fragment-color: #fc2;
+  $new-fragment-opacity: 0.6;
 
-  &.inserted {
-    background-color: rgba($new-fragment-color, 0.7);
+  position: relative;
+
+  &:after {
+    transition: all 750ms ease-out;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($new-fragment-color, 0);
+    outline: 10px solid rgba($new-fragment-color, 0);
+    z-index: 1;
+  }
+
+  &.inserted:after {
+    background-color: rgba($new-fragment-color, $new-fragment-opacity);
+    outline: 10px solid rgba($new-fragment-color, $new-fragment-opacity);
   }
 }
 

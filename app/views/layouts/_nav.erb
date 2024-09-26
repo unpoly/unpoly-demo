@@ -4,8 +4,11 @@
     <span class="nav-link">
       <%= tour_dot do %>
         <p>Navigation links have the <code>[up-follow]</code> attribute. Clicking such links only updates a <b>page fragment</b>. The remaining DOM is not changed.</p>
-        <p>Unpoly links can update arbitrary fragments, identified by CSS selectors. The default selector is the element with the <code>[up-main]</code> attribute.</p>
-        <p>In this demo new fragments are highlighted with a <b>yellow flash</b>. Try switching between navigation sections.</p>
+        <p>Unpoly links can update arbitrary fragments, identified by CSS selectors. The default selector is the <code>&lt;main&gt;</code> element.</p>
+        <p>
+          In this demo new fragments are highlighted with a <b id="inserted-flash-demo">yellow flash</b> (<a href="#" onclick="showInsertedFlash('#inserted-flash-demo'); event.preventDefault()">demo</a>)
+          Try switching between navigation sections.
+        </p>
       <% end %>
     </span>
     <%= link_to 'Companies', companies_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => company_path('*') %>
