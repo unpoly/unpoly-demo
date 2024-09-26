@@ -1,0 +1,30 @@
+<div class="placeholder-wave">
+  <div class="row mb-4">
+    <div class="col">
+      <h2><%= placeholder 'Placeholder #123' %></h2>
+    </div>
+
+    <div class="col-sm-auto">
+      <span class="btn placeholder">Edit</span>
+      <span class="btn placeholder">Delete</span>
+    </div>
+  </div>
+
+  <dl>
+    <dt class="mb-1"><%= placeholder 'Name' %></dt>
+    <dd class="mb-2"><%= placeholder 'Acme Corporation' %></dd>
+
+    <dt class="mb-1"><%= placeholder 'Address' %></dt>
+    <dd class="mb-2">
+      <%= placeholder do %>
+        Footaster Street 123
+        <br>
+        12345 Fooville
+      <% end %>
+    </dd>
+
+    <dt class="mb-1"><%= placeholder 'Budget' %></dt>
+    <dd class="mb-2"><%= placeholder '€ 1234' %></dd>
+  </dl>
+
+</div>

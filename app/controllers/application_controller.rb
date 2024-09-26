@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :reset_faker
   before_action :create_missing_tenant
+  before_action :emulate_latency, if: :up?
 
   private
 
@@ -33,6 +34,10 @@ class ApplicationController < ActionController::Base
     # We must periodically release the list of used names or Faker will eventually throw errors.
     # See https://github.com/faker-ruby/faker#ensuring-unique-values
     Faker::UniqueGenerator.clear
+  end
+
+  def emulate_latency
+    # sleep 1
   end
 
 end

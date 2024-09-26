@@ -44,3 +44,23 @@ up.on('up:assets:changed', function() {
 up.compiler('.alert', function(alert) {
   up.util.timer(4000, () => up.destroy(alert, { animation: 'move-to-top' }))
 })
+
+up.on('up:link:follow', '.navbar a', ({ renderOptions }) => {
+  renderOptions.skeleton = '#index-skeleton'
+})
+
+up.on('up:link:follow', '.table a[up-layer*=new]', ({ renderOptions }) => {
+  renderOptions.skeleton = '#form-skeleton'
+})
+
+up.compiler('.rtt', (fragment, _data, { response }) => {
+  let { rtt, request } = response
+  let { fromCache } = request
+
+  let info = `${rtt} ms`
+  if (fromCache) {
+    info += ' <span class="text-muted">(cache)</span>'
+  }
+
+  fragment.innerHTML = info
+})

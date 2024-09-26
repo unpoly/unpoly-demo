@@ -41,11 +41,18 @@ class FragmentExplainer
   end
 
   def updated_selector
-    if response.status.to_s.starts_with?('2')
+    selector = if response.status.to_s.starts_with?('2')
       up.target
     else
       up.fail_target
     end
+
+    selector = selector.gsub(', [up-flashes=""]', '')
+    selector = selector.gsub(', .fragment-explainer', '')
+    selector = selector.gsub('[up-main~=modal]', 'main')
+    selector = selector.gsub('[up-main~=popup]', 'main')
+
+    selector
   end
 
   delegate :controller_name, :action_name, :response, :up, :up?, to: :controller

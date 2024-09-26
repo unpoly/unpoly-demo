@@ -91,6 +91,7 @@ p {
   background-color: white;
   padding: 1rem 1.7rem 1.05rem;
   position: fixed;
+  z-index: 2500;
   bottom: 0;
   left: 0;
   width: 100vw;
@@ -102,7 +103,7 @@ p {
   line-height: 1.35;
 }
 .fragment-explainer--cell {
-  flex: 0 0 auto;
+  flex: 0 0 135px;
 
   a {
     text-decoration: underline;
@@ -224,4 +225,9 @@ up-popup-content {
   #new-version:not([hidden]) + & {
     display: none;
   }
+}
+
+.placeholder {
+  opacity: 0.1;
+  border-radius: 15px;
 }

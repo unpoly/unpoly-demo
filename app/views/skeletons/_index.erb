@@ -1,0 +1,29 @@
+<div class="placeholder-wave">
+  <div class="row mb-4">
+    <div class="col">
+      <h2><%= placeholder 'All records' %></h2>
+    </div>
+    <div class="col-sm-auto">
+      <span class="btn placeholder">New record</span>
+    </div>
+  </div>
+
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th><%= placeholder 'Name' %></th>
+      <th><%= placeholder 'Company' %></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% 12.times do%>
+      <tr>
+        <td><%= placeholder Faker::App.name %></span></td>
+        <td><%= placeholder Faker::Company.name %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

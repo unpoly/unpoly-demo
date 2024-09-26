@@ -1,31 +1,30 @@
-<div class="fragment-explainer" up-hungry up-fixed="bottom">
+<div class="fragment-explainer" up-hungry up-if-layer="any" up-fixed="bottom">
 
   <div class="fragment-explainer--cell">
-    <small>Last update:</small>
+    <small>Updated selector:</small>
     <br>
-    <b>
-      <% if fragment_explainer.up? %>
-        Fragment <code><%= fragment_explainer.updated_selector %></code>
-      <% else %>
-        Full page load
-      <% end %>
-    </b>
+
+    <% if fragment_explainer.up? %>
+      <code><%= fragment_explainer.updated_selector %></code>
+    <% else %>
+      <span class="text-muted">Initial page load</span>
+    <% end %>
   </div>
 
   <div class="fragment-explainer--cell">
-    <small>View template:</small>
+    <small>Server-side code:</small>
     <br>
-    <a href="<%= fragment_explainer.view_github_url %>" target="_blank">
-      <code><%= fragment_explainer.view_short_path %></code>
-    </a>
+    <a href="<%= fragment_explainer.controller_github_url %>" target="_blank" title="<%= fragment_explainer.controller_short_path %>">Controller</a>
+    /
+    <a href="<%= fragment_explainer.view_github_url %>" target="_blank" title="<%= fragment_explainer.view_short_path %>">View</a>
   </div>
 
-  <div class="fragment-explainer--cell">
-    <small>Controller:</small>
-    <br>
-    <a href="<%= fragment_explainer.controller_github_url %>" target="_blank">
-      <code><%= fragment_explainer.controller_short_path %></code>
-    </a>
-  </div>
+  <% if up? %>
+    <div class="fragment-explainer--cell">
+      <small>Perceived load time:</small>
+      <br>
+      <output class="rtt"></output>
+    </div>
+  <% end %>
 
 </div>

@@ -18,5 +18,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'skeletons/index', to: 'skeletons#index'
+  get 'skeletons/show', to: 'skeletons#show'
+  get 'skeletons/form', to: 'skeletons#form'
+
   get 'verify_tenant', to: 'tenants#verify', as: :verify_tenant
 end
