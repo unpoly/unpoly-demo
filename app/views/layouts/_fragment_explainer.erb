@@ -1,30 +1,43 @@
-<div class="fragment-explainer" up-hungry up-if-layer="any" up-fixed="bottom">
+<div class="fragment-explainer d-none d-lg-flex" up-fixed="bottom">
 
   <div class="fragment-explainer--cell">
-    <small>Updated selector:</small>
-    <br>
-
-    <% if fragment_explainer.up? %>
-      <code><%= fragment_explainer.updated_selector %></code>
-    <% else %>
-      <span class="text-muted">Initial page load</span>
-    <% end %>
+    <div class="fragment-explainer--label">Last fragment:</div>
+    <code class="fragment-explainer--target">html</code>
+    (<a href="#" class="fragment-explainer--reveal">reveal</a>)
   </div>
 
   <div class="fragment-explainer--cell">
-    <small>Server-side code:</small>
-    <br>
-    <a href="<%= fragment_explainer.controller_github_url %>" target="_blank" title="<%= fragment_explainer.controller_short_path %>">Controller</a>
-    /
-    <a href="<%= fragment_explainer.view_github_url %>" target="_blank" title="<%= fragment_explainer.view_short_path %>">View</a>
-  </div>
-
-  <% if up? %>
-    <div class="fragment-explainer--cell">
-      <small>Perceived load time:</small>
-      <br>
-      <output class="rtt"></output>
+    <div class="fragment-explainer--label">Server-side code:</div>
+    <div class="fragment-explainer--server-code" up-hungry up-if-layer="any">
+      <a href="<%= fragment_explainer.controller_github_url %>" target="_blank" title="<%= fragment_explainer.controller_short_path %>">Controller</a>
+      /
+      <a href="<%= fragment_explainer.view_github_url %>" target="_blank" title="<%= fragment_explainer.view_short_path %>">View</a>
     </div>
-  <% end %>
+  </div>
+
+  <div class="fragment-explainer--cell">
+    <div class="fragment-explainer--label">Last request:</div>
+    <code class="fragment-explainer--request">GET <%= request.path %></code>
+  </div>
+
+  <div class="fragment-explainer--cell">
+    <div class="fragment-explainer--label">Perceived load time:</div>
+    <div class="fragment-explainer--rtt">
+      <span class="text-muted">(initial load)</span>
+    </div>
+  </div>
+
+  <div class="fragment-explainer--cell">
+    <form id="config">
+      <div class="form-check my-0">
+        <input class="form-check-input" type="checkbox" name="cache" value="true" checked id="config-cache">
+        <label class="form-check-label" for="config-cache">Cache responses</label>
+      </div>
+      <div class="form-check my-0">
+        <input class="form-check-input" type="checkbox" name="latency" value="true" id="config-latency">
+        <label class="form-check-label" for="config-latency">Extra server delay</label>
+      </div>
+    </form>
+  </div>
 
 </div>

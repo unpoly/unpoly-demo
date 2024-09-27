@@ -14,23 +14,70 @@ up.log.enable()
 // Gray out tour dots once clicked.
 up.on('up:link:follow', '.tour-dot', (event, element) => { element.classList.add('viewed') })
 
-// Don't highlight the fragment insertion from the initial compile on DOMContentLoaded.
-window.addEventListener('load', () => {
-  // Show the yellow flash when a new fragment was inserted.
-  up.on('up:fragment:inserted', (event, fragment) => {
-    if (fragment.matches('.fragment-explainer, [up-flashes], .btn-spinner')) return
-    if (fragment.querySelector('.placeholder')) return
-    showInsertedFlash(fragment)
-  })
+up.compiler('.fragment-explainer', function(container) {
+  let lastFragment = document.documentElement
+
+  let targetExplainer = container.querySelector('.fragment-explainer--target')
+  let revealTarget = container.querySelector('.fragment-explainer--reveal')
+  let requestExplainer = container.querySelector('.fragment-explainer--request')
+  let rttExplainer = container.querySelector('.fragment-explainer--rtt')
+
+  return [
+    up.on('up:fragment:inserted', (_event, fragment) => {
+      if (fragment.matches('[up-hungry]')) return
+      if (fragment.querySelector('.placeholder')) return
+      if (fragment.matches('up-modal, up-modal main, up-drawer, up-drawer main, up-popup, up-popup main')) fragment = up.layer.current.getBoxElement()
+      lastFragment = fragment
+      targetExplainer.innerText = up.fragment.toTarget(fragment, { verify: false })
+    }),
+
+    up.on(revealTarget, 'click', (event) => {
+      up.event.halt(event)
+      showInsertedFlash(lastFragment)
+    }),
+
+    up.on('up:link:follow up:form:submit', ({ renderOptions }) => {
+      let method = up.util.normalizeMethod(renderOptions.method)
+      requestExplainer.innerText = `${method} ${renderOptions.url}`
+    }),
+
+    up.on('up:fragment:loaded', ({ request, response, revalidating }) => {
+      if (revalidating) return
+
+      let rtt = Math.max(response.loadedAt - request.builtAt, 0)
+      let info = `${rtt} ms`
+      if (request.fromCache) {
+        info += ' <span class="text-muted">(cache)</span>'
+      }
+      rttExplainer.innerHTML = info
+    })
+  ]
 })
 
-window.showInsertedFlash = function(fragment) {
+up.compiler('form#config', function(form) {
+  return [
+    up.on('up:link:follow up:form:submit', function(event) {
+      if (!form.cache.checked) {
+        event.renderOptions.cache = false
+      }
+    }),
+
+    up.on('up:link:preload', (event) => {
+      if (!form.cache.checked) {
+        event.preventDefault()
+      }
+    }),
+
+    up.on('up:request:load', ({ request }) => {
+      if (form.latency.checked) {
+        request.headers['X-Extra-Latency'] = 'true'
+      }
+    })
+  ]
+})
+
+function showInsertedFlash(fragment) {
   fragment = up.fragment.get(fragment)
-
-  if (fragment.matches('up-modal, up-modal main')) fragment = fragment.closest('up-modal').querySelector('up-modal-box')
-  if (fragment.matches('up-drawer, up-drawer main')) fragment = fragment.closest('up-drawer').querySelector('up-drawer-box')
-  if (fragment.matches('up-popup, up-popup main')) fragment = fragment.closest('up-popup').querySelector('up-popup-box')
-
   fragment.classList.add('new-fragment', 'inserted')
   up.util.timer(0, () => fragment.classList.remove('inserted'))
   up.util.timer(750, () => fragment.classList.remove('new-fragment'))
@@ -46,24 +93,7 @@ up.compiler('.alert', function(alert) {
   up.util.timer(4000, () => up.destroy(alert, { animation: 'move-to-top' }))
 })
 
-up.on('up:link:follow', '.table a[up-layer*=new]', ({ renderOptions }) => {
-  renderOptions.skeleton = '#form-skeleton'
-})
-
+// Show a spinning wheel inside the button.
 up.preview('btn-spinner', function(preview) {
   preview.insert(preview.origin, 'afterbegin', '<span class="btn-spinner"></span>')
-})
-
-up.fragment.config.navigateOptions.cache = false
-
-up.compiler('.rtt', (fragment, _data, { response }) => {
-  let { rtt, request } = response
-  let { fromCache } = request
-
-  let info = `${rtt} ms`
-  if (fromCache) {
-    info += ' <span class="text-muted">(cache)</span>'
-  }
-
-  fragment.innerHTML = info
 })
