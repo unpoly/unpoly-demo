@@ -1,4 +1,4 @@
-<div class="row mb-4">
+<div class="row align-items-center mb-4">
   <div class="col">
     <h2>Company #<%= @company.id %></h2>
   </div>
@@ -47,7 +47,7 @@
         'up-layer': 'new',
         'up-skeleton': '#form-skeleton',
         'up-accept-location': project_path('$id'),
-        'up-on-accepted': "up.reload('#projects', { skeleton: '#table-skeleton' })",
+        'up-on-accepted': "up.reload('#projects', { skeleton: '#short-table-skeleton' })",
         'up-context': { from_company: true }.to_json
       %>
     </div>
@@ -69,7 +69,7 @@
                 'up-layer': 'new',
                 'up-skeleton': '#show-skeleton',
                 'up-dismiss-event': 'project:destroyed',
-                'up-on-dismissed': "up.reload('#projects', { skeleton: '#table-skeleton' })",
+                'up-on-dismissed': "up.reload('#projects', { skeleton: '#short-table-skeleton' })",
                 'up-context': { from_company: true }.to_json
               %>
               <%= tour_dot(overlay_only: true) do %>

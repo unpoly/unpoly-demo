@@ -29,6 +29,10 @@ body {
   overflow-y: scroll;
 }
 
+.container {
+  max-width: 1100px;
+}
+
 p {
   margin-bottom: 0.8rem;
 }
@@ -42,53 +46,150 @@ b, strong, th {
 //}
 
 .field_with_errors {
-  label {
-    color: $danger;
-  }
+  display: contents;
 
-  input,
-  textarea,
-  select {
-    border-color: $danger;
-  }
-
+  // For some reason display: contents does not work here.
   .input-group & {
-    flex: 1 1 auto; // Use available space when wrapping a .form-control inside an .input-group;
-  }
-
-  &:has(label) {
     display: inline-block;
+    flex: 1 1 auto;
   }
 
-  &:has(label.d-none) {
-    display: none;
+  &:not(form.up-active &) {
+
+    label {
+      color: $danger;
+    }
+
+    input,
+    textarea,
+    select {
+      border-color: $danger;
+    }
+
+    //.input-group & {
+    //  flex: 1 1 auto; // Use available space when wrapping a .form-control inside an .input-group;
+    //}
+
+    //&:has(label) {
+    //  display: inline-block;
+    //}
+    //
+    //&:has(label.d-none) {
+    //  display: none;
+    //}
   }
 
 }
+
+.form-error {
+  &:not(form.up-active &) {
+    color: $danger;
+  }
+}
+
 
 .form-group {
   margin-bottom: spacer(3);
 }
 
-.tasks {
-  display: flex;
-  gap: spacer(3);
-  flex-wrap: wrap;
+#tasks {
+  max-width: 650px;
+  margin: 0 auto;
 }
 
 .task {
-  flex: 0 0 358px;
-  height: 180px;
+  display: flex;
+  align-items: center;
+  gap: spacer(3);
+  border: $border-width $border-style $border-color;
+  padding: ($spacer * 0.5) $spacer;
 
-  &:not(.done) {
-    border-color: $info;
+  &:first-child {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
   }
-  &.done {
-    opacity: 0.6;
-    .card-text {
+
+  &:last-child {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+
+  &+& {
+    border-top: none;
+  }
+
+}
+
+.task-item {
+  &.-done {
+    .task-item--text {
       text-decoration: line-through;
     }
+
+    .task-item--toggle:after {
+      content: '✔';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      font-size: 1.2em;
+      line-height: 1.3em;
+      text-align: center;
+    }
   }
+
+}
+
+.task-item--toggle {
+  flex: 0 0 auto;
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
+  border-radius: 4em;
+  border: 1px solid $gray-500;
+  position: relative;
+}
+
+.task-item--text {
+  flex: 1 1 0;
+  padding: $btn-padding-y 0;
+}
+
+.task-item--edit {
+  flex: 0 0 auto;
+}
+
+.task-form {
+  gap: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "input save"
+    "error error";
+  align-items: center;
+
+
+  column-gap: spacer(3);
+
+  &:focus {
+    outline: none !important;
+  }
+}
+
+.task-form--input {
+  grid-area: input;
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+.task-form--save {
+  grid-area: save;
+}
+
+.task-form--error {
+  margin-top: spacer(1);
+  grid-area: error;
 }
 
 .fragment-explainer {
@@ -132,6 +233,7 @@ $tour-dot-color: $green;
 .tour-dot {
   margin: 0 0.4rem;
   display: inline-block;
+  vertical-align: middle;
   width: 10px;
   height: 10px;
   border-radius: 50%;

@@ -97,3 +97,34 @@ up.compiler('.alert', function(alert) {
 up.preview('btn-spinner', function(preview) {
   preview.insert(preview.origin, 'afterbegin', '<span class="btn-spinner"></span>')
 })
+
+// Setting a `-done` class will line-through the task text.
+up.preview('finish-task', function(preview) {
+  preview.addClass('-done')
+})
+
+// Removing a `-done` class will remove the line-through decoration from the task text.
+up.preview('unfinish-task', function(preview) {
+  preview.removeClass('-done')
+})
+
+up.preview('add-task', function(preview) {
+  let form = preview.origin.closest('form')
+  let text = preview.params.get('task[text]')
+  if (text) {
+    preview.insert(form, 'afterend', `
+      <div class="task task-item">
+        <span class="task-item--toggle"></span>
+        <span class="task-item--text">${up.util.escapeHTML(text)}</span>
+      </div>
+    `)
+  }
+})
+
+up.preview('clear-tasks', function(preview) {
+  let doneTasks = up.fragment.all('.task.-done', { layer: preview.layer })
+  for (let doneTask of doneTasks) {
+    preview.hide(doneTask)
+  }
+})
+

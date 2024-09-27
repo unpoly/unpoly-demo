@@ -1,4 +1,4 @@
-<div class="row mb-4">
+<div class="row align-items-center mb-4">
   <div class="col">
     <h2>All projects</h2>
   </div>
@@ -22,7 +22,7 @@
       'up-skeleton': '#form-skeleton',
       'up-layer': 'new',
       'up-accept-location': project_path('$id'),
-      'up-on-accepted': "up.reload('#projects', { skeleton: '#table-skeleton' })"
+      'up-on-accepted': "up.reload('#projects', { skeleton: '#long-table-skeleton' })"
     %>
   </div>
 </div>
@@ -43,7 +43,7 @@
             <%= link_to project.name, project,
               'up-layer': 'new',
               'up-accept-event': 'project:destroyed project:updated',
-              'up-on-accepted': "up.reload('#projects')"
+              'up-on-accepted': "up.reload('#projects', { skeleton: '#long-table-skeleton' })"
             %>
           </td>
           <td>

@@ -1,28 +1,9 @@
-<div class="row mb-4">
-  <div class="col">
-    <h2>
-      Tasks
-    </h2>
+<%= render 'tasks/head', title: 'Tasks' %>
 
-  </div>
+<div id="tasks" class="mt-5">
+  <%= render 'tasks/form', task: Task.new, autofocus: true %>
 
-  <div class="col-sm-auto">
-    <%= tour_dot(position: 'left') do %>
-      <p>
-        The <i>Clear done</i> button has an <code>[up-target=".tasks"]</code> attribute.
-        Clicking the link will only update the <code>&lt;div class="tasks"&gt;</code> element.
-      </p>
-      <p>
-        Other HTML from the server response is discarded.
-      </p>
-    <% end %>
-    <%= link_to 'Clear done', clear_done_tasks_path, method: :delete, class: 'btn btn-secondary', 'up-target': '.tasks' %>
-    <%= link_to 'New task', new_task_path, class: 'btn btn-primary', 'up-layer': 'new', 'up-accept-event': 'task:created', 'up-on-accepted': "up.reload('.tasks')" %>
-  </div>
-</div>
-
-<div class="tasks">
-  <% @tasks.each_with_index do |task, i| %>
-    <%= render task, tour_dot: (i == 0) %>
+  <% @tasks.each do |task| %>
+    <%= render 'tasks/task', task: task %>
   <% end %>
 </div>

@@ -6,7 +6,12 @@ class TasksController < ApplicationController
 
   def create
     build_task
-    save_task(event: 'task:created', form: 'new')
+
+    if @task.save
+      redirect_to tasks_path, notice: 'Task added'
+    else
+      render 'new', status: :bad_request
+    end
   end
 
   def edit
@@ -17,7 +22,12 @@ class TasksController < ApplicationController
   def update
     load_task
     build_task
-    save_task(form: 'edit')
+
+    if @task.save
+      redirect_to @task, notice: 'Task updated'
+    else
+      render 'edit', status: :bad_request
+    end
   end
 
   def show
@@ -33,9 +43,15 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
-  def toggle_done
+  def finish
     load_task
-    @task.toggle_done!
+    @task.finish!
+    redirect_to @task
+  end
+
+  def unfinish
+    load_task
+    @task.unfinish!
     redirect_to @task
   end
 
@@ -58,24 +74,17 @@ class TasksController < ApplicationController
     @task.attributes = task_attributes
   end
 
-  def save_task(event: nil, form:)
-    if up.validate?
-      @task.valid? # run validations
-      render form
-    elsif @task.save
-      up.layer.emit(event) if event
-      redirect_to @task, notice: 'Task saved successfully'
-    else
-      render form, status: :bad_request
-    end
-  end
-
   def task_attributes
     if (attrs = params[:task])
       attrs.permit(:text, :done)
     else
       {}
     end
+  end
+
+  helper_method def open_task_count
+    load_tasks
+    @tasks.select(&:open?).size
   end
 
 end

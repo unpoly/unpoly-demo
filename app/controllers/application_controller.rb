@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :reset_faker
   before_action :create_missing_tenant
-  before_action :emulate_latency, if: :up?
+  after_action :emulate_latency, if: :up?
 
   private
 
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def emulate_latency
-    if request.headers['X-Extra-Latency'].present?
+    if request.headers['X-Extra-Latency'].present? && !response.redirect?
       sleep 1.0
     end
   end

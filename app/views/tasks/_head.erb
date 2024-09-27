@@ -1,0 +1,41 @@
+<% show_tour = action_name == 'index' %>
+
+<div class="row align-items-center gx-3 mb-4">
+  <div class="col">
+    <h2>
+      <%= title %>
+      <%= tour_dot do %>
+        <p>
+          This screen shows many task boxes with the same selector
+          (<code>&lt;div class="task"&gt;</code>).
+        </p>
+        <p>
+          Note how changing a task will only update a single task box.
+        </p>
+      <% end if show_tour %>
+    </h2>
+
+  </div>
+
+  <div class="col-sm-auto" id="open-task-count" up-hungry>
+    <%= pluralize(open_task_count, 'task', 'tasks') %> left!
+  </div>
+
+  <div class="col-sm-auto">
+    <%= tour_dot(position: 'left') do %>
+      <p>
+        The <i>Clear done</i> button has an <code>[up-target=".tasks"]</code> attribute.
+        Clicking the link will only update the <code>&lt;div class="tasks"&gt;</code> element.
+      </p>
+      <p>
+        Other HTML from the server response is discarded.
+      </p>
+    <% end if show_tour %>
+
+    <%= link_to 'Clear done', clear_done_tasks_path, method: :delete,
+        class: 'btn btn-secondary',
+        'up-target': '.tasks',
+        'up-preview': 'btn-spinner clear-tasks'
+    %>
+  </div>
+</div>

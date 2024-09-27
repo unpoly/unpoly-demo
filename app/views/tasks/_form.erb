@@ -1,12 +1,9 @@
-<%= form_for @task, html: { 'up-target': '.task', class: 'task card' } do |form| %>
-  <div class="card-body d-flex flex-column">
-    <div class="form-group flex-grow-1 mb-0">
-      <%= form.label :text, class: 'd-none' %>
-      <%= form.text_area :text, class: 'form-control', autofocus: true, rows: 2 %>
-      <%= form.error_message :text %>
-    </div>
-    <div class="flex-grow-0 mt-2">
-      <%= form.submit "Save", class: 'btn btn-primary' %>
-    </div>
-  </div>
+<% task = local_assigns.fetch(:task) %>
+<% target = task.new_record? ? '#tasks' : '.task' %>
+<% autofocus = local_assigns.fetch(:autofocus, false) %>
+
+<%= form_for task, html: { class: 'task task-form', 'up-target': target, 'up-disable': true, 'up-preview': 'add-task' } do |form| %>
+  <%= form.text_field :text, class: 'task-form--input form-control', placeholder: 'What needs to be done?', autofocus: autofocus %>
+  <%= form.error_message :text, class: 'task-form--error' %>
+  <%= form.submit 'Save', class: 'task-form--save btn btn-primary btn-sm' %>
 <% end %>

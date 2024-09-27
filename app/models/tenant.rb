@@ -31,7 +31,7 @@ class Tenant < ApplicationRecord
         address: sample_address
       )
 
-      (2..3).to_a.sample.times do
+      3.times do
         projects.create!(
           company: company,
           name: Project.suggest_name,
@@ -40,9 +40,9 @@ class Tenant < ApplicationRecord
       end
     end
 
-    18.times do
+    5.times do
       tasks.create!(
-        text: Faker::Lorem.sentence(word_count: 2,  random_words_to_add: 10),
+        text: Faker::Lorem.unique.sentence(word_count: 2,  random_words_to_add: 3).chop,
         created_at: rand(100).hours.ago
       )
     end

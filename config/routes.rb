@@ -14,7 +14,8 @@ Rails.application.routes.draw do
       delete :clear_done
     end
     member do
-      patch :toggle_done
+      patch :finish
+      patch :unfinish
     end
   end
 

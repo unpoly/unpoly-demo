@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :tenant
-  validates :text, presence: true
+  validates :text, presence: true, uniqueness: { case_sensitive: false, scope: :tenant_id }
 
   has_defaults done: false
 
@@ -8,8 +8,12 @@ class Task < ApplicationRecord
     !done?
   end
 
-  def toggle_done!
-    update!(done: !done?)
+  def finish!
+    update!(done: true)
+  end
+
+  def unfinish!
+    update!(done: false)
   end
 
   def self.clear_done!

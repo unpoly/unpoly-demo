@@ -1,4 +1,4 @@
-<div class="row gx-2 mb-4">
+<div class="row align-items-center gx-2 mb-4">
   <div class="col">
     <h2>All companies</h2>
   </div>
@@ -49,7 +49,7 @@
       'up-layer': 'new',
       'up-skeleton': '#form-skeleton',
       'up-accept-location': company_path('$id'),
-      'up-on-accepted': "up.reload('#companies', { skeleton: '#table-skeleton' })"
+      'up-on-accepted': "up.reload('#companies', { skeleton: '#short-table-skeleton' })"
     %>
   </div>
 </div>
@@ -70,7 +70,7 @@
               'up-layer': 'new',
               'up-skeleton': '#show-skeleton',
               'up-dismiss-event': 'company:destroyed',
-              'up-on-dismissed': "up.reload('#companies', { skeleton: '#table-skeleton' })"
+              'up-on-dismissed': "up.reload('#companies', { skeleton: '#short-table-skeleton' })"
             %>
 
             <%= tour_dot do %>
