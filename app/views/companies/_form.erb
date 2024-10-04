@@ -1,7 +1,8 @@
 <%= form_for @company, html: {
   'up-submit': true,
   'up-validate': true,
-  'up-disable': true
+  'up-disable': true,
+  'up-preview': 'btn-spinner',
 } do |form| %>
 
   <div class="form-group">
@@ -22,7 +23,7 @@
 
   <div class="d-flex align-items-center mt-4">
     <div class="flex-grow-1">
-      <%= form.submit "Save", class: 'btn btn-primary' %>
+      <%= form.button "Save", class: 'btn btn-primary' %>
 
       <% if @company.new_record? %>
         <%= tour_dot(overlay_only: true) do %>
@@ -36,7 +37,8 @@
       <% if local_assigns[:cancel_path] %>
         <%= link_to 'Cancel', cancel_path, class: 'btn btn-outline-secondary',
           'up-follow': true,
-          'up-disable': 'form'
+          'up-disable': 'form',
+          'up-preview': 'btn-spinner'
         %>
       <% end %>
     </div>

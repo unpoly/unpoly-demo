@@ -43,7 +43,8 @@
             <%= link_to project.name, project,
               'up-layer': 'new',
               'up-accept-event': 'project:destroyed project:updated',
-              'up-on-accepted': "up.reload('#projects', { skeleton: '#long-table-skeleton' })"
+              'up-on-accepted': "up.reload('#projects', { skeleton: '#long-table-skeleton' })",
+              'up-skeleton': '#show-skeleton'
             %>
           </td>
           <td>

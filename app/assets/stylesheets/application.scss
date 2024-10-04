@@ -260,8 +260,16 @@ $tour-dot-color: $green;
   }
 }
 
-.btn.btn-sm {
-  min-width: 50px;
+.btn {
+  text-align: center;
+
+  &.btn-sm {
+    min-width: 50px;
+  }
+
+  &:not(.btn-sm) {
+    min-width: 75px;
+  }
 }
 
 $popup-spacing: 12px;
@@ -381,8 +389,8 @@ up-popup-content {
   margin-top: -0.15em;
 }
 
-.btn .btn-spinner {
-  margin-right: 0.4em;
+.btn:has(.btn-spinner) {
+  text-align: center;
 }
 
 .popup-spinner {

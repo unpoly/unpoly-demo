@@ -57,19 +57,19 @@ up.compiler('.fragment-explainer', function(container) {
 up.compiler('form#config', function(form) {
   return [
     up.on('up:link:follow up:form:submit', function(event) {
-      if (!form.cache.checked) {
+      if (form.disableCache.checked) {
         event.renderOptions.cache = false
       }
     }),
 
     up.on('up:link:preload', (event) => {
-      if (!form.cache.checked) {
+      if (form.disableCache.checked) {
         event.preventDefault()
       }
     }),
 
     up.on('up:request:load', ({ request }) => {
-      if (form.latency.checked) {
+      if (form.extraLatency.checked) {
         request.headers['X-Extra-Latency'] = 'true'
       }
     })
@@ -93,9 +93,21 @@ up.compiler('.alert', function(alert) {
   up.util.timer(4000, () => up.destroy(alert, { animation: 'move-to-top' }))
 })
 
+function findButton(origin) {
+  if (origin.matches('.btn')) {
+    return origin
+  } else {
+    let form = origin.closest('form')
+    return up.form.submitButtons(form)[0]
+  }
+}
+
 // Show a spinning wheel inside the button.
 up.preview('btn-spinner', function(preview) {
-  preview.insert(preview.origin, 'afterbegin', '<span class="btn-spinner"></span>')
+  let button = findButton(preview.origin)
+  // Keep the button dimensions while we're hiding its content.
+  preview.setStyle(button, { height: button.offsetHeight + 'px', width: button.offsetWidth + 'px' })
+  preview.swapContent(button, '<span class="btn-spinner"></span>')
 })
 
 // Setting a `-done` class will line-through the task text.
@@ -111,6 +123,7 @@ up.preview('unfinish-task', function(preview) {
 up.preview('add-task', function(preview) {
   let form = preview.origin.closest('form')
   let text = preview.params.get('task[text]')
+
   if (text) {
     preview.insert(form, 'afterend', `
       <div class="task task-item">
@@ -118,6 +131,8 @@ up.preview('add-task', function(preview) {
         <span class="task-item--text">${up.util.escapeHTML(text)}</span>
       </div>
     `)
+
+    form.reset()
   }
 })
 

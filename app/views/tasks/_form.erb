@@ -1,9 +1,14 @@
 <% task = local_assigns.fetch(:task) %>
 <% target = task.new_record? ? '#tasks' : '.task' %>
-<% autofocus = local_assigns.fetch(:autofocus, false) %>
+<% autofocus = task.new_record? ? '#tasks' : '.task' %>
+<% preview = task.new_record? ? 'add-task btn-spinner' : 'btn-spinner' %>
 
-<%= form_for task, html: { class: 'task task-form', 'up-target': target, 'up-disable': true, 'up-preview': 'add-task' } do |form| %>
+<%= form_for task, html: {
+  class: 'task task-form',
+  'up-target': target,
+  'up-preview': preview,
+} do |form| %>
   <%= form.text_field :text, class: 'task-form--input form-control', placeholder: 'What needs to be done?', autofocus: autofocus %>
   <%= form.error_message :text, class: 'task-form--error' %>
-  <%= form.submit 'Save', class: 'task-form--save btn btn-primary btn-sm' %>
+  <%= form.button 'Save', class: 'task-form--save btn btn-primary btn-sm' %>
 <% end %>

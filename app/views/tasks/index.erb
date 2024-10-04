@@ -1,7 +1,7 @@
 <%= render 'tasks/head', title: 'Tasks' %>
 
 <div id="tasks" class="mt-5">
-  <%= render 'tasks/form', task: Task.new, autofocus: true %>
+  <%= render 'tasks/form', task: Task.new %>
 
   <% @tasks.each do |task| %>
     <%= render 'tasks/task', task: task %>

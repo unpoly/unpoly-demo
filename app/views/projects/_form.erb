@@ -1,32 +1,38 @@
-<%= form_for @project, html: { 'up-submit': true, 'up-validate': true, 'up-disable': true } do |form| %>
+<%= form_for @project, html: {
+  'up-submit': true,
+  'up-validate': true,
+  'up-disable': true,
+  'up-preview': 'btn-spinner',
+} do |form| %>
 
   <div class="form-group">
     <%= form.label :name %>
     <div class="input-group">
       <%= form.text_field :name, class: 'form-control', autocomplete: 'off' %>
-      <div class="input-group-append">
-        <span class="input-group-text">
-          <%= link_to 'Suggest name', suggest_name_projects_path,
-            'up-skeleton': '#popup-spinner',
-            'up-layer': 'new popup',
-            'up-align': 'right',
-            'up-accept-event': 'name:select',
-            'up-on-accepted': "up.fragment.get('#project_name').value = value.name"
-          %>
-          <%= tour_dot(position: 'left') do %>
-            <p>
-              The link opens a popup with suggestions for a project name.
-            </p>
-            <p>
-              When a suggestion is clicked, the choice is communicated
-              back to the project form via a custom <code>name:select</code> event.</p>
-            <p>
-              The <i>Suggest name</i> link has an <code>[up-on-accepted]</code>
-              attribute that copies the suggestion into the project form.
-            </p>
-          <% end %>
-        </span>
-      </div>
+      <span class="input-group-text">
+        <%= tour_dot(position: 'left') do %>
+          <p>
+            The button opens a popup with suggestions for a project name.
+          </p>
+          <p>
+            When a suggestion is clicked, the choice is communicated
+            back to the project form via a custom <code>name:select</code> event.</p>
+          <p>
+            The <i>Suggest name</i> link has an <code>[up-on-accepted]</code>
+            attribute that copies the suggestion into the project form.
+          </p>
+        <% end %>
+      </span>
+
+      <%= link_to suggest_name_projects_path,
+        class: 'btn btn-outline-secondary',
+        'up-skeleton': '#popup-spinner',
+        'up-layer': 'new popup',
+        'up-align': 'right',
+        'up-accept-event': 'name:select',
+        'up-on-accepted': "up.fragment.get('#project_name').value = value.name" do %>
+          Suggest name
+      <% end %>
     </div>
     <%= form.error_message :name %>
   </div>
@@ -36,32 +42,31 @@
 
     <div class="input-group">
       <%= form.collection_select :company_id, current_tenant.companies.order(:name), :id, :name, { include_blank: '<Select a company>' }, class: 'form-select' %>
-      <div class="input-group-append">
-        <span class="input-group-text">
-          <%= link_to 'New company', new_company_path,
-            'up-skeleton': '#form-skeleton',
-            'up-layer': 'new',
-            'up-accept-location': company_path('$id'),
-            'up-on-accepted': "up.validate('#company-form-group', { params: { 'project[company_id]': value.id }, skeleton: '#form-skeleton' })"
-          %>
-          <%= tour_dot(position: 'left') do %>
-            <p>
-              A new company can be created in an overlay while the incomplete project form
-              stays open in the background.
-            </p>
-            <p>
-              The <i>New company</i> also defines a <i>close condition</i> using an <code>[up-accept-location]</code> attribute.
-              This causes the overlay to automatically close when it reaches the URL of a newly created company.
-            </p>
+      <span class="input-group-text">
+        <%= tour_dot(position: 'left') do %>
+          <p>
+            A new company can be created in an overlay while the incomplete project form
+            stays open in the background.
+          </p>
+          <p>
+            The <i>New company</i> also defines a <i>close condition</i> using an <code>[up-accept-location]</code> attribute.
+            This causes the overlay to automatically close when it reaches the URL of a newly created company.
+          </p>
 
-            <p>
-              When a company was created successfully, the overlay is automatically closed.
-              The project form reloads the company select box so the new company appears
-              as an option.
-            </p>
-          <% end %>
-        </span>
-      </div>
+          <p>
+            When a company was created successfully, the overlay is automatically closed.
+            The project form reloads the company select box so the new company appears
+            as an option.
+          </p>
+        <% end %>
+      </span>
+      <%= link_to 'New company', new_company_path,
+        class: 'btn btn-outline-secondary',
+        'up-skeleton': '#form-skeleton',
+        'up-layer': 'new',
+        'up-accept-location': company_path('$id'),
+        'up-on-accepted': "up.validate('#company-form-group', { params: { 'project[company_id]': value.id }, skeleton: '#form-skeleton' })"
+      %>
     </div>
 
     <%= form.error_message :company_id %>
@@ -80,7 +85,7 @@
 
   <div class="d-flex align-items-center mt-4">
     <div class="flex-grow-1">
-      <%= form.submit "Save", class: 'btn btn-primary' %>
+      <%= form.button "Save", class: 'btn btn-primary' %>
 
       <% if @project.new_record? %>
         <%= tour_dot(overlay_only: true) do %>
@@ -92,7 +97,12 @@
 
     <div>
       <% if local_assigns[:cancel_path] %>
-        <%= link_to 'Cancel', cancel_path, class: 'btn btn-outline-secondary', 'up-follow': true, 'up-disable': 'Form' %>
+        <%= link_to 'Cancel', cancel_path,
+          class: 'btn btn-outline-secondary',
+          'up-follow': true,
+          'up-disable': 'Form',
+          'up-preview': 'btn-spinner'
+        %>
       <% end %>
     </div>
   </div>
