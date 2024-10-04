@@ -8,6 +8,8 @@ up.link.config.preloadSelectors.unshift('a[href]')
 
 up.form.config.groupSelectors.unshift('.form-group')
 
+up.network.config.lateTime = 1250
+
 // Enable more logging for curious users.
 up.log.enable()
 
@@ -108,6 +110,15 @@ up.preview('btn-spinner', function(preview) {
   // Keep the button dimensions while we're hiding its content.
   preview.setStyle(button, { height: button.offsetHeight + 'px', width: button.offsetWidth + 'px' })
   preview.swapContent(button, '<span class="btn-spinner"></span>')
+})
+
+up.preview('popup-spinner', function(preview) {
+  preview.showPlaceholder('<div class="popup-spinner"></div>')
+})
+
+up.preview('main-spinner', function(preview) {
+  let main = up.fragment.closest(preview.fragment, ':main')
+  preview.insert(main, 'afterbegin', '<div class="main-spinner"></div>')
 })
 
 // Setting a `-done` class will line-through the task text.

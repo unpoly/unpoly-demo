@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand navbar-light bg-light fixed-top">
-  <%= link_to 'Unpoly Demo', root_path, class: 'navbar-brand', 'up-follow': true, 'up-skeleton': '#long-index-skeleton' %>
+  <%= link_to 'Unpoly Demo', root_path, class: 'navbar-brand', 'up-follow': true, 'up-placeholder': '#long-index-placeholder' %>
   <div class="navbar-nav">
     <span class="nav-link">
       <%= tour_dot do %>
@@ -7,8 +7,8 @@
         <p>Unpoly links can update arbitrary fragments, identified by CSS selectors. The default selector is the <code>&lt;main&gt;</code> element.</p>
       <% end %>
     </span>
-    <%= link_to 'Companies', companies_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => company_path('*'), 'up-skeleton': '#short-index-skeleton' %>
-    <%= link_to 'Projects', projects_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => project_path('*'), 'up-skeleton': '#long-index-skeleton' %>
-    <%= link_to 'Tasks', tasks_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => task_path('*'), 'up-skeleton': '#short-index-skeleton' %>
+    <%= link_to 'Companies', companies_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => company_path('*'), 'up-placeholder': '#short-index-placeholder' %>
+    <%= link_to 'Projects', projects_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => project_path('*'), 'up-placeholder': '#long-index-placeholder' %>
+    <%= link_to 'Tasks', tasks_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => task_path('*'), 'up-placeholder': '#short-index-placeholder' %>
   </div>
 </nav>

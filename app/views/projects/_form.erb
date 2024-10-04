@@ -26,7 +26,7 @@
 
       <%= link_to suggest_name_projects_path,
         class: 'btn btn-outline-secondary',
-        'up-skeleton': '#popup-spinner',
+        'up-preview': 'popup-spinner',
         'up-layer': 'new popup',
         'up-align': 'right',
         'up-accept-event': 'name:select',
@@ -62,10 +62,10 @@
       </span>
       <%= link_to 'New company', new_company_path,
         class: 'btn btn-outline-secondary',
-        'up-skeleton': '#form-skeleton',
+        'up-placeholder': '#form-placeholder',
         'up-layer': 'new',
         'up-accept-location': company_path('$id'),
-        'up-on-accepted': "up.validate('#company-form-group', { params: { 'project[company_id]': value.id }, skeleton: '#form-skeleton' })"
+        'up-on-accepted': "up.validate('#company-form-group', { params: { 'project[company_id]': value.id }, placeholder: '#form-placeholder' })"
       %>
     </div>
 
@@ -100,8 +100,7 @@
         <%= link_to 'Cancel', cancel_path,
           class: 'btn btn-outline-secondary',
           'up-follow': true,
-          'up-disable': 'Form',
-          'up-preview': 'btn-spinner'
+          'up-preview': 'main-spinner'
         %>
       <% end %>
     </div>

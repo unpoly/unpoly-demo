@@ -298,6 +298,19 @@ up-popup-content {
   }
 }
 
+up-modal-box {
+  padding: 1.8rem 2rem;
+}
+
+up-modal-content {
+  :last-child {
+    margin-bottom: 0;
+  }
+
+  >*:last-child {
+    margin-bottom: 0;
+  }
+}
 
 .new-fragment {
   $new-fragment-color: #fc2;
@@ -359,10 +372,10 @@ up-popup-content {
   border-radius: 15px;
 }
 
-@mixin spinner($width, $color) {
+@mixin spinner($size: 1em, $color: $info, $thickness: 2px) {
   display: inline-block;
   vertical-align: middle;
-  width: $width;
+  width: $size;
   aspect-ratio: 1;
   position: relative;
 
@@ -375,11 +388,13 @@ up-popup-content {
     top: 0;
     right: 0;
     bottom: 0;
-    border: 2px solid rgba($color, 1.0);
+    border: $thickness solid rgba($color, 1.0);
     border-bottom-color: rgba($color, 0.2);
     border-radius: 50%;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
+    opacity: inherit;
+    @content;
   }
 
 }
@@ -387,15 +402,51 @@ up-popup-content {
 .btn-spinner {
   @include spinner(1em, white);
   margin-top: -0.15em;
-}
 
-.btn:has(.btn-spinner) {
-  text-align: center;
+  .btn:has(&) {
+    text-align: center;
+  }
 }
 
 .popup-spinner {
-  @include spinner(2.5rem, $info);
+  @include spinner($size: 2.5rem, $color: $info);
   margin: 0.5rem 3rem 6rem 0.5rem;
+}
+
+.main-spinner {
+  @include spinner($size: 6rem, $color: $info, $thickness: 3px) {
+    transition: opacity 0.3s ease-in;
+    opacity: 1.0;
+    @starting-style {
+      opacity: 0.1;
+    }
+  }
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  main:has(>&) {
+    position: relative;
+    opacity: 1;
+    filter: grayscale(0%);
+
+    & > *:not(.main-spinner) {
+      transition: opacity 0.3s ease-out, filter 0.3s ease-out;
+      opacity: 0.4;
+      filter: grayscale(100%);
+    }
+  }
+}
+
+.placeholder-wave {
+  transition: opacity 0.2s ease-in;
+  opacity: 1.0;
+
+  @starting-style {
+    opacity: 0.5;
+  }
 }
 
 @keyframes rotation {

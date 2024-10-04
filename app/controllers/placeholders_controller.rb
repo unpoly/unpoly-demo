@@ -1,4 +1,4 @@
-class SkeletonsController < ApplicationController
+class PlaceholdersController < ApplicationController
 
   def index
   end

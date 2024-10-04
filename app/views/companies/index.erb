@@ -47,9 +47,9 @@
 
     <%= link_to 'New company', new_company_path, class: 'btn btn-primary',
       'up-layer': 'new',
-      'up-skeleton': '#form-skeleton',
+      'up-placeholder': '#form-placeholder',
       'up-accept-location': company_path('$id'),
-      'up-on-accepted': "up.reload('#companies', { skeleton: '#short-table-skeleton' })"
+      'up-on-accepted': "up.reload('#companies', { placeholder: '#short-table-placeholder' })"
     %>
   </div>
 </div>
@@ -68,9 +68,9 @@
           <td>
             <%= link_to company.name, company,
               'up-layer': 'new',
-              'up-skeleton': '#show-skeleton',
+              'up-placeholder': '#show-placeholder',
               'up-dismiss-event': 'company:destroyed',
-              'up-on-dismissed': "up.reload('#companies', { skeleton: '#short-table-skeleton' })"
+              'up-on-dismissed': "up.reload('#companies', { placeholder: '#short-table-placeholder' })"
             %>
 
             <%= tour_dot do %>

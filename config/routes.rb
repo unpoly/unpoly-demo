@@ -19,10 +19,10 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'skeletons/index', to: 'skeletons#index'
-  get 'skeletons/table', to: 'skeletons#table'
-  get 'skeletons/show', to: 'skeletons#show'
-  get 'skeletons/form', to: 'skeletons#form'
+  get 'placeholders/index', to: 'placeholders#index'
+  get 'placeholders/table', to: 'placeholders#table'
+  get 'placeholders/show', to: 'placeholders#show'
+  get 'placeholders/form', to: 'placeholders#form'
 
   get 'verify_tenant', to: 'tenants#verify', as: :verify_tenant
 end

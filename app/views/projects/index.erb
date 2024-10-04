@@ -19,10 +19,10 @@
     <% end %>
 
     <%= link_to 'New project', new_project_path, class: 'btn btn-primary',
-      'up-skeleton': '#form-skeleton',
+      'up-placeholder': '#form-placeholder',
       'up-layer': 'new',
       'up-accept-location': project_path('$id'),
-      'up-on-accepted': "up.reload('#projects', { skeleton: '#long-table-skeleton' })"
+      'up-on-accepted': "up.reload('#projects', { placeholder: '#long-table-placeholder' })"
     %>
   </div>
 </div>
@@ -43,8 +43,8 @@
             <%= link_to project.name, project,
               'up-layer': 'new',
               'up-accept-event': 'project:destroyed project:updated',
-              'up-on-accepted': "up.reload('#projects', { skeleton: '#long-table-skeleton' })",
-              'up-skeleton': '#show-skeleton'
+              'up-on-accepted': "up.reload('#projects', { placeholder: '#long-table-placeholder' })",
+              'up-placeholder': '#show-placeholder'
             %>
           </td>
           <td>
