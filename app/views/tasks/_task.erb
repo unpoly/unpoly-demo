@@ -1,4 +1,4 @@
-<div class="task task-item <%= '-done' if task.done? %>">
+<div class="task task-item <%= '-done' if task.done? %>" data-id="<%= task.id %>" draggable="true">
 
   <% if task.done? %>
     <%= link_to '', [:unfinish, task], method: :patch, class: 'task-item--toggle',

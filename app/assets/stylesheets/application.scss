@@ -97,7 +97,9 @@ b, strong, th {
   margin: 0 auto;
 }
 
+
 .task {
+  position: relative;
   display: flex;
   align-items: center;
   gap: spacer(3);
@@ -137,6 +139,10 @@ b, strong, th {
     }
   }
 
+  &[draggable=true] {
+    cursor: move;
+  }
+
 }
 
 .task-item--toggle {
@@ -157,6 +163,44 @@ b, strong, th {
 .task-item--edit {
   flex: 0 0 auto;
 }
+
+.task-item.-dragging {
+  cursor: move;
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+}
+
+.task.-dropping {
+  border-bottom-color: $primary !important;
+  border-bottom-width: 3px;
+  margin-bottom: -2px;
+}
+
+
+//.task-item.-dropping {
+//  position: relative;
+//  //margin-bottom: 5px + 3px + 5px;
+//  margin-bottom: 3px;
+//
+//  &:after {
+//    position: absolute;
+//    top: calc(100%);
+//    left: 0;
+//    content: '';
+//    background-color: $primary;
+//    height: 3px;
+//    width: 100%;
+//    border-radius: 2px;
+//  }
+//  //&.-before {
+//  //  box-shadow: inset 0 10px 5px -5px $primary;
+//  //}
+//  //&.-after {
+//  //  box-shadow: inset 0 -10px 5px -5px $primary;
+//  //}
+//}
+
+
 
 .task-form {
   gap: 0;

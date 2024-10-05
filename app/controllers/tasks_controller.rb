@@ -35,7 +35,7 @@ class TasksController < ApplicationController
   end
 
   def index
-    load_tasks
+    render_tasks
   end
 
   def clear_done
@@ -55,18 +55,40 @@ class TasksController < ApplicationController
     redirect_to @task
   end
 
+  def move
+    load_task
+    reference = params[:reference]
+    if reference == 'start'
+      task_scope.move_to_start!(@task)
+    else
+      reference_task = find_task(reference)
+      task_scope.move_after!(reference_task, @task)
+    end
+
+    render_tasks
+  end
+
   private
 
+  def render_tasks
+    load_tasks
+    render :index
+  end
+
   def load_tasks
-    @tasks ||= task_scope.order(created_at: :desc).to_a
+    @tasks ||= task_scope.to_a
   end
 
   def task_scope
-    current_tenant.tasks
+    current_tenant.tasks.by_position
   end
 
   def load_task
-    @task ||= task_scope.find(params[:id])
+    @task ||= find_task(params[:id])
+  end
+
+  def find_task(id)
+    task_scope.find(id)
   end
 
   def build_task

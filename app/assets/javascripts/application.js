@@ -154,3 +154,43 @@ up.preview('clear-tasks', function(preview) {
   }
 })
 
+up.compiler('#tasks', function(container) {
+  let draggingItem
+
+  up.on(container, 'dragstart', '.task-item', function(event, item) {
+    draggingItem = item
+    item.classList.add('-dragging')
+  })
+
+  up.on(container, 'dragover', '.task', function(event, item) {
+    event.preventDefault() // prime drop event
+    item.classList.add('-dropping')
+  })
+
+  up.on(container, 'dragleave', '.task', function(event, item) {
+    item.classList.remove('-dropping')
+  })
+
+  up.on(container, 'drop', '.task', function(event, dropItem) {
+    if (!draggingItem) return
+    event.preventDefault()
+
+    let draggingID = draggingItem.dataset.id
+    let referenceID = dropItem.dataset.id
+
+    draggingItem.classList.remove('-dragging')
+    dropItem.classList.remove('-dropping')
+
+    if (draggingID !== referenceID) {
+      up.render({
+        target: '#tasks',
+        method: 'patch',
+        url: `/tasks/${draggingID}/move`,
+        params: { reference: referenceID },
+        fallback: true,
+        preview: (preview) => preview.insert(dropItem, 'afterend', draggingItem)
+      })
+    }
+  })
+
+})
