@@ -1,17 +1,3 @@
-<table class="table">
-  <thead>
-  <tr>
-    <th><%= placeholder 'Name' %></th>
-    <th><%= placeholder 'Company' %></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% rows.times do%>
-    <tr>
-      <td><%= placeholder Faker::App.name %></span></td>
-      <td><%= placeholder Faker::Company.name %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class="placeholder-wave">
+  <%= render 'placeholders/table_inner' %>
+</div>

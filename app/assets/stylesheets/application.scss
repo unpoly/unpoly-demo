@@ -524,6 +524,10 @@ up-modal-content {
   @starting-style {
     opacity: 0.5;
   }
+
+  &.short tr:nth-child(n + 5) {
+    display: none;
+  }
 }
 
 @keyframes rotation {
