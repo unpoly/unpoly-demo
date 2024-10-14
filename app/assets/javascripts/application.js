@@ -187,18 +187,15 @@ up.compiler('#tasks', function(container) {
     if (!draggingItem) return
     event.preventDefault()
 
-    let draggingID = draggingItem.dataset.id
-    let referenceID = dropItem.dataset.id
-
     draggingItem.classList.remove('-dragging')
     dropItem.classList.remove('-dropping')
 
-    if (draggingID !== referenceID) {
+    if (draggingItem !== dropItem) {
       up.render({
         target: '#tasks',
         method: 'patch',
-        url: `/tasks/${draggingID}/move`,
-        params: { reference: referenceID },
+        url: `/tasks/${draggingItem.dataset.id}/move`,
+        params: { reference: dropItem.dataset.id },
         fallback: true,
         preview: (preview) => preview.insert(dropItem, 'afterend', draggingItem)
       })
