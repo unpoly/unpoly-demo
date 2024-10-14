@@ -31,6 +31,7 @@ up.compiler('.fragment-explainer', function(container) {
       if (fragment.matches('up-modal, up-modal main, up-drawer, up-drawer main, up-popup, up-popup main')) fragment = up.layer.current.getBoxElement()
       lastFragment = fragment
       targetExplainer.innerText = up.fragment.toTarget(fragment, { verify: false })
+      if (config.showFragments.checked) showInsertedFlash(lastFragment)
     }),
 
     up.on(revealTarget, 'click', (event) => {
@@ -73,6 +74,17 @@ up.compiler('form#config', function(form) {
     up.on('up:request:load', ({ request }) => {
       if (form.extraLatency.checked) {
         request.headers['X-Extra-Latency'] = 'true'
+      }
+    }),
+
+    up.on('up:click', { capture: true }, (event) => {
+      if (form.showClicks.checked) {
+        let style = {
+          top: event.clientY + "px",
+          left: event.clientX + "px"
+        }
+        let bubble = up.element.affix(document.body, '.click-bubble', { style })
+        bubble.addEventListener('animationend', () => bubble.remove());
       }
     })
   ]

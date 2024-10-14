@@ -271,6 +271,39 @@ b, strong, th {
   color: #444;
 }
 
+#config {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 1em;
+}
+
+.click-bubble {
+  box-sizing: border-box;
+  position: fixed;
+  border-style: solid;
+  border-color: #ff2299;
+  border-radius: 50%;
+  animation: click-bubble 0.3s ease-out;
+  z-index: 999999;
+}
+
+@keyframes click-bubble {
+  0% {
+    opacity: 0.8;
+    width:0.5em; height: 0.5em;
+    margin: -0.25em;
+    border-width: 0.5em;
+  }
+  100% {
+    opacity: 0.1;
+    width: 6em;
+    height: 6em;
+    margin: -3em;
+    border-width: 0.2em;
+  }
+}
+
+
 
 $tour-dot-color: $green;
 
@@ -522,3 +555,4 @@ input[type=search].up-active {
     background-position: -1000% 1000%;
   }
 }
+
