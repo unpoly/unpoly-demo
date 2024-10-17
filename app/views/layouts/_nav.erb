@@ -7,7 +7,7 @@
         <p>Unpoly links can update arbitrary fragments, identified by CSS selectors. The default selector is the <code>&lt;main&gt;</code> element.</p>
       <% end %>
     </span>
-    <%= link_to 'Companies', companies_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => company_path('*'), 'up-placeholder': '#index-placeholder as .short' %>
+    <%= link_to 'Companies', companies_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => company_path('*'), 'up-placeholder': '#index-placeholder { rows: 5 }' %>
     <%= link_to 'Projects', projects_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => project_path('*'), 'up-placeholder': '#index-placeholder' %>
     <%= link_to 'Tasks', tasks_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => task_path('*'), 'up-placeholder': '#index-placeholder' %>
   </div>

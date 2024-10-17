@@ -1,3 +1,5 @@
+// Unpoly //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //= require unpoly
 //= require unpoly-bootstrap5
 
@@ -6,15 +8,25 @@
 up.link.config.instantSelectors.unshift('a[href]')
 up.link.config.preloadSelectors.unshift('a[href]')
 
+// We use a .form-group to contain each (label, input, error, help) tuple.
+// Unpoly can use this to only update the affected a group when validating.
 up.form.config.groupSelectors.unshift('.form-group')
 
+// Since we're rendering instant loading state for all interactions in the demo,
+// wait longer until we show the progress bar.
 up.network.config.lateTime = 1250
 
 // Enable more logging for curious users.
 up.log.enable()
 
+
+// Tour /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Gray out tour dots once clicked.
 up.on('up:link:follow', '.tour-dot', (event, element) => { element.classList.add('viewed') })
+
+
+// Fragment explainer //////////////////////////////////////////////////////////////////////////////////////////////////
 
 up.compiler('.fragment-explainer', function(container) {
   let lastFragment = document.documentElement
@@ -97,6 +109,9 @@ function showInsertedFlash(fragment) {
   up.util.timer(750, () => fragment.classList.remove('new-fragment'))
 }
 
+
+// Notifications ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Prompt user to reload when frontend assets changeds on the server.
 up.on('up:assets:changed', function() {
   up.element.show(document.querySelector('#new-version'))
@@ -106,6 +121,9 @@ up.on('up:assets:changed', function() {
 up.compiler('.alert', function(alert) {
   up.util.timer(4000, () => up.destroy(alert, { animation: 'move-to-top' }))
 })
+
+
+// Loading state ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function findButton(origin) {
   if (origin.matches('.btn')) {
@@ -124,14 +142,26 @@ up.preview('btn-spinner', function(preview) {
   preview.swapContent(button, '<span class="btn-spinner"></span>')
 })
 
+// Show a spinning wheel inside a loading popup overlay
 up.preview('popup-spinner', function(preview) {
   preview.showPlaceholder('<div class="popup-spinner"></div>')
 })
 
+// Show a spinning wheel inside a loading main element
 up.preview('main-spinner', function(preview) {
   let main = up.fragment.closest(preview.fragment, ':main')
   preview.insert(main, 'afterbegin', '<div class="main-spinner"></div>')
 })
+
+// Shorten placeholder table to the maximum number of rows given
+up.compiler('.placeholder-wave', function(placeholder, { rows = 15 }) {
+  let trs = placeholder.querySelectorAll('tr')
+  for (let i = 0; i < trs.length - rows; i++) {
+    trs[i].remove()
+  }
+})
+
+// Tasks ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Setting a `-done` class will line-through the task text.
 up.preview('finish-task', function(preview) {

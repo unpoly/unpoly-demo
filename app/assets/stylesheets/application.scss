@@ -3,13 +3,11 @@
 //= require roboto
 //= require roboto-mono
 
+
+// Theme ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 @import 'bootstrap';
 @import 'helpers';
-
-@mixin block-spacing {
-  margin-top: spacer(3);
-  margin-bottom: spacer(3);
-}
 
 :root {
   --bs-font-sans-serif: 'Roboto', sans-serif;
@@ -41,10 +39,6 @@ b, strong, th {
   font-weight: 500;
 }
 
-//*:focus {
-//  outline: 2px solid orange !important; // Make focus very visible to help test A11Y
-//}
-
 .field_with_errors {
   display: contents;
 
@@ -66,17 +60,6 @@ b, strong, th {
       border-color: $danger;
     }
 
-    //.input-group & {
-    //  flex: 1 1 auto; // Use available space when wrapping a .form-control inside an .input-group;
-    //}
-
-    //&:has(label) {
-    //  display: inline-block;
-    //}
-    //
-    //&:has(label.d-none) {
-    //  display: none;
-    //}
   }
 
 }
@@ -92,11 +75,65 @@ b, strong, th {
   margin-bottom: spacer(3);
 }
 
+.btn {
+  text-align: center;
+
+  &.btn-sm {
+    min-width: 50px;
+  }
+
+  &:not(.btn-sm) {
+    min-width: 75px;
+  }
+}
+
+$popup-spacing: 12px;
+
+up-popup {
+  z-index: 1070;
+}
+
+up-popup.tour-hint {
+  margin: $popup-spacing;
+
+  code {
+    white-space: nowrap
+  }
+}
+
+up-popup-content {
+  line-height: 1.3;
+
+  p {
+    margin-bottom: 0.7rem;
+  }
+
+  :not(.popup-spinner):last-child {
+    margin-bottom: 0;
+  }
+}
+
+up-modal-box {
+  padding: 1.8rem 2rem;
+}
+
+up-modal-content {
+  :last-child {
+    margin-bottom: 0;
+  }
+
+  >*:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+// Tasks /////////////////////////////////////////////////////////////////////////////////////////////
+
 #tasks {
   max-width: 650px;
   margin: 0 auto;
 }
-
 
 .task {
   position: relative;
@@ -176,32 +213,6 @@ b, strong, th {
   margin-bottom: -2px;
 }
 
-
-//.task-item.-dropping {
-//  position: relative;
-//  //margin-bottom: 5px + 3px + 5px;
-//  margin-bottom: 3px;
-//
-//  &:after {
-//    position: absolute;
-//    top: calc(100%);
-//    left: 0;
-//    content: '';
-//    background-color: $primary;
-//    height: 3px;
-//    width: 100%;
-//    border-radius: 2px;
-//  }
-//  //&.-before {
-//  //  box-shadow: inset 0 10px 5px -5px $primary;
-//  //}
-//  //&.-after {
-//  //  box-shadow: inset 0 -10px 5px -5px $primary;
-//  //}
-//}
-
-
-
 .task-form {
   gap: 0;
   display: grid;
@@ -235,6 +246,9 @@ b, strong, th {
   margin-top: spacer(1);
   grid-area: error;
 }
+
+
+// Fragment explainer //////////////////////////////////////////////////////////////////////////////////////////////////
 
 .fragment-explainer {
   background-color: white;
@@ -277,6 +291,31 @@ b, strong, th {
   column-gap: 1em;
 }
 
+.new-fragment {
+  $new-fragment-color: #fc2;
+  $new-fragment-opacity: 0.6;
+
+  position: relative;
+
+  &:after {
+    transition: all 750ms ease-out;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($new-fragment-color, 0);
+    outline: 10px solid rgba($new-fragment-color, 0);
+    z-index: 1;
+  }
+
+  &.inserted:after {
+    background-color: rgba($new-fragment-color, $new-fragment-opacity);
+    outline: 10px solid rgba($new-fragment-color, $new-fragment-opacity);
+  }
+}
+
 .click-bubble {
   box-sizing: border-box;
   position: fixed;
@@ -304,6 +343,7 @@ b, strong, th {
 }
 
 
+// Tour ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $tour-dot-color: $green;
 
@@ -337,82 +377,8 @@ $tour-dot-color: $green;
   }
 }
 
-.btn {
-  text-align: center;
 
-  &.btn-sm {
-    min-width: 50px;
-  }
-
-  &:not(.btn-sm) {
-    min-width: 75px;
-  }
-}
-
-$popup-spacing: 12px;
-
-up-popup {
-  z-index: 1070;
-}
-
-up-popup.tour-hint {
-  margin: $popup-spacing;
-
-  code {
-    white-space: nowrap
-  }
-}
-
-up-popup-content {
-  line-height: 1.3;
-
-  p {
-    margin-bottom: 0.7rem;
-  }
-
-  :not(.popup-spinner):last-child {
-    margin-bottom: 0;
-  }
-}
-
-up-modal-box {
-  padding: 1.8rem 2rem;
-}
-
-up-modal-content {
-  :last-child {
-    margin-bottom: 0;
-  }
-
-  >*:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.new-fragment {
-  $new-fragment-color: #fc2;
-  $new-fragment-opacity: 0.6;
-
-  position: relative;
-
-  &:after {
-    transition: all 750ms ease-out;
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba($new-fragment-color, 0);
-    outline: 10px solid rgba($new-fragment-color, 0);
-    z-index: 1;
-  }
-
-  &.inserted:after {
-    background-color: rgba($new-fragment-color, $new-fragment-opacity);
-    outline: 10px solid rgba($new-fragment-color, $new-fragment-opacity);
-  }
-}
+// Notifications ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #new-version {
   position: fixed;
@@ -443,6 +409,9 @@ up-modal-content {
     display: none;
   }
 }
+
+
+// Loading state ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .placeholder {
   opacity: 0.1;
@@ -523,10 +492,6 @@ up-modal-content {
 
   @starting-style {
     opacity: 0.5;
-  }
-
-  &.short tr:nth-child(n + 5) {
-    display: none;
   }
 }
 
