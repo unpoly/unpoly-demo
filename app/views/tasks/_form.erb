@@ -1,7 +1,7 @@
 <% task = local_assigns.fetch(:task) %>
 <% target = task.new_record? ? '#tasks' : '.task' %>
 <% autofocus = task.new_record? ? '#tasks' : '.task' %>
-<% preview = task.new_record? ? 'add-task btn-spinner' : 'btn-spinner' %>
+<% preview = task.new_record? ? 'add-task, btn-spinner' : 'btn-spinner' %>
 
 <%= form_for task, html: {
   class: 'task task-form',
