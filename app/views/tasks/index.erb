@@ -7,3 +7,10 @@
     <%= render 'tasks/task', task: task %>
   <% end %>
 </div>
+
+<script id="task-preview" type="text/minimustache">
+  <div class="task task-item">
+    <span class="task-item--toggle"></span>
+    <span class="task-item--text">{{text}}</span>
+  </div>
+</script>

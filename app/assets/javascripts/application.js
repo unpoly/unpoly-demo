@@ -173,24 +173,25 @@ up.preview('unfinish-task', function(preview) {
   preview.removeClass('-done')
 })
 
+up.on('up:template:clone', '[type="text/minimustache"]', function(event) {
+  let template = event.target.innerHTML
+  let filled = template.replace(/{{(\w+)}}/g, (_match, variable) => up.util.escapeHTML(event.data[variable]))
+  event.nodes = up.element.createNodesFromHTML(filled)
+})
+
 up.preview('add-task', function(preview) {
   let form = preview.origin.closest('form')
   let text = preview.params.get('task[text]')
 
   if (text) {
-    preview.insert(form, 'afterend', `
-      <div class="task task-item">
-        <span class="task-item--toggle"></span>
-        <span class="task-item--text">${up.util.escapeHTML(text)}</span>
-      </div>
-    `)
-
+    let newItem = up.template.clone('#task-preview', { text })
+    preview.insert(form, 'afterend', newItem)
     form.reset()
   }
 })
 
 up.preview('clear-tasks', function(preview) {
-  let doneTasks = up.fragment.all('.task.-done', { layer: preview.layer })
+  let doneTasks = up.fragment.all('.task.-done')
   for (let doneTask of doneTasks) {
     preview.hide(doneTask)
   }
