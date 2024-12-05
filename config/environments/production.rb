@@ -1,3 +1,9 @@
+class NullCompressor
+  def compress(string)
+    string
+  end
+end
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -110,7 +116,7 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  Sprockets.register_compressor 'application/javascript', :terser, Terser::Compressor
-  config.assets.js_compressor = :terser
+  config.assets.js_compressor = NullCompressor.new
+  config.assets.css_compressor = NullCompressor.new
 
 end
