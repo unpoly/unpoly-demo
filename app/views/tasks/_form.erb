@@ -10,7 +10,7 @@
   'up-target': target,
   'up-preview': preview,
 } do |form| %>
-  <%= form.text_field :text, class: 'task-form--input form-control', placeholder: 'What needs to be done?', autofocus: autofocus %>
+  <%= form.text_field :text, class: 'task-form--input form-control', placeholder: 'What needs to be done?', autofocus: autofocus, required: true %>
   <%= form.error_message :text, class: 'task-form--error' %>
   <%= form.button 'Save', class: 'task-form--save btn btn-primary btn-sm' %>
 <% end %>

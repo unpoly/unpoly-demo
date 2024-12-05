@@ -182,12 +182,9 @@ up.on('up:template:clone', '[type="text/minimustache"]', function(event) {
 up.preview('add-task', function(preview) {
   let form = preview.origin.closest('form')
   let text = preview.params.get('task[text]')
-
-  if (text) {
-    let newItem = up.template.clone('#task-preview', { text })
-    preview.insert(form, 'afterend', newItem)
-    form.reset()
-  }
+  let newItem = up.template.clone('#task-preview', { text })
+  preview.insert(form, 'afterend', newItem)
+  form.reset()
 })
 
 up.preview('clear-tasks', function(preview) {
