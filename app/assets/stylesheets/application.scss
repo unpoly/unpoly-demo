@@ -176,6 +176,10 @@ up-modal-content {
     }
   }
 
+  &.-previewing {
+    color: $gray-600
+  }
+
   &[draggable=true] {
     cursor: move;
   }
