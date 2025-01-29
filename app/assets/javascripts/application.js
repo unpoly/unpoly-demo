@@ -75,6 +75,12 @@ up.compiler('form#config', function(form) {
       if (form.disableCache.checked) {
         event.renderOptions.cache = false
       }
+      if (form.noPreviews.checked) {
+        Object.assign(event.renderOptions, up.RenderOptions.NO_PREVIEWS)
+      }
+      if (form.noMotion.checked) {
+        Object.assign(event.renderOptions, up.RenderOptions.NO_MOTION)
+      }
     }),
 
     up.on('up:link:preload', (event) => {

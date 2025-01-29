@@ -274,7 +274,7 @@ up-modal-content {
 
 .fragment-explainer--cell {
   flex: 0 1 auto;
-  min-width: calc(min(180px, 13vw));
+  min-width: calc(min(150px, 13vw));
 
   a {
     text-decoration: underline;
@@ -291,7 +291,7 @@ up-modal-content {
 
 #config {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto;
   column-gap: 1em;
 }
 
