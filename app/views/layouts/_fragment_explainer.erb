@@ -1,6 +1,6 @@
 <div class="fragment-explainer d-none d-lg-flex" up-fixed="bottom">
 
-  <div class="fragment-explainer--cell">
+  <div class="fragment-explainer--cell" style="min-width: 170px">
     <div class="fragment-explainer--label">Last fragment:</div>
     <code class="fragment-explainer--target">html</code>
     (<a href="#" class="fragment-explainer--reveal">reveal</a>)
@@ -15,19 +15,19 @@
     </div>
   </div>
 
-  <div class="fragment-explainer--cell">
+  <div class="fragment-explainer--cell d-none">
     <div class="fragment-explainer--label">Last request:</div>
     <code class="fragment-explainer--request">GET <%= request.path %></code>
   </div>
 
   <div class="fragment-explainer--cell">
-    <div class="fragment-explainer--label">Perceived load time:</div>
+    <div class="fragment-explainer--label">Round-trip:</div>
     <div class="fragment-explainer--rtt">
       <span class="text-muted">(initial load)</span>
     </div>
   </div>
 
-  <div class="fragment-explainer--cell d-none d-xl-block">
+  <div class="fragment-explainer--cell">
     <form id="config">
       <div class="form-check my-0">
         <input class="form-check-input" type="checkbox" name="disableCache" value="true" id="configDisableCache">
