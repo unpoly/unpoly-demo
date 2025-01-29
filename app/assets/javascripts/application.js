@@ -161,6 +161,16 @@ up.compiler('.placeholder-wave', function(placeholder, { rows = 15 }) {
   }
 })
 
+
+// Templates with simple {{variable}} substitution /////////////////////////////////////////////////////////////////////
+
+up.on('up:template:clone', '[type="text/minimustache"]', function(event) {
+  let template = event.target.innerHTML
+  let filled = template.replace(/{{(\w+)}}/g, (_match, variable) => up.util.escapeHTML(event.data[variable]))
+  event.nodes = up.element.createNodesFromHTML(filled)
+})
+
+
 // Tasks ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Setting a `-done` class will line-through the task text.
@@ -171,12 +181,6 @@ up.preview('finish-task', function(preview) {
 // Removing a `-done` class will remove the line-through decoration from the task text.
 up.preview('unfinish-task', function(preview) {
   preview.removeClass('-done')
-})
-
-up.on('up:template:clone', '[type="text/minimustache"]', function(event) {
-  let template = event.target.innerHTML
-  let filled = template.replace(/{{(\w+)}}/g, (_match, variable) => up.util.escapeHTML(event.data[variable]))
-  event.nodes = up.element.createNodesFromHTML(filled)
 })
 
 up.preview('add-task', function(preview) {
