@@ -11,30 +11,28 @@
   </head>
 
   <body>
-    <% unless up? %>
-      <%= render 'layouts/nav' %>
+    <%= render 'layouts/nav' %>
 
-      <div class="text-secondary" id="new-version" hidden up-anchored="right">
-        A newer version is available!
-        <a href="javascript:location.reload()" class="btn btn-secondary btn-sm ms-2">Reload</a>
-      </div>
+    <div class="text-secondary" id="new-version" hidden up-anchored="right">
+      A newer version is available!
+      <a href="javascript:location.reload()" class="btn btn-secondary btn-sm ms-2">Reload</a>
+    </div>
 
-      <div class="flashes-explainer" up-anchored="right">
-        <%= tour_dot(position: 'left') do %>
-          <p>
-            The element after this one uses the <code>[up-flashes]</code> attribute
-            to extract notification messages from any response, even
-            if this container wasn't targeted.
-          </p>
+    <div class="flashes-explainer" up-anchored="right">
+      <%= tour_dot(position: 'left') do %>
+        <p>
+          The element after this one uses the <code>[up-flashes]</code> attribute
+          to extract notification messages from any response, even
+          if this container wasn't targeted.
+        </p>
 
-          <p>
-            A <a href="https://unpoly.com/up.compiler">compiler</a> removes any <code>&lt;div class="alert"&gt;</code>
-            after some seconds.
-          </p>
-        <% end %>
-        Notifications go here
-      </div>
-    <% end %>
+        <p>
+          A <a href="https://unpoly.com/up.compiler">compiler</a> removes any <code>&lt;div class="alert"&gt;</code>
+          after some seconds.
+        </p>
+      <% end %>
+      Notifications go here
+    </div>
 
     <div up-flashes up-anchored="right">
       <%= flashes %>
