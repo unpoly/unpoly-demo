@@ -1,0 +1,16 @@
+<div class="split-pane">
+  <div class="split-pane-nav" up-nav>
+
+    <div class="list-group">
+      <% @messages.each do |message| %>
+        <%= link_to message.subject, split_pane_message_path(message.id), class: "list-group-item", 'up-target': '.split-pane-main', 'up-history': 'true' %>
+      <% end %>
+    </div>
+
+  </div>
+
+  <div class="split-pane-main">
+    <%= yield %>
+  </div>
+
+</div>
