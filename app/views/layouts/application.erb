@@ -17,7 +17,12 @@
       <div class="layout-main" up-main up-viewport>
         <%= yield %>
       </div>
-      <div class="layout-foot"></div>
+      <div class="layout-foot">
+        <div class="status">
+          <div class="status-target">Initial page load</div>
+          <div class="status-rtt"></div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

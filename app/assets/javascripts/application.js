@@ -20,8 +20,40 @@
 up.log.enable()
 
 
-//
-//
+up.compiler('.status-target', function(targetInfo) {
+  let lastFragment = document.documentElement
+
+  targetInfo.addEventListener('click', () => showInsertedFlash(lastFragment))
+
+  return up.on('up:fragment:inserted', (_event, fragment) => {
+    if (fragment.matches('[up-hungry]')) return
+    if (fragment.querySelector('.placeholder')) return
+    if (fragment.matches('up-modal, up-modal main, up-drawer, up-drawer main, up-popup, up-popup main')) fragment = up.layer.current.getBoxElement()
+    lastFragment = fragment
+    let lastTarget = up.fragment.toTarget(fragment, {verify: false})
+    targetInfo.innerHTML = `Updated <code>${up.util.escapeHTML(lastTarget)}</code>`
+    if (config.showFragments.checked) showInsertedFlash(lastFragment)
+    // if (config.showFragments.checked) showInsertedFlash(lastFragment)
+  })
+
+})
+
+
+up.compiler('.status-rtt', function(rttInfo) {
+  return up.on('up:fragment:loaded', ({ request, response, revalidating }) => {
+    if (revalidating) return
+
+    let rtt = Math.max(response.loadedAt - request.builtAt, 0)
+    let info = `RTT ${rtt} ms`
+    if (request.fromCache) {
+      info += ' <span class="text-muted">(cache)</span>'
+    }
+    rttInfo.innerHTML = info
+  })
+})
+
+
+
 // // Tour /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // // Gray out tour dots once clicked.
@@ -110,12 +142,12 @@ up.log.enable()
 //   ]
 // })
 //
-// function showInsertedFlash(fragment) {
-//   fragment = up.fragment.get(fragment)
-//   fragment.classList.add('new-fragment', 'inserted')
-//   up.util.timer(0, () => fragment.classList.remove('inserted'))
-//   up.util.timer(750, () => fragment.classList.remove('new-fragment'))
-// }
+function showInsertedFlash(fragment) {
+  fragment = up.fragment.get(fragment)
+  fragment.classList.add('new-fragment', 'inserted')
+  up.util.timer(0, () => fragment.classList.remove('inserted'))
+  up.util.timer(750, () => fragment.classList.remove('new-fragment'))
+}
 //
 //
 // // Notifications ///////////////////////////////////////////////////////////////////////////////////////////////////////

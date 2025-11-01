@@ -31,7 +31,7 @@ body {
   height: 100vh;
   max-height: 700px;
   width: 100vw;
-  max-width: 1000px;
+  max-width: (700px * 16/9);
   inset: auto;
 }
 
@@ -47,8 +47,9 @@ body {
 }
 
 .layout-foot {
-  flex: 0 0 30px;
-  background-color: $gray-900;
+  flex: 0 0 auto;
+  padding: 0.2rem 0.5rem;
+  background-color: $gray-400;
 }
 
 .split-pane {
@@ -65,6 +66,20 @@ body {
   padding: 1rem;
   flex: 1 1 0;
   overflow-y: auto;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.status-target {
+  flex: 1 1 0;
+}
+
+.status-rtt {
+  flex: 0 1 auto;
 }
 
 
@@ -349,30 +364,31 @@ body {
 //  column-gap: 1em;
 //}
 //
-//.new-fragment {
-//  $new-fragment-color: #fc2;
-//  $new-fragment-opacity: 0.6;
-//
-//  position: relative;
-//
-//  &:after {
-//    transition: all 750ms ease-out;
-//    content: '';
-//    position: absolute;
-//    left: 0;
-//    top: 0;
-//    right: 0;
-//    bottom: 0;
-//    background-color: rgba($new-fragment-color, 0);
-//    outline: 10px solid rgba($new-fragment-color, 0);
-//    z-index: 1;
-//  }
-//
-//  &.inserted:after {
-//    background-color: rgba($new-fragment-color, $new-fragment-opacity);
-//    outline: 10px solid rgba($new-fragment-color, $new-fragment-opacity);
-//  }
-//}
+
+.new-fragment {
+  $new-fragment-color: #fc2;
+  $new-fragment-opacity: 0.6;
+
+  position: relative;
+
+  &:after {
+    transition: all 750ms ease-out;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($new-fragment-color, 0);
+    outline: 10px solid rgba($new-fragment-color, 0);
+    z-index: 1;
+  }
+
+  &.inserted:after {
+    background-color: rgba($new-fragment-color, $new-fragment-opacity);
+    outline: 10px solid rgba($new-fragment-color, $new-fragment-opacity);
+  }
+}
 //
 //.click-bubble {
 //  box-sizing: border-box;
