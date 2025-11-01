@@ -9,12 +9,12 @@ module TourHelper
       html = content_tag(:p, html)
     end
 
-    # Add a button to close the hint popup.
-    html << <<~HTML.html_safe
-      <p>
-        <a href="#" up-dismiss class="btn btn-success btn-sm">OK</a>
-      </p>
-    HTML
+    # # Add a button to close the hint popup.
+    # html << <<~HTML.html_safe
+    #   <p>
+    #     <a href="#" up-dismiss class="btn btn-success btn-sm">OK</a>
+    #   </p>
+    # HTML
 
     if strip_tags(html).size > 400
       size = 'large'
