@@ -24,8 +24,8 @@
   <div class="col-sm-auto">
     <%= tour_dot(position: 'left') do %>
       <p>
-        The <i>Clear done</i> button has an <code>[up-target=".tasks"]</code> attribute.
-        Clicking the link will only update the <code>&lt;div class="tasks"&gt;</code> element.
+        The <i>Clear done</i> button has an <code>[up-target="#tasks"]</code> attribute.
+        Clicking the link will only update the <code>&lt;div id="tasks"&gt;</code> element.
       </p>
       <p>
         Other HTML from the server response is discarded.
@@ -34,7 +34,7 @@
 
     <%= link_to 'Clear done', clear_done_tasks_path, method: :delete,
         class: 'btn btn-secondary',
-        'up-target': '.tasks',
+        'up-target': '#tasks',
         'up-preview': 'btn-spinner, clear-tasks'
     %>
   </div>

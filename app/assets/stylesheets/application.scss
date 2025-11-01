@@ -6,13 +6,31 @@
 
 // Theme ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Half the border radius of Bootstrap's defaults.
+$border-radius:     0.6 * .375rem;
+$border-radius-sm:  0.6 * .25rem;
+$border-radius-lg:  0.6 * .5rem;
+$border-radius-xl:  0.6 * 1rem;
+$border-radius-xxl: 0.6 * 2rem;
+
+$font-family-base: 'Roboto', sans-serif;
+$font-family-monospace: 'Roboto Mono', monospace;
+
+//$primary: #2587bb;
+
+//$unpoly-primary: #ee2020;
+//$unpoly-secondary: #464b72;
+//
+//$primary: $unpoly-primary;
+//$secondary: $unpoly-secondary;
+
 @import 'bootstrap';
 @import 'helpers';
 
-:root {
-  --bs-font-sans-serif: 'Roboto', sans-serif;
-  --bs-font-monospace: 'Roboto Mono', monospace;
-}
+//:root {
+//  --bs-font-sans-serif: 'Roboto', sans-serif;    // Goes into $font-family-base
+//  --bs-font-monospace: 'Roboto Mono', monospace; // Goes into $font-family-code
+//}
 
 a {
   --bs-link-decoration: none;
@@ -87,6 +105,41 @@ b, strong, th {
   }
 }
 
+$fragment-outline-width: 5px;
+$fragment-outline-label-height: 32px;
+
+.fragment-outline {
+  position: fixed;
+  opacity: 0.6;
+  //background-color: rgba($new-fragment-color, $new-fragment-opacity);
+  outline: $fragment-outline-width solid green;
+  background-color: rgba(25, 200, 20, 0.1);
+}
+
+.fragment-outline--label {
+  position: absolute;
+  background-color: green;
+  display: inline-block;
+  padding: 0 8px;
+  height: $fragment-outline-label-height;
+  line-height: $fragment-outline-label-height;
+  color: white;
+  font-weight: 500;
+  top: -$fragment-outline-label-height;
+  left: -$fragment-outline-width;
+  border-top-left-radius: $border-radius-lg;
+  border-top-right-radius: $border-radius-lg;
+}
+
+.fragment-outline.-failure {
+  outline-color: red;
+  background-color: rgba(200, 25, 20, 0.1);
+
+  .fragment-outline--label {
+    background-color: red;
+  }
+}
+
 $popup-spacing: 12px;
 
 up-popup {
@@ -111,6 +164,10 @@ up-popup-content {
   :not(.popup-spinner):last-child {
     margin-bottom: 0;
   }
+}
+
+up-modal {
+  --up-modal-viewport-padding-y: 35px;
 }
 
 up-modal-box {
@@ -141,7 +198,7 @@ up-modal-content {
   align-items: center;
   gap: spacer(3);
   border: $border-width $border-style $border-color;
-  padding: ($spacer * 0.5) $spacer;
+  padding: ($spacer * 0.5) ($spacer * 0.75);
 
   &:first-child {
     border-top-left-radius: $border-radius;
@@ -295,30 +352,32 @@ up-modal-content {
   column-gap: 1em;
 }
 
-.new-fragment {
-  $new-fragment-color: #fc2;
-  $new-fragment-opacity: 0.6;
+//.new-fragment {
+//  $new-fragment-color: #fc2;
+//  $new-fragment-opacity: 0.6;
+//
+//  position: relative;
+//
+//  &:after {
+//    transition: all 750ms ease-out;
+//    content: '';
+//    position: absolute;
+//    left: 0;
+//    top: 0;
+//    right: 0;
+//    bottom: 0;
+//    background-color: rgba($new-fragment-color, 0);
+//    outline: 10px solid rgba($new-fragment-color, 0);
+//    z-index: 1;
+//  }
+//
+//  &.inserted:after {
+//    background-color: rgba($new-fragment-color, $new-fragment-opacity);
+//    outline: 10px solid rgba($new-fragment-color, $new-fragment-opacity);
+//  }
+//}
 
-  position: relative;
 
-  &:after {
-    transition: all 750ms ease-out;
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba($new-fragment-color, 0);
-    outline: 10px solid rgba($new-fragment-color, 0);
-    z-index: 1;
-  }
-
-  &.inserted:after {
-    background-color: rgba($new-fragment-color, $new-fragment-opacity);
-    outline: 10px solid rgba($new-fragment-color, $new-fragment-opacity);
-  }
-}
 
 .click-bubble {
   box-sizing: border-box;

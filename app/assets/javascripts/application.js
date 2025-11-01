@@ -16,6 +16,8 @@ up.form.config.groupSelectors.unshift('.form-group')
 // wait longer until we show the progress bar.
 up.network.config.lateTime = 1250
 
+up.fragment.config.runScripts = true
+
 // Enable more logging for curious users.
 up.log.enable()
 
@@ -25,30 +27,38 @@ up.log.enable()
 // Gray out tour dots once clicked.
 up.on('up:link:follow', '.tour-dot', (event, element) => { element.classList.add('viewed') })
 
-
 // Fragment explainer //////////////////////////////////////////////////////////////////////////////////////////////////
 
 up.compiler('.fragment-explainer', function(container) {
   let lastFragment = document.documentElement
+  let lastOK = true
 
   let targetExplainer = container.querySelector('.fragment-explainer--target')
   let revealTarget = container.querySelector('.fragment-explainer--reveal')
   let requestExplainer = container.querySelector('.fragment-explainer--request')
   let rttExplainer = container.querySelector('.fragment-explainer--rtt')
 
+  function revealLastFragment() {
+    let outline = new FragmentOutline(lastFragment, { nature: lastOK ? 'success' : 'failure' })
+    up.util.timer(500, () => outline.destroy({ animation: 'fade-out', duration: 750 }))
+  }
+
   return [
-    up.on('up:fragment:inserted', (_event, fragment) => {
+    up.on('up:fragment:inserted', (event, fragment) => {
       if (fragment.matches('[up-hungry]')) return
+      if (fragment.matches('.tour-hint')) return
       if (fragment.querySelector('.placeholder')) return
+      if (fragment.className.includes('spinner')) return
       if (fragment.matches('up-modal, up-modal main, up-drawer, up-drawer main, up-popup, up-popup main')) fragment = up.layer.current.getBoxElement()
       lastFragment = fragment
+      lastOK = event.ok
       targetExplainer.innerText = up.fragment.toTarget(fragment, { verify: false })
-      if (config.showFragments.checked) showInsertedFlash(lastFragment)
+      if (config.showFragments.checked) revealLastFragment()
     }),
 
     up.on(revealTarget, 'click', (event) => {
       up.event.halt(event)
-      showInsertedFlash(lastFragment)
+      revealLastFragment()
     }),
 
     up.on('up:link:follow up:form:submit', ({ renderOptions }) => {
@@ -108,11 +118,62 @@ up.compiler('form#config', function(form) {
   ]
 })
 
-function showInsertedFlash(fragment) {
-  fragment = up.fragment.get(fragment)
-  fragment.classList.add('new-fragment', 'inserted')
-  up.util.timer(0, () => fragment.classList.remove('inserted'))
-  up.util.timer(750, () => fragment.classList.remove('new-fragment'))
+// function showInsertedFlash(fragment) {
+//   fragment = up.fragment.get(fragment)
+//   fragment.classList.add('new-fragment', 'inserted')
+//   up.util.timer(0, () => fragment.classList.remove('inserted'))
+//   up.util.timer(750, () => fragment.classList.remove('new-fragment'))
+// }
+
+class FragmentOutline {
+  constructor(fragment, { target, nature } = {}) {
+    this._fragment = fragment
+    this._target = target || up.fragment.toTarget(fragment, { verify: false})
+    this._nature = nature || 'success'
+    this._cleaner = up.util.cleaner()
+    this._render()
+  }
+
+  _render() {
+    let layer = up.layer.get(this._fragment)
+    this._outline = layer.affix(`.fragment-outline.-${this._nature}`)
+    this._label = up.element.affix(this._outline, '.fragment-outline--label', { text: this._target })
+    this._updatePosition()
+    this._cleaner(
+      up.on(document, 'scroll', () => this._updatePosition()),
+      up.on(window, 'resize', () => this._updatePosition()),
+    )
+  }
+
+  _updatePosition() {
+    let rect = this._fragment.getBoundingClientRect()
+    Object.assign(this._outline.style, {
+      top: rect.top + 'px',
+      left: rect.left + 'px',
+      width: rect.width + 'px',
+      height: rect.height + 'px'
+    })
+  }
+
+  destroy({ animation = 'fade-out', duration = 750 }) {
+    up.destroy(this._outline, { animation, duration })
+    this._cleaner.clean()
+  }
+}
+
+function showFragmentOutline(fragment, options) {
+  let outline = new FragmentOutline(fragment, options)
+  let offDismissed
+  let destroy = (...args) => {
+    offDismissed()
+    outline.destroy(...args)
+  }
+  offDismissed = up.on('up:layer:dismissed', ({ layer }) => {
+    if (layer.element.matches('.tour-hint')) {
+      destroy({ animation: 'fade-out', duration: 300 })
+    }
+  })
+  return destroy
 }
 
 
