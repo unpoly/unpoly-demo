@@ -22,14 +22,17 @@
   </div>
 
   <div class="col-sm-auto">
-    <%= tour_dot(position: 'left') do %>
-      <p>
-        The <i>Clear done</i> button has an <code>[up-target="#tasks"]</code> attribute.
-        Clicking the link will only update the <code>&lt;div id="tasks"&gt;</code> element.
-      </p>
-      <p>
-        Other HTML from the server response is discarded.
-      </p>
+    <%= tour_dot(outline: { 'a[href*="tasks/clear_done"]' => 'context', '#tasks' => 'success' }) do %>
+
+
+      <%= pre_code do %>
+        <a
+          href="/tasks/clear_done"
+          up-method="delete"
+          up-target="#tasks">
+          Clear done
+        </a>
+      <% end %>
     <% end if show_tour %>
 
     <%= link_to 'Clear done', clear_done_tasks_path, method: :delete,

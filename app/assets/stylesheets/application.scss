@@ -483,9 +483,19 @@ $tour-dot-color: $green;
 }
 
 .tour-hint {
+
+  code {
+    white-space: nowrap;
+  }
+
   pre {
     overflow: visible;
+
+    code {
+      white-space: pre;
+    }
   }
+
 }
 
 
