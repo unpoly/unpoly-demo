@@ -16,6 +16,8 @@ $border-radius-xxl: 0.6 * 2rem;
 $font-family-base: 'Roboto', sans-serif;
 $font-family-monospace: 'Roboto Mono', monospace;
 
+$layout-side-width: 370px;
+
 //$primary: #2587bb;
 
 //$unpoly-primary: #ee2020;
@@ -44,6 +46,7 @@ body {
   //margin: 5.5rem spacer(4) 7rem spacer(4);
   margin: 0;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .container {
@@ -106,15 +109,18 @@ b, strong, th {
   }
 }
 
-$fragment-outline-width: 5px;
+$fragment-outline-width: 3px;
 $fragment-outline-label-height: 32px;
 
 .fragment-outline {
   position: fixed;
-  opacity: 0.6;
+  opacity: 0.7;
   //background-color: rgba($new-fragment-color, $new-fragment-opacity);
   outline: $fragment-outline-width solid green;
   background-color: rgba(25, 200, 20, 0.1);
+  border-radius: 2px;
+  box-shadow: 2px 2px 15px 3px rgba(0, 0, 0, 0.4), inset 0 5px 10px white, inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+  //outline-offset: 2px;
 }
 
 .fragment-outline--label {
@@ -130,6 +136,7 @@ $fragment-outline-label-height: 32px;
   left: -$fragment-outline-width;
   border-top-left-radius: $border-radius-lg;
   border-top-right-radius: $border-radius-lg;
+  display: none;
 }
 
 .fragment-outline.-failure {
@@ -154,14 +161,6 @@ $popup-spacing: 12px;
 
 up-popup {
   z-index: 1070;
-}
-
-up-popup.tour-hint {
-  margin: $popup-spacing;
-
-  code {
-    white-space: nowrap
-  }
 }
 
 up-popup-content {
@@ -197,11 +196,11 @@ up-modal-content {
 
 .layout {
   display: grid;
-  grid-template-columns: 1fr 300px;
+  grid-template-columns: $layout-side-width 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
-    "head side"
-    "main side";
+    "side head"
+    "side main";
   height: 100vh;
 }
 
@@ -213,15 +212,18 @@ up-modal-content {
 
 .layout--side {
   grid-area: side;
-  background: linear-gradient(to bottom, #222 0%, #333 10%, #444 70%, #666 100%);
-  padding: 1.2rem;
-  color: white;
+  padding: 1.5rem 2rem;
+  //background: linear-gradient(to bottom, #222 0%, #333 10%, #444 70%, #666 100%);
+  //color: white;
+  background: #e6e6e6;
+  border-left: 1px solid #999;
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.5);
 }
 
 .layout--main {
   grid-area: main;
   background: white; /* optional */
-  padding: 1.5rem; /* optional */
+  padding: 1.5rem 2rem; /* optional */
 }
 
 
@@ -480,6 +482,12 @@ $tour-dot-color: $green;
   }
 }
 
+.tour-hint {
+  pre {
+    overflow: visible;
+  }
+}
+
 
 // Notifications ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -493,7 +501,7 @@ $tour-dot-color: $green;
 [up-flashes], .flashes-explainer {
   position: fixed;
   top: 0.4rem;
-  right: 320px;
+  right: 2rem;
   z-index: 1050;
 
   .alert {
