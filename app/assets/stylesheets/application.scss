@@ -16,7 +16,10 @@ $border-radius-xxl: 0.6 * 2rem;
 $font-family-base: 'Roboto', sans-serif;
 $font-family-monospace: 'Roboto Mono', monospace;
 
-$layout-side-width: 370px;
+$mark-bg: #ffe055;
+
+$nav-height: 56px;
+$fragment-explainer-height: 64px;
 
 //$primary: #2587bb;
 
@@ -44,7 +47,9 @@ a {
 
 body {
   //margin: 5.5rem spacer(4) 7rem spacer(4);
-  margin: 0;
+  margin-top: calc(#{$nav-height} + 1.5rem);
+  margin-inline: 2rem;
+  margin-bottom: calc(#{$fragment-explainer-height} + 1.5rem);
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -194,37 +199,86 @@ up-modal-content {
 }
 
 
-.layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "head"
-    "main";
-  height: 100vh;
+$panes-side-width: 350px;
+
+.panes--side {
+  position: fixed;
+  overflow-y: scroll;
+  left: 0;
+  top: $nav-height;
+  bottom: $fragment-explainer-height;
+  width: $panes-side-width;
 }
 
-.layout--head {
-  grid-area: head;
-  background: red;
-  height: 56px;
+.panes--content {
+  margin-left: $panes-side-width;
 }
 
-//.layout--side {
-//  grid-area: side;
-//  padding: 1.5rem 2rem;
-//  //background: linear-gradient(to bottom, #222 0%, #333 10%, #444 70%, #666 100%);
-//  //color: white;
-//  background: #e6e6e6;
-//  border-left: 1px solid #999;
-//  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.5);
+
+.note-item {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #bbb;
+  display: block;
+  background-color: #eee;
+  color: #444;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &.up-active, &.up-current {
+    color: white;
+    background-color: $primary;
+
+    .note-item--age {
+      color: #ccc;
+    }
+  }
+}
+
+
+.note-item--title {
+  font-weight: 500;
+}
+
+.note-item--age {
+  font-size: 0.8em;
+  color: #777;
+}
+
+
+//.layout {
+//  display: grid;
+//  grid-template-columns: 1fr;
+//  grid-template-rows: auto 1fr;
+//  grid-template-areas:
+//    "head"
+//    "main";
+//  height: 100vh;
 //}
-
-.layout--main {
-  grid-area: main;
-  background: white; /* optional */
-  padding: 1.5rem 2rem; /* optional */
-}
+//
+//.layout--head {
+//  grid-area: head;
+//  background: red;
+//  height: 56px;
+//}
+//
+////.layout--side {
+////  grid-area: side;
+////  padding: 1.5rem 2rem;
+////  //background: linear-gradient(to bottom, #222 0%, #333 10%, #444 70%, #666 100%);
+////  //color: white;
+////  background: #e6e6e6;
+////  border-left: 1px solid #999;
+////  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.5);
+////}
+//
+//.layout--main {
+//  grid-area: main;
+//  background: white; /* optional */
+//  padding: 1.5rem 2rem; /* optional */
+//}
 
 
 // Tasks /////////////////////////////////////////////////////////////////////////////////////////////
@@ -355,7 +409,7 @@ up-modal-content {
 
 .fragment-explainer {
   background-color: white;
-  padding: 0.75rem 1.2rem;
+  padding: 0.75rem 2rem;
   position: fixed;
   z-index: 2500;
   bottom: 0;

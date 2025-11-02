@@ -47,6 +47,15 @@ class Tenant < ApplicationRecord
         created_at: rand(100).hours.ago
       )
     end
+
+    50.times do
+      notes.create!(
+        title: Faker::Book.unique.title,
+        body: (3..10).to_a.sample.times.map { Faker::Lorem.paragraph(sentence_count: 5,  random_sentences_to_add: 4) }.join("\n\n"),
+        created_at: rand(100).hours.ago
+      )
+    end
+
   end
 
   def sample_address
