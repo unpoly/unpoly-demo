@@ -1,11 +1,18 @@
-<nav class="navbar navbar-expand navbar-light bg-light fixed-top">
-  <%= link_to 'Unpoly Demo', root_path, class: 'navbar-brand', 'up-follow': true, 'up-placeholder': '#index-placeholder' %>
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <%# link_to 'Unpoly Demo', root_path, class: 'navbar-brand', 'up-follow': true, 'up-placeholder': '#index-placeholder' %>
   <div class="navbar-nav">
     <span class="nav-link">
-      <%= tour_dot do %>
-        <p>Navigation links have the <code>[up-follow]</code> attribute. Clicking such links only updates a <b>page fragment</b>. The remaining DOM is not changed.</p>
-        <p>Unpoly links can update arbitrary fragments, identified by CSS selectors. The default selector is the <code>&lt;main&gt;</code> element.</p>
-        <script>showFragmentOutline(up.fragment.get(':main'))</script>
+      <%= tour_dot(outline: { ':main' => 'success', '.navbar-nav a[href*=companies]' => 'context' }) do %>
+        <p>Navigation links have an <code>[up-follow]</code> attribute:</p>
+
+          <pre><code>&lt;a href="/companies"
+  <mark>up-follow</mark>&gt;
+  Companies
+&lt;/a&gt;</code></pre>
+
+          <p>Clicking such links only updates a page fragment. The remaining DOM is not changed.</p>
+
+          <p>Unpoly links can update arbitrary fragments, identified by CSS selectors. The default selector is the <code>&lt;main&gt;</code> element.</p>
       <% end %>
     </span>
     <%= link_to 'Companies', companies_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => company_path('*'), 'up-placeholder': '#index-placeholder { rows: 5 }' %>

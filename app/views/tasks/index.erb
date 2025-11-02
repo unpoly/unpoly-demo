@@ -1,5 +1,15 @@
 <%= render 'tasks/head', title: 'Tasks' %>
 
+<% content_for :tour_hint do %>
+  <p>
+    This screen shows many task boxes with the same selector
+    (<code>&lt;div class="task"&gt;</code>).
+  </p>
+  <p>
+    Note how changing a task will only update a single task box.
+  </p>
+<% end %>
+
 <div id="tasks" class="mt-5">
   <%= render 'tasks/form', task: Task.new %>
 

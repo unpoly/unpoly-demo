@@ -304,7 +304,7 @@ DEPENDENCIES
   sqlite3
   terser
   tzinfo-data
-  unpoly-rails (~> 3.10)
+  unpoly-rails!
   web-console (>= 3.3.0)
   whenever
 

@@ -16,6 +16,8 @@ up.form.config.groupSelectors.unshift('.form-group')
 // wait longer until we show the progress bar.
 up.network.config.lateTime = 1250
 
+up.radio.config.hungrySelectors.push('#tour-hint')
+
 up.fragment.config.runScripts = true
 
 // Enable more logging for curious users.
@@ -26,6 +28,28 @@ up.log.enable()
 
 // Gray out tour dots once clicked.
 up.on('up:link:follow', '.tour-dot', (event, element) => { element.classList.add('viewed') })
+
+up.compiler('#tour-hint', function(hint, data) {
+  let outlines = []
+
+  function destroyOutlines() {
+    for (let outline of outlines) {
+      outline.destroy()
+    }
+    hint.innerHTML = ''
+  }
+
+  for (let selector in data.outline) {
+    let nature = data.outline[selector]
+    let fragment = up.fragment.get(selector)
+    let outline = new FragmentOutline(fragment, { nature })
+    outlines.push(outline)
+    up.fragment.onAborted(fragment, () => destroyOutlines())
+  }
+
+  up.fragment.onAborted(hint, () => destroyOutlines())
+
+})
 
 // Fragment explainer //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -46,7 +70,7 @@ up.compiler('.fragment-explainer', function(container) {
   return [
     up.on('up:fragment:inserted', (event, fragment) => {
       if (fragment.matches('[up-hungry]')) return
-      if (fragment.matches('.tour-hint')) return
+      if (fragment.matches('.tour-hint, #tour-hint')) return
       if (fragment.querySelector('.placeholder')) return
       if (fragment.className.includes('spinner')) return
       if (fragment.matches('up-modal, up-modal main, up-drawer, up-drawer main, up-popup, up-popup main')) fragment = up.layer.current.getBoxElement()
@@ -126,18 +150,26 @@ up.compiler('form#config', function(form) {
 // }
 
 class FragmentOutline {
-  constructor(fragment, { target, nature } = {}) {
+  constructor(fragment, { nature, label } = {}) {
     this._fragment = fragment
-    this._target = target || up.fragment.toTarget(fragment, { verify: false})
     this._nature = nature || 'success'
+    this._label = label ?? this._autoLabel()
     this._cleaner = up.util.cleaner()
     this._render()
   }
 
+  _autoLabel() {
+    if (this._nature === 'success' || this._nature === 'failure') {
+      return up.fragment.toTarget(this._fragment, { verify: false })
+    }
+  }
+
   _render() {
     let layer = up.layer.get(this._fragment)
-    this._outline = layer.affix(`.fragment-outline.-${this._nature}`)
-    this._label = up.element.affix(this._outline, '.fragment-outline--label', { text: this._target })
+    this._outlineElement = layer.affix(`.fragment-outline.-${this._nature}`)
+    if (this._label) {
+      this._labelElement = up.element.affix(this._outlineElement, '.fragment-outline--label', {text: this._label})
+    }
     this._updatePosition()
     this._cleaner(
       up.on(document, 'scroll', () => this._updatePosition()),
@@ -147,7 +179,7 @@ class FragmentOutline {
 
   _updatePosition() {
     let rect = this._fragment.getBoundingClientRect()
-    Object.assign(this._outline.style, {
+    Object.assign(this._outlineElement.style, {
       top: rect.top + 'px',
       left: rect.left + 'px',
       width: rect.width + 'px',
@@ -155,26 +187,26 @@ class FragmentOutline {
     })
   }
 
-  destroy({ animation = 'fade-out', duration = 750 }) {
-    up.destroy(this._outline, { animation, duration })
+  destroy({ animation = 'fade-out', duration = 500 } = {}) {
+    up.destroy(this._outlineElement, { animation, duration })
     this._cleaner.clean()
   }
 }
 
-function showFragmentOutline(fragment, options) {
-  let outline = new FragmentOutline(fragment, options)
-  let offDismissed
-  let destroy = (...args) => {
-    offDismissed()
-    outline.destroy(...args)
-  }
-  offDismissed = up.on('up:layer:dismissed', ({ layer }) => {
-    if (layer.element.matches('.tour-hint')) {
-      destroy({ animation: 'fade-out', duration: 300 })
-    }
-  })
-  return destroy
-}
+// function showFragmentOutline(fragment, options) {
+//   let outline = new FragmentOutline(fragment, options)
+//   let offDismissed
+//   let destroy = (...args) => {
+//     offDismissed()
+//     outline.destroy(...args)
+//   }
+//   offDismissed = up.on('up:layer:dismissed', ({ layer }) => {
+//     if (layer.element.matches('.tour-hint')) {
+//       destroy({ animation: 'fade-out', duration: 300 })
+//     }
+//   })
+//   return destroy
+// }
 
 
 // Notifications ///////////////////////////////////////////////////////////////////////////////////////////////////////
