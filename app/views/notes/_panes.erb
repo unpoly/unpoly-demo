@@ -1,0 +1,32 @@
+<div class="panes">
+  <div class="panes--side" up-nav>
+    <% @notes.each_with_index do |note, i| %>
+      <div class="note-item" up-expand>
+        <div class="note-item--title">
+          <%= link_to note.title, note, 'up-target': '.panes--content', 'up-history': true, 'up-scroll': 'target' %>
+          <% if i == 3 %>
+            <%= tour_dot(outline: { ".note-item:has(a[href='#{note_path(note)}'])" => 'context', '.panes--content' => 'success' }) do %>
+              <p>This link targets the main content:</p>
+
+              <%= pre_code(mark: 'up-target=".panes--content"') do %>
+                <a
+                  href="<%= note_path(note) %>"
+                  up-target=".panes--content"
+                >
+                  <%= note.title %>
+                </a>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="note-item--age">
+          <%= time_ago_in_words(note.created_at) %> ago
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="panes--content">
+    <%= yield %>
+  </div>
+</div>

@@ -52,9 +52,15 @@ module TourHelper
     content_tag(:a, '', attrs)
   end
 
-  def pre_code(&block)
-    html = '' + capture(&block)
+  def pre_code(**options, &block)
+    html = capture(&block)
     html = html.strip_heredoc.strip
+    html = CGI.escapeHTML(html)
+    if (mark = options[:mark])
+      mark = CGI.escapeHTML(mark)
+      html = html.sub(mark) { |match| "<mark>#{match}</mark>" }
+    end
+    html = html.html_safe
     content_tag(:pre, content_tag(:code, html))
   end
 

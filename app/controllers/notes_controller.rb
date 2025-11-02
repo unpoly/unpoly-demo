@@ -21,6 +21,7 @@ class NotesController < ApplicationController
   end
 
   def show
+    load_notes
     load_note
   end
 
@@ -62,7 +63,7 @@ class NotesController < ApplicationController
   end
 
   def load_notes
-    @notes = note_scope.order(:name).to_a
+    @notes = note_scope.order(created_at: :desc).to_a
   end
 
   def note_scope
