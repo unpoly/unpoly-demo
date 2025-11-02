@@ -196,11 +196,11 @@ up-modal-content {
 
 .layout {
   display: grid;
-  grid-template-columns: $layout-side-width 1fr;
+  grid-template-columns: 1fr $layout-side-width;
   grid-template-rows: auto 1fr;
   grid-template-areas:
-    "side head"
-    "side main";
+    "head side"
+    "main side";
   height: 100vh;
 }
 
@@ -463,6 +463,8 @@ $tour-dot-color: $green;
   cursor: pointer;
   box-shadow: 0 0 0 4px rgba($tour-dot-color, 0.3);
   font-size: 0;
+  //filter: grayscale(50%);
+  opacity: 0.6;
 
   &:hover {
     animation: none;
@@ -511,7 +513,7 @@ $tour-dot-color: $green;
 [up-flashes], .flashes-explainer {
   position: fixed;
   top: 0.4rem;
-  right: 2rem;
+  right: calc(2rem + #{$layout-side-width});
   z-index: 1050;
 
   .alert {
@@ -525,6 +527,7 @@ $tour-dot-color: $green;
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: #666;
   border-radius: 0.25rem;
+  min-width: 200px;
 
   #new-version:not([hidden]) + & {
     display: none;
