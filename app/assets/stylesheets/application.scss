@@ -41,7 +41,8 @@ a {
 }
 
 body {
-  margin: 5.5rem spacer(4) 7rem spacer(4);
+  //margin: 5.5rem spacer(4) 7rem spacer(4);
+  margin: 0;
   overflow-y: scroll;
 }
 
@@ -140,6 +141,15 @@ $fragment-outline-label-height: 32px;
   }
 }
 
+.fragment-outline.-context {
+  outline-color: blue;
+  background-color: rgba(20, 25, 200, 0.1);
+
+  .fragment-outline--label {
+    background-color: blue;
+  }
+}
+
 $popup-spacing: 12px;
 
 up-popup {
@@ -182,6 +192,36 @@ up-modal-content {
   >*:last-child {
     margin-bottom: 0;
   }
+}
+
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "head side"
+    "main side";
+  height: 100vh;
+}
+
+.layout--head {
+  grid-area: head;
+  background: red;
+  height: 56px;
+}
+
+.layout--side {
+  grid-area: side;
+  background: linear-gradient(to bottom, #222 0%, #333 10%, #444 70%, #666 100%);
+  padding: 1.2rem;
+  color: white;
+}
+
+.layout--main {
+  grid-area: main;
+  background: white; /* optional */
+  padding: 1.5rem; /* optional */
 }
 
 
@@ -453,7 +493,7 @@ $tour-dot-color: $green;
 [up-flashes], .flashes-explainer {
   position: fixed;
   top: 0.4rem;
-  right: 1rem;
+  right: 320px;
   z-index: 1050;
 
   .alert {

@@ -16,22 +16,27 @@ module TourHelper
     #   </p>
     # HTML
 
-    if strip_tags(html).size > 400
-      size = 'large'
-    else
-      size = 'medium'
-    end
+    # if strip_tags(html).size > 400
+    #   size = 'large'
+    # else
+    #   size = 'medium'
+    # end
 
-    # The hint is just an Unpoly popup.
+    outline = options.fetch(:outline, {})
+
+    html = content_tag(:div, html, id: 'tour-hint', 'up-data': { outline: outline }.to_json)
+
+      # The hint is just an Unpoly popup.
     attrs = {
       class: 'tour-dot',
       href: '#',
-      'up-layer': 'new popup',
-      'up-content': '' + html, # force-escape the HTML string by making it unsafe
-      'up-position': options.fetch(:position, 'right'),
-      'up-align': options.fetch(:align, 'top'),
-      'up-class': 'tour-hint',
-      'up-size': size
+      'up-layer': 'root',
+      'up-peel': 'false',
+      'up-fragment': '' + html, # force-escape the HTML string by making it unsafe
+      # 'up-position': options.fetch(:position, 'right'),
+      # 'up-align': options.fetch(:align, 'top'),
+      # 'up-class': 'tour-hint',
+      # 'up-size': size
     }
 
     # This is a hint to hide this dot on the root layer (see application.sass).
@@ -39,9 +44,9 @@ module TourHelper
       attrs['overlay-only'] = ''
     end
 
-    if (size = options[:size])
-      attrs['up-size'] = size
-    end
+    # if (size = options[:size])
+    #   attrs['up-size'] = size
+    # end
 
     content_tag(:a, '', attrs)
   end
