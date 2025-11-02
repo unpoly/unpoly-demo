@@ -56,7 +56,7 @@ module TourHelper
     html = capture(&block)
     html = html.strip_heredoc.strip
     html = CGI.escapeHTML(html)
-    if (mark = options[:mark])
+    Array.wrap(options[:mark]).each do |mark|
       mark = CGI.escapeHTML(mark)
       html = html.sub(mark) { |match| "<mark>#{match}</mark>" }
     end

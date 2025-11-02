@@ -1,0 +1,28 @@
+@function spacer($length) {
+  @return map-get($spacers, $length);
+}
+
+@mixin pretty-scrollbars($width: 10px) {
+  $idle-track-color: rgba(0, 0, 0, 0.02);
+  $idle-thumb-color: rgba(0, 0, 0, 0.2);
+  $hover-track-color: rgba(0, 0, 0, 0.1);
+  $hover-thumb-color: rgba(0, 0, 0, 0.3);
+
+  &::-webkit-scrollbar {
+    background-color: $idle-track-color;
+    width: $width;
+    height: $width;
+
+    &:hover {
+      background-color: $hover-track-color;
+    }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $idle-thumb-color;
+
+    &:hover {
+      background-color: $hover-thumb-color;
+    }
+  }
+}
