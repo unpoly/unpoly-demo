@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :companies
+  resources :notes
 
   resources :tasks do
     collection do
