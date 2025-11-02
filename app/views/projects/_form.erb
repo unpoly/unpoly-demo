@@ -10,7 +10,7 @@
     <div class="input-group">
       <%= form.text_field :name, class: 'form-control', autocomplete: 'off' %>
       <span class="input-group-text">
-        <%= tour_dot(position: 'left') do %>
+        <%= tour_dot() do %>
           <p>
             The button opens a popup with suggestions for a project name.
           </p>
@@ -43,7 +43,7 @@
     <div class="input-group">
       <%= form.collection_select :company_id, current_tenant.companies.order(:name), :id, :name, { include_blank: '<Select a company>' }, class: 'form-select' %>
       <span class="input-group-text">
-        <%= tour_dot(position: 'left') do %>
+        <%= tour_dot() do %>
           <p>
             A new company can be created in an overlay while the incomplete project form
             stays open in the background.

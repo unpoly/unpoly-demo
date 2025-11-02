@@ -30,14 +30,15 @@ module TourHelper
     attrs = {
       class: 'tour-dot',
       href: '#',
-      'up-layer': 'root',
-      'up-peel': 'false',
+      # 'up-layer': 'root',
+      # 'up-peel': 'false',
+      'up-layer': 'new drawer',
       'up-fragment': '' + html, # force-escape the HTML string by making it unsafe
-      # 'up-position': options.fetch(:position, 'right'),
+      'up-position': options[:position],
       # 'up-align': options.fetch(:align, 'top'),
-      # 'up-class': 'tour-hint',
-      # 'up-size': size
-    }
+      'up-class': 'tour-hint-drawer',
+      'up-size': options[:size],
+    }.compact
 
     # This is a hint to hide this dot on the root layer (see application.sass).
     if options[:overlay_only]
