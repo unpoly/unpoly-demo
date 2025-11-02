@@ -1,12 +1,6 @@
-<div class="fragment-explainer d-none d-lg-flex" up-fixed="bottom">
+<div class="fragment-explainer" up-fixed="bottom">
 
-  <div class="fragment-explainer--cell" style="min-width: 170px">
-    <div class="fragment-explainer--label">Last fragment:</div>
-    <code class="fragment-explainer--target">html</code>
-    (<a href="#" class="fragment-explainer--reveal">reveal</a>)
-  </div>
-
-  <div class="fragment-explainer--cell">
+  <div class="fragment-explainer--cell" style="display: none">
     <div class="fragment-explainer--label">Server-side code:</div>
     <div class="fragment-explainer--server-code" up-hungry up-if-layer="any">
       <a href="<%= fragment_explainer.controller_github_url %>" target="_blank" title="<%= fragment_explainer.controller_short_path %>">Controller</a>
@@ -55,5 +49,12 @@
       </div>
     </form>
   </div>
+
+  <div class="fragment-explainer--cell" style="margin-left: auto">
+    <div class="fragment-explainer--label">Last fragment:</div>
+    <code class="fragment-explainer--target">html</code>
+    (<a href="#" class="fragment-explainer--reveal">reveal</a>)
+  </div>
+
 
 </div>

@@ -355,10 +355,11 @@ up-modal-content {
 
 .fragment-explainer {
   background-color: white;
-  padding: 0.95rem 1.2rem 1.0rem;
+  padding: 0.75rem 1.2rem;
   position: fixed;
   z-index: 2500;
   bottom: 0;
+  font-size: 0.9rem;
   left: 0;
   width: 100vw;
   border-top: 1px solid $gray-500;
@@ -369,6 +370,10 @@ up-modal-content {
   line-height: 1.35;
   justify-content: flex-start;
   align-items: center;
+
+  .form-check {
+    min-height: 0;
+  }
 }
 
 .fragment-explainer--cell {

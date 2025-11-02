@@ -84,7 +84,7 @@ up.compiler('.fragment-explainer', function(container) {
 
   function revealLastFragment() {
     let outline = new FragmentOutline(lastFragment, { nature: lastOK ? 'success' : 'failure' })
-    up.util.timer(500, () => outline.destroy({ animation: 'fade-out', duration: 750 }))
+    up.util.timer(600, () => outline.destroy({ animation: 'fade-out', duration: 750 }))
   }
 
   return [
