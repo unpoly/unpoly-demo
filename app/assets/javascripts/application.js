@@ -16,7 +16,7 @@ up.form.config.groupSelectors.unshift('.form-group')
 // wait longer until we show the progress bar.
 up.network.config.lateTime = 1250
 
-up.radio.config.hungrySelectors.push('#tour-hint')
+up.radio.config.hungrySelectors.push('.tour-hint')
 
 up.fragment.config.runScripts = true
 
@@ -29,7 +29,7 @@ up.log.enable()
 // Gray out tour dots once clicked.
 up.on('up:link:follow', '.tour-dot', (event, element) => { element.classList.add('viewed') })
 
-up.compiler('#tour-hint', function(hint, data) {
+up.compiler('.tour-hint', function(hint, data) {
   let outlines = []
 
   function destroyOutlines() {
@@ -41,7 +41,7 @@ up.compiler('#tour-hint', function(hint, data) {
 
   for (let selector in data.outline) {
     let nature = data.outline[selector]
-    let fragment = up.fragment.get(selector)
+    let fragment = up.fragment.get(selector, { origin: hint })
     let outline = new FragmentOutline(fragment, { nature })
     outlines.push(outline)
     up.fragment.onAborted(fragment, () => destroyOutlines())
@@ -70,7 +70,7 @@ up.compiler('.fragment-explainer', function(container) {
   return [
     up.on('up:fragment:inserted', (event, fragment) => {
       if (fragment.matches('[up-hungry]')) return
-      if (fragment.matches('.tour-hint, #tour-hint')) return
+      if (fragment.matches('.tour-hint')) return
       if (fragment.querySelector('.placeholder')) return
       if (fragment.className.includes('spinner')) return
       if (fragment.matches('up-modal, up-modal main, up-drawer, up-drawer main, up-popup, up-popup main')) fragment = up.layer.current.getBoxElement()

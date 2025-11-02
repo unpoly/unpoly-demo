@@ -24,7 +24,7 @@ module TourHelper
 
     outline = options.fetch(:outline, {})
 
-    html = content_tag(:div, html, id: 'tour-hint', 'up-data': { outline: outline }.to_json)
+    html = content_tag(:div, html, class: 'tour-hint', 'up-data': { outline: outline }.to_json)
 
       # The hint is just an Unpoly popup.
     attrs = {
@@ -49,6 +49,12 @@ module TourHelper
     # end
 
     content_tag(:a, '', attrs)
+  end
+
+  def pre_code(&block)
+    html = '' + capture(&block)
+    html = html.strip_heredoc.strip
+    content_tag(:pre, content_tag(:code, html))
   end
 
 end

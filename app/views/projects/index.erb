@@ -4,7 +4,18 @@
   </div>
 
   <div class="col-sm-auto">
-    <%= tour_dot(position: 'left') do %>
+    <%= tour_dot(outline: { '#new-project-btn' => 'context' }) do %>
+      <%= pre_code do %>
+        <a
+          href="/projects/new"
+          up-layer="new"
+          up-accept-location="/projects/$id"
+          up-on-accepted="up.reload('#projects')"
+        >
+          New Project
+        </a>
+      <% end %>
+
       <p>
         The <i>New project</i> button has an <code>[up-layer=new]</code> attribute.
         This causes the link destination to open in an overlay.
@@ -18,7 +29,7 @@
       </p>
     <% end %>
 
-    <%= link_to 'New project', new_project_path, class: 'btn btn-primary',
+    <%= link_to 'New project', new_project_path, class: 'btn btn-primary', id: 'new-project-btn',
       'up-placeholder': '#form-placeholder',
       'up-layer': 'new',
       'up-accept-location': project_path('$id'),
