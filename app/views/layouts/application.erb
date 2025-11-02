@@ -21,19 +21,18 @@
     <div class="flashes-explainer" up-anchored="right">
       <%= tour_dot(outline: { '.flashes-explainer' => 'context' }) do %>
         <p>
-          This element uses the <code>[up-flashes]</code> attribute
-          to extract notification messages from any response, even
-          if this container wasn't targeted:
+          This element extracts notifications from any response,
+          even when the element wasn't targeted:
         </p>
 
-        <%= pre_code do %>
+        <%= pre_code(mark: 'up-flashes') do %>
           <div up-flashes>
             Notifications go here
           </div>
         <% end %>
 
         <p>
-          A <a href="https://unpoly.com/up.compiler">compiler</a> removes any <code>&lt;div class="alert"&gt;</code>
+          A <a href="https://unpoly.com/up.compiler">compiler</a> removes notifications
           after some seconds.
         </p>
       <% end %>

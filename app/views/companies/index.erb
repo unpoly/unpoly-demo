@@ -4,11 +4,21 @@
   </div>
 
   <div class="col-sm-auto">
-    <%= tour_dot() do %>
+    <%= tour_dot(outline: { '#search-companies-form' => 'context', '#companies' => 'success' }) do %>
       <p>
         The search form has an <code>[up-target="#companies"]</code> attribute.
         This causes the submission results to update the <code>&lt;div id="companies"&gt;</code> element below.
       </p>
+
+      <%= pre_code(mark: ['up-target="#companies"', 'up-autosubmit']) do %>
+        <form
+          action="/companies"
+          up-target="#companies"
+          up-autosubmit
+        >
+          <input type="search" name="query">
+        </form>
+      <% end %>
 
       <p>
         The form also has an <code>[up-autosubmit]</code> attribute.
@@ -21,7 +31,7 @@
       </p>
     <% end %>
 
-    <%= form_tag companies_path, method: :get, class: 'd-inline-block',
+    <%= form_tag companies_path, method: :get, class: 'd-inline-block', id: 'search-companies-form',
       'up-target': '#companies',
       'up-autosubmit': true do
     %>
