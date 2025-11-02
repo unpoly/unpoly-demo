@@ -16,7 +16,7 @@ up.form.config.groupSelectors.unshift('.form-group')
 // wait longer until we show the progress bar.
 up.network.config.lateTime = 1250
 
-up.radio.config.hungrySelectors.push('.tour-hint')
+// up.radio.config.hungrySelectors.push('.tour-hint')
 
 up.fragment.config.runScripts = true
 
@@ -26,8 +26,28 @@ up.log.enable()
 
 // Tour /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+function tourDrawerAutoPosition(tourDot) {
+  const rect = tourDot.getBoundingClientRect()
+  const viewportWidth = window.innerWidth
+
+  // Compute the element's horizontal center position in the viewport
+  const elementCenter = rect.left + rect.width / 2
+
+  // Compare with viewport midpoint
+  if (elementCenter < viewportWidth / 2) {
+    return 'right'
+  } else {
+    return 'left'
+  }
+}
+
 // Gray out tour dots once clicked.
-up.on('up:link:follow', '.tour-dot', (event, element) => { element.classList.add('viewed') })
+up.on('up:link:follow', '.tour-dot', (event, dot) => {
+  dot.classList.add('viewed')
+
+  event.renderOptions.position ??= tourDrawerAutoPosition(dot)
+})
 
 up.compiler('.tour-hint', function(hint, data) {
   let outlines = []
@@ -41,7 +61,7 @@ up.compiler('.tour-hint', function(hint, data) {
 
   for (let selector in data.outline) {
     let nature = data.outline[selector]
-    let fragment = up.fragment.get(selector, { origin: hint })
+    let fragment = up.fragment.get(selector, { layer: 'parent' })
     let outline = new FragmentOutline(fragment, { nature })
     outlines.push(outline)
     up.fragment.onAborted(fragment, () => destroyOutlines())

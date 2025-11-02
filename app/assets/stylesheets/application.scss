@@ -196,11 +196,11 @@ up-modal-content {
 
 .layout {
   display: grid;
-  grid-template-columns: 1fr $layout-side-width;
+  grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
-    "head side"
-    "main side";
+    "head"
+    "main";
   height: 100vh;
 }
 
@@ -210,15 +210,15 @@ up-modal-content {
   height: 56px;
 }
 
-.layout--side {
-  grid-area: side;
-  padding: 1.5rem 2rem;
-  //background: linear-gradient(to bottom, #222 0%, #333 10%, #444 70%, #666 100%);
-  //color: white;
-  background: #e6e6e6;
-  border-left: 1px solid #999;
-  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.5);
-}
+//.layout--side {
+//  grid-area: side;
+//  padding: 1.5rem 2rem;
+//  //background: linear-gradient(to bottom, #222 0%, #333 10%, #444 70%, #666 100%);
+//  //color: white;
+//  background: #e6e6e6;
+//  border-left: 1px solid #999;
+//  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.5);
+//}
 
 .layout--main {
   grid-area: main;
@@ -500,6 +500,21 @@ $tour-dot-color: $green;
 
 }
 
+up-drawer.tour-hint-drawer {
+
+  &[size=medium] {
+    up-drawer-box {
+      width: 380px;
+    }
+
+  }
+
+
+  up-drawer-backdrop {
+    background: transparent;
+  }
+}
+
 
 // Notifications ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -513,7 +528,7 @@ $tour-dot-color: $green;
 [up-flashes], .flashes-explainer {
   position: fixed;
   top: 0.4rem;
-  right: calc(2rem + #{$layout-side-width});
+  right: 2rem;
   z-index: 1050;
 
   .alert {
