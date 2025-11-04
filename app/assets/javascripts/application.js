@@ -12,6 +12,8 @@ up.link.config.preloadSelectors.unshift('a[href]:is([up-follow], [up-target])')
 // Unpoly can use this to only update the affected a group when validating.
 up.form.config.groupSelectors.unshift('.form-group')
 
+up.fragment.config.autoHistoryTargets.unshift('.panes--content')
+
 // Since we're rendering instant loading state for all interactions in the demo,
 // wait longer until we show the progress bar.
 up.network.config.lateTime = 1250
@@ -62,7 +64,19 @@ up.compiler('.tour-hint', function(hint, data) {
   for (let selector in data.outline) {
     let nature = data.outline[selector]
     let fragment = up.fragment.get(selector, { layer: 'parent' })
-    let outline = new FragmentOutline(fragment, { nature })
+    if (!fragment) {
+      console.warn("[.tour-hint] Could not find fragment for selector", selector)
+      continue
+    }
+
+    let label
+    if (nature === 'success' || nature == 'failure') {
+      label = selector
+    } else {
+      label = false
+    }
+
+    let outline = new FragmentOutline(fragment, { nature, label })
     outlines.push(outline)
     up.fragment.onAborted(fragment, () => destroyOutlines())
   }
@@ -124,8 +138,22 @@ up.compiler('.fragment-explainer', function(container) {
 })
 
 up.compiler('form#config', function(form) {
+
+  let pageParams = new URLSearchParams(location.search)
+  for (let checkbox of form.querySelectorAll('input[type="checkbox"]')) {
+    if (pageParams.get(checkbox.name)) checkbox.checked = true
+  }
+
   return [
     up.on('up:link:follow up:form:submit', function(event) {
+      if (form.fullPageLoads.checked) {
+        event.preventDefault()
+        let { url, method, params } = event.renderOptions
+        params ||= new up.Params()
+        params.set('fullPageLoads', true)
+        up.network.loadPage({ url, method, params })
+      }
+
       if (form.disableCache.checked) {
         event.renderOptions.cache = false
       }
@@ -138,7 +166,7 @@ up.compiler('form#config', function(form) {
     }),
 
     up.on('up:link:preload', (event) => {
-      if (form.disableCache.checked) {
+      if (form.fullPageLoads.checked || form.disableCache.checked) {
         event.preventDefault()
       }
     }),

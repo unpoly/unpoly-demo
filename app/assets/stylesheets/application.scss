@@ -21,6 +21,8 @@ $mark-bg: #ffe055;
 $nav-height: 56px;
 $fragment-explainer-height: 64px;
 
+$navbar-nav-link-padding-x: 0.7rem;
+
 
 //$primary: #2587bb;
 
@@ -32,6 +34,53 @@ $fragment-explainer-height: 64px;
 
 @import 'bootstrap';
 @import 'helpers';
+
+
+//@mixin stripe-animation($color1, $color2, $stripe-width: 1rem) {
+//  --stripe-width: #{$stripe-width};
+//
+//  background-image: repeating-linear-gradient(
+//    -45deg,
+//    $color1,
+//    $color1 var(--stripe-width),
+//    $color2 var(--stripe-width),
+//    $color2 calc(2 * var(--stripe-width))
+//  );
+//  background-size: calc(2 * var(--stripe-width)) calc(2 * var(--stripe-width));
+//  animation: barberpole 200ms linear infinite;
+//}
+//
+//@keyframes barberpole {
+//  0% {
+//    background-position: 0 0;
+//  }
+//
+//  /* move one tile diagonally; use same-sign to go down-right,
+//     or opposite-sign to go up-right depending on your taste */
+//  100% {
+//    background-position: calc(2 * var(--stripe-width)) calc(2 * var(--stripe-width));
+//  }
+//}
+
+
+@mixin stripe-animation($color1, $color2, $size: 20000%) {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    $color1,
+    $color1 1rem,
+    $color2 1rem,
+    $color2 2rem
+  );
+  background-size: $size $size;
+  animation: barberpole 200s linear infinite;
+}
+
+@keyframes barberpole {
+  100% {
+    background-position: -1000% 1000%;
+  }
+}
+
 
 //:root {
 //  --bs-font-sans-serif: 'Roboto', sans-serif;    // Goes into $font-family-base
@@ -50,8 +99,13 @@ a {
 }
 
 .nav-link {
-  &.up-active, &.up-current {
+  &.up-active {
     text-decoration: underline;
+  }
+ &.up-current {
+    border-radius: 7px;
+    background-color: white;
+    box-shadow: inset 0 0 0 1px #ccc;
   }
 }
 
@@ -74,6 +128,10 @@ p {
 
 b, strong, th {
   font-weight: 500;
+}
+
+main {
+  min-height: 300px;
 }
 
 .field_with_errors {
@@ -127,21 +185,37 @@ b, strong, th {
 $fragment-outline-width: 3px;
 $fragment-outline-label-height: 32px;
 
+@mixin tint-fragment-outline($color) {
+  outline-color: $color;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, #{transparentize($color, 0.95)} 70%);
+
+  .fragment-outline--label {
+    background-color: $color;
+  }
+}
+
 .fragment-outline {
   position: fixed;
-  opacity: 0.7;
-  //background-color: rgba($new-fragment-color, $new-fragment-opacity);
-  outline: $fragment-outline-width solid green;
+  outline: $fragment-outline-width solid orange;
   background-color: rgba(25, 200, 20, 0.2);
   border-radius: 2px;
-  box-shadow: 2px 2px 15px 3px rgba(0, 0, 0, 0.4), inset 0 5px 10px white, inset 0 -5px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 15px 3px rgba(0, 0, 0, 0.4); //, inset 0 5px 10px white, inset 0 -5px 8px rgba(0, 0, 0, 0.2);
   z-index: 1030 + 1; // bleed through Bootstrap's fixed navbar
-  //outline-offset: 2px;
+
+  //&:before {
+  //  position: absolute;
+  //  top: 0;
+  //  left: 0;
+  //  right: 0;
+  //  bottom: 0;
+  //  z-index: -1;
+  //  content: '';
+  //  background: linear-gradient(to bottom, red 0%, blue 100%);
+  //}
 }
 
 .fragment-outline--label {
   position: absolute;
-  background-color: green;
   display: inline-block;
   padding: 0 8px;
   height: $fragment-outline-label-height;
@@ -162,22 +236,17 @@ $fragment-outline-label-height: 32px;
 
 }
 
-.fragment-outline.-failure {
-  outline-color: red;
-  background-color: rgba(200, 25, 20, 0.2);
+.fragment-outline.-success {
+  @include tint-fragment-outline(#54b342);
+}
 
-  .fragment-outline--label {
-    background-color: red;
-  }
+.fragment-outline.-failure {
+  @include tint-fragment-outline(#df4819);
 }
 
 .fragment-outline.-context {
-  outline-color: blue;
-  background-color: rgba(20, 25, 200, 0.2);
-
-  .fragment-outline--label {
-    background-color: blue;
-  }
+  //@include tint-fragment-outline(#6f1cd5);
+  @include tint-fragment-outline(orange);
 }
 
 $popup-spacing: 12px;
@@ -207,7 +276,7 @@ up-modal-box {
 }
 
 up-modal-content {
-  :last-child {
+  >:last-child {
     margin-bottom: 0;
   }
 
@@ -247,7 +316,7 @@ $panes-side-width: 350px;
     color: inherit;
   }
 
-  &.up-active, &.up-current {
+  &.up-current {
     box-shadow: inset 0 5px 15px -6px rgba(0, 0, 0, 0.7);
     color: white;
     background-color: $primary;
@@ -256,6 +325,32 @@ $panes-side-width: 350px;
       color: #ccc;
     }
   }
+
+  &.up-active {
+    box-shadow: inset 0 5px 10px -6px rgba(0, 0, 0, 0.4);
+    background-color: #fc3;
+    $stripe-color: #fc3;
+    $stripe-color: #e8e8e8;
+    @include stripe-animation($stripe-color, darken($stripe-color, 3%));
+  }
+}
+
+.page-head {
+  margin-bottom: spacer(4);
+  display: flex;
+  gap: spacer(2);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-head--title {
+  h1, h2, h3 {
+    margin-bottom: 0;
+  }
+}
+
+.page-head--actions {
+
 }
 
 
@@ -449,6 +544,10 @@ $panes-side-width: 350px;
   .form-check {
     min-height: 0;
   }
+
+  .form-check-input {
+    margin-top: 0.15em;
+  }
 }
 
 .fragment-explainer--cell {
@@ -470,7 +569,7 @@ $panes-side-width: 350px;
 
 #config {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
   column-gap: 1em;
 }
 
@@ -570,8 +669,11 @@ $tour-dot-color: $green;
     white-space: nowrap;
   }
 
-  pre {
+  pre:has(>code) {
     overflow: visible;
+    @include steal-space-x(200px);
+    background-color: #f4f4f4;
+    padding-block: 0.9rem;
 
     code {
       white-space: pre;
@@ -584,7 +686,7 @@ up-drawer.tour-hint-drawer {
 
   &[size=medium] {
     up-drawer-box {
-      width: 380px;
+      width: 400px;
     }
 
   }
@@ -726,21 +828,7 @@ up-drawer.tour-hint-drawer {
 $search-active-stripe-color: rgba(200, 230, 255, 0.3);
 
 input[type=search].up-active {
-  background-image:
-    repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 1rem,
-        $search-active-stripe-color 1rem,
-        $search-active-stripe-color 2rem
-    );
-  background-size: 2000% 2000%;
-  animation: barberpole 200s linear infinite;
+   @include stripe-animation(transparent, $search-active-stripe-color);
 }
 
-@keyframes barberpole {
-  100% {
-    background-position: -1000% 1000%;
-  }
-}
 

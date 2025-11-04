@@ -23,9 +23,9 @@
 
   <div class="col-sm-auto">
     <%= tour_dot(outline: { 'a[href*="tasks/clear_done"]' => 'context', '#tasks' => 'success' }) do %>
+      <p>This button updates the task list with the response:</p>
 
-
-      <%= pre_code do %>
+      <%= pre_code(mark: 'up-target="#tasks"') do %>
         <a
           href="/tasks/clear_done"
           up-method="delete"

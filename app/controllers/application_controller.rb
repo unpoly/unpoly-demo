@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
 
   def emulate_latency
     if up? && request.headers['X-Extra-Latency'].present? && !response.redirect?
-      sleep 1.0
+      sleep 1.2
     end
   end
 

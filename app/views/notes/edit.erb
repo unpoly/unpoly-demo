@@ -1,0 +1,99 @@
+<%= render 'panes' do %>
+  <div class="page-head">
+    <div class="page-head--title">
+      <h2>
+        Edit note #<%= @note.id %>
+        <%= tour_dot(
+          outline: {
+            '.panes--content' => 'success',
+            "#note-item-#{@note.id}" => 'success',
+            '#note-form' => 'failure',
+            'button[type=submit]' => 'context'
+          },
+          position: 'right',
+        ) do %>
+          <p>
+            This form updates the note elements with the server response.
+            A failed submission will re-render the form.
+          </p>
+
+          <% code_target = ".panes--content, #note-item-#{@note.id}" %>
+          <% code_fail_target = "form" %>
+
+          <%= pre_code(mark: [%(up-target="#{code_target}"), %(up-fail-target="#{code_fail_target}")]) do %>
+            <form
+              method="post",
+              action="<%= note_path(@note) %>"
+              up-target="<%= code_target %>"
+              up-fail-target="<%= code_fail_target %>"
+            >
+              ...
+            </form>
+          <% end %>
+
+          <p>
+            For Unpoly to be able to detect a failed submission, the backend must respond with a status code
+            like <code>422 Unprocessable Entity</code>.
+          </p>
+
+        <% end %>
+      </h2>
+    </div>
+  </div>
+
+  <%= form_for @note, html: {
+    id: 'note-form',
+    'up-submit': true,
+    'up-target': ".panes--content, #note-item-#{@note.id}:maybe",
+    'up-disable': true,
+    'up-preview': 'btn-spinner',
+  } do |form| %>
+
+    <div class="form-group" id="title-form-group">
+      <%= form.label :title, class: 'form-label' %>
+      <%= tour_dot(outline: { '#title-form-group' => 'context' }) do %>
+        <p>The field validates user input on the server without a full submission:</p>
+        <%= pre_code(mark: 'up-validate') do %>
+          <fieldset>
+            <label>Title</label>
+            <input
+              type="text"
+              name="title"
+              value="<%= @note.title %>"
+              up-validate>
+          </fieldset>
+        <% end %>
+        <p>When the field is blurred, the surrounding fieldset is re-rendered by the server. This shows eventual error messages.</p>
+        <p>Try entering a duplicate note title and then focus the body field.</p>
+      <% end %>
+      <%= form.text_field :title, class: 'form-control' %>
+      <%= form.error_message :title %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :body, class: 'form-label' %>
+      <%= form.text_area :body, class: 'form-control', rows: 10 %>
+      <%= form.error_message :body %>
+    </div>
+
+    <div class="d-flex align-items-center mt-4">
+      <div class="flex-grow-1">
+        <%= form.button "Save", class: 'btn btn-primary' %>
+
+        <%= tour_dot(overlay_only: true) do %>
+          <p>Saving invalid fields will re-render the <code>&lt;form&gt;</code> element.</p>
+        <% end %>
+      </div>
+
+      <div>
+        <%= link_to 'Cancel', notes_path, class: 'btn btn-outline-secondary',
+          'up-target': '.panes--content',
+          'up-preview': 'main-spinner'
+        %>
+      </div>
+    </div>
+
+  <% end %>
+
+
+<% end %>
