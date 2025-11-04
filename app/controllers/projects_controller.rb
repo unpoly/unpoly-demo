@@ -46,7 +46,7 @@ class ProjectsController < ApplicationController
 
   def build_project
     @project ||= project_scope.build
-    @project.attributes = project_attributes
+    @project.attributes = project_params
   end
 
   def load_project
@@ -73,7 +73,7 @@ class ProjectsController < ApplicationController
     current_tenant.projects
   end
 
-  def project_attributes
+  def project_params
     if (attrs = params[:project])
       attrs.permit(:name, :company_id, :budget)
     else

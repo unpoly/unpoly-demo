@@ -5,18 +5,18 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1'>
-    <%= javascript_include_tag 'application', defer: true %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application', defer: true unless up? %>
+    <%= stylesheet_link_tag 'application', media: 'all' unless up? %>
     <%= favicon_link_tag("favicon.png") %>
   </head>
 
   <body>
     <%= render 'layouts/nav' %>
 
-    <div class="text-secondary" id="new-version" hidden up-anchored="right">
-      A newer version is available!
-      <a href="javascript:location.reload()" class="btn btn-secondary btn-sm ms-2">Reload</a>
-    </div>
+    <!-- <div class="text-secondary" id="new-version" hidden up-anchored="right">-->
+    <!--   A newer version is available!-->
+    <!--   <a href="javascript:location.reload()" class="btn btn-secondary btn-sm ms-2">Reload</a>-->
+    <!-- </div>-->
 
     <div class="flashes-explainer" up-anchored="right">
       <%= tour_dot(outline: { '.flashes-explainer' => 'context' }) do %>

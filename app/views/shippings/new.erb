@@ -1,0 +1,103 @@
+<%= page_head 'Shipping costs' %>
+
+<%= form_for @shipping, html: {
+  'up-submit': true,
+} do |form| %>
+
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group" id="weight" up-validate="#estimate" up-watch-event="input">
+        <%= form.label :weight, class: 'form-label' %>
+        <div class="input-group w-50">
+          <%= form.text_field :weight, class: 'form-control', autocomplete: 'off' %>
+          <span class="input-group-append">
+            <span class="input-group-text">kg</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group" id="continent" up-validate="#country, #estimate">
+        <%= form.label :continent, class: 'form-label' %>
+        <%= form.collection_radio_buttons :continent, @shipping.assignable_continents, :to_s, :to_s, { include_blank: true } do |b| %>
+          <div class="form-check">
+            <%= b.radio_button class: 'form-check-input' %>
+            <%= b.label class: 'form-check-label' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="form-group" id="country" up-validate="#country, #estimate">
+        <%= form.label :country, class: 'form-label' %>
+        <% if @shipping.continent.blank? %>
+          <p class="text-muted">
+            Please select a continent.
+          </p>
+        <% end %>
+        <%= form.collection_radio_buttons :country, @shipping.assignable_countries, :to_s, :to_s, { include_blank: true } do |b| %>
+          <div class="form-check">
+            <%= b.radio_button class: 'form-check-input' %>
+            <%= b.label class: 'form-check-label' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-7" id="estimate">
+      <% estimate = @shipping.estimate %>
+
+      <% if estimate %>
+        <table class="table table-sm">
+          <colgroup>
+            <col width="30%">
+            <col width="30%">
+            <col width="20%">
+          </colgroup>
+
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Basis</th>
+              <th align="right">Price</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr>
+              <td><%= estimate.base_fee.label %></td>
+              <td><%= estimate.base_fee.basis %></td>
+              <td align="right"><%= euros(estimate.base_fee.price) %></td>
+            </tr>
+            <tr>
+              <td><%= estimate.weight_surcharge.label %></td>
+              <td><%= estimate.weight_surcharge.basis %></td>
+              <td align="right"><%= euros(estimate.weight_surcharge.price) %></td>
+            </tr>
+            <tr>
+              <td><%= estimate.distance_surcharge.label %></td>
+              <td><%= estimate.distance_surcharge.basis %></td>
+              <td align="right"><%= euros(estimate.distance_surcharge.price) %></td>
+            </tr>
+            <tr>
+              <td><%= estimate.vat.label %></td>
+              <td><%= estimate.vat.basis %></td>
+              <td align="right"><%= euros(estimate.vat.price) %></td>
+            </tr>
+          </tbody>
+          <tfoot class="table-group-divider">
+            <tr>
+              <th><%= estimate.total.label %></th>
+              <th></th>
+              <th class="fs-3" align="right"><%= euros(estimate.total.price) %></th>
+            </tr>
+          </tfoot>
+        </table>
+      <% elsif @shipping.errors[:country].any? %>
+        <p class="text-muted">
+          Please select a country.
+        </p>
+      <% end %>
+    </div>
+  </div>
+
+  <%# form.submit 'Save', class: 'btn btn-primary' %>
+
+<% end %>

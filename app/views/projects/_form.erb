@@ -6,7 +6,7 @@
 } do |form| %>
 
   <div class="form-group">
-    <%= form.label :name %>
+    <%= form.label :name, class: 'form-label' %>
     <div class="input-group">
       <%= form.text_field :name, class: 'form-control', autocomplete: 'off' %>
       <span class="input-group-text">
@@ -38,7 +38,7 @@
   </div>
 
   <div class="form-group <%= 'd-none' if up.context[:from_company] %>" id="company-form-group">
-    <%= form.label :company_id %>
+    <%= form.label :company_id, class: 'form-label' %>
 
     <div class="input-group">
       <%= form.collection_select :company_id, current_tenant.companies.order(:name), :id, :name, { include_blank: '<Select a company>' }, class: 'form-select' %>
@@ -73,7 +73,7 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :budget %>
+    <%= form.label :budget, class: 'form-label' %>
     <div class="input-group">
       <%= form.text_field :budget, class: 'form-control' %>
       <span class="input-group-append">

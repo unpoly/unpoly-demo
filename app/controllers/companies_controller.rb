@@ -42,7 +42,7 @@ class CompaniesController < ApplicationController
 
   def build_company
     @company ||= company_scope.build
-    @company.attributes = company_attributes
+    @company.attributes = company_params
   end
 
   def load_company
@@ -71,7 +71,7 @@ class CompaniesController < ApplicationController
     current_tenant.companies
   end
 
-  def company_attributes
+  def company_params
     if (attrs = params[:company])
       attrs.permit(:name, :address)
     else
