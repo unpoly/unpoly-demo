@@ -6,18 +6,43 @@
 
   <div class="row">
     <div class="col-md-5">
-      <div class="form-group" id="weight" up-validate="#estimate" up-watch-event="input">
+      <div class="form-group" id="weight-group" up-validate="#estimate" up-watch-event="input">
         <%= form.label :weight, class: 'form-label' %>
+        <%= tour_dot(outline: { '#weight-group': 'context', '#estimate' => 'success' }) do %>
+          <p>Changing this input updates the estimate:</p>
+          <%= pre_code(mark: ['up-validate="#estimate"', 'up-watch-event="input"']) do %>
+            <input
+              type="number"
+              name="weight"
+              up-validate="#estimate"
+              up-watch-event="input"
+            >
+          <% end %>
+        <% end %>
         <div class="input-group w-50">
-          <%= form.text_field :weight, class: 'form-control', autocomplete: 'off' %>
+          <%= form.number_field :weight, class: 'form-control', autocomplete: 'off' %>
           <span class="input-group-append">
             <span class="input-group-text">kg</span>
           </span>
         </div>
       </div>
 
-      <div class="form-group" id="continent" up-validate="#country, #estimate">
+      <div class="form-group" id="continent-group" up-validate="#country-group, #estimate">
         <%= form.label :continent, class: 'form-label' %>
+        <%= tour_dot(outline: { '#continent-group': 'context', '#country-group' => 'success', '#estimate' => 'success' }) do %>
+          <p>Picking a continent updates the countries and estimate:</p>
+          <%= pre_code(mark: ['up-validate="#country-group, #estimate"']) do %>
+            <div
+              id="continent-group"
+              up-validate="#country-group, #estimate"
+            >
+              <input type="radio" name="continent" ...>
+              <input type="radio" name="continent" ...>
+              ...
+            </div>
+          <% end %>
+        <% end %>
+
         <%= form.collection_radio_buttons :continent, @shipping.assignable_continents, :to_s, :to_s, { include_blank: true } do |b| %>
           <div class="form-check">
             <%= b.radio_button class: 'form-check-input' %>
@@ -26,8 +51,21 @@
         <% end %>
       </div>
 
-      <div class="form-group" id="country" up-validate="#country, #estimate">
+      <div class="form-group" id="country-group" up-validate="#country-group, #estimate">
         <%= form.label :country, class: 'form-label' %>
+        <%= tour_dot(outline: { '#country-group': 'context', '#estimate' => 'success' }) do %>
+          <p>Picking a country updates the countries and estimate:</p>
+          <%= pre_code(mark: ['up-validate="#country-group, #estimate"']) do %>
+            <div
+              id="country-group"
+              up-validate="#country-group, #estimate"
+            >
+              <input type="radio" name="country" ...>
+              <input type="radio" name="country" ...>
+              ...
+            </div>
+          <% end %>
+        <% end %>
         <% if @shipping.continent.blank? %>
           <p class="text-muted">
             Please select a continent.
