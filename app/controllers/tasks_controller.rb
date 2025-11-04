@@ -93,10 +93,10 @@ class TasksController < ApplicationController
 
   def build_task
     @task ||= task_scope.build
-    @task.attributes = task_attributes
+    @task.attributes = task_params
   end
 
-  def task_attributes
+  def task_params
     if (attrs = params[:task])
       attrs.permit(:text, :done)
     else

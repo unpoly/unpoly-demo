@@ -48,6 +48,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_type (2.5.1)
+      activerecord (>= 3.2)
     activejob (6.1.7.2)
       activesupport (= 6.1.7.2)
       globalid (>= 0.3.6)
@@ -111,6 +113,9 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.3.4)
+    countries (4.2.3)
+      i18n_data (~> 0.16.0)
+      sixarm_ruby_unaccent (~> 1.1)
     crass (1.0.6)
     database_cleaner (1.7.0)
     date (3.3.3)
@@ -126,8 +131,11 @@ GEM
       activesupport (>= 5.0)
     has_defaults (0.4.4)
       activerecord
+    haversine (0.3.2)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
+    i18n_data (0.16.0)
+      simple_po_parser (~> 1.1)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
     listen (3.2.1)
@@ -244,6 +252,8 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    simple_po_parser (1.1.6)
+    sixarm_ruby_unaccent (1.2.2)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -288,6 +298,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_type
   bootsnap (>= 1.4.2)
   bootstrap (>= 5.0.0)
   byebug
@@ -297,11 +308,14 @@ DEPENDENCIES
   capistrano-rails (~> 1.3)
   capybara
   coffee-script
+  countries
   database_cleaner
   faker
   has_defaults
+  haversine
   jbuilder
   listen (~> 3.2)
+  memoized
   minidusen
   pg
   puma

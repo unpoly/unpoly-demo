@@ -22,7 +22,8 @@ $nav-height: 56px;
 $fragment-explainer-height: 64px;
 
 $navbar-nav-link-padding-x: 0.7rem;
-
+$form-label-font-weight: 500;
+$font-weight-bold: 500;
 
 //$primary: #2587bb;
 
@@ -105,7 +106,7 @@ a {
  &.up-current {
     border-radius: 7px;
     background-color: white;
-    box-shadow: inset 0 0 0 1px #ccc;
+    box-shadow: inset 0 0 0 1px #d4d4d4;
   }
 }
 
@@ -132,6 +133,10 @@ b, strong, th {
 
 main {
   min-height: 300px;
+}
+
+th[align=right] {
+  text-align: right;
 }
 
 .field_with_errors {

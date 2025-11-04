@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :shippings, only: [:new, :create]
+
   get 'placeholders/index', to: 'placeholders#index'
   get 'placeholders/table', to: 'placeholders#table'
   get 'placeholders/show', to: 'placeholders#show'

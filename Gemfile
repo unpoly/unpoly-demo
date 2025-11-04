@@ -27,6 +27,12 @@ gem 'bootstrap', '>=5.0.0'
 
 gem 'minidusen'
 
+gem 'active_type'
+gem 'memoized'
+
+gem 'haversine'
+gem 'countries'
+
 gem 'has_defaults'
 
 gem 'database_cleaner'

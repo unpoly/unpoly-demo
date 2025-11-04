@@ -17,4 +17,8 @@ module ApplicationHelper
 
   end
 
+  def euros(amount)
+    number_to_currency(amount, unit: '€', precision: 2)
+  end
+
 end

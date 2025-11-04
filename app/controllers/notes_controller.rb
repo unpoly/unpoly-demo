@@ -43,7 +43,7 @@ class NotesController < ApplicationController
 
   def build_note
     @note ||= note_scope.build
-    @note.attributes = note_attributes
+    @note.attributes = note_params
   end
 
   def load_note
@@ -70,7 +70,7 @@ class NotesController < ApplicationController
     current_tenant.notes
   end
 
-  def note_attributes
+  def note_params
     if (attrs = params[:note])
       attrs.permit(:title, :body)
     else

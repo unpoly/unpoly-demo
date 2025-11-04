@@ -98,7 +98,7 @@ up.compiler('.fragment-explainer', function(container) {
 
   function revealLastFragment() {
     let outline = new FragmentOutline(lastFragment, { nature: lastOK ? 'success' : 'failure' })
-    up.util.timer(600, () => outline.destroy({ animation: 'fade-out', duration: 750 }))
+    up.util.timer(800, () => outline.destroy({ animation: 'fade-out', duration: 850 }))
   }
 
   return [
@@ -259,10 +259,10 @@ class FragmentOutline {
 
 // Notifications ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Prompt user to reload when frontend assets changeds on the server.
-up.on('up:assets:changed', function() {
-  up.element.show(document.querySelector('#new-version'))
-})
+// // Prompt user to reload when frontend assets changeds on the server.
+// up.on('up:assets:changed', function() {
+//   up.element.show(document.querySelector('#new-version'))
+// })
 
 // Remove notification flashes after a few seconds.
 up.compiler('.alert', function(alert) {
