@@ -5,6 +5,10 @@
 
   <div class="col-sm-auto">
     <%= tour_dot(outline: { '#new-project-btn' => 'context' }) do %>
+      <p>
+        The <i>New project</i> link opens its response in an overlay:
+      </p>
+
       <%= pre_code(mark: 'up-layer="new"') do %>
         <a
           href="/projects/new"
@@ -16,10 +20,6 @@
         </a>
       <% end %>
 
-      <p>
-        The <i>New project</i> button has an <code>[up-layer=new]</code> attribute.
-        This causes the link destination to open in an overlay.
-      </p>
       <p>
         The button also defines a <i>close condition</i> using an <code>[up-accept-location]</code> attribute.
         This causes the overlay to automatically close when it reaches the URL of a newly created project.
