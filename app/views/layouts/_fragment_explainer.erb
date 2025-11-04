@@ -14,15 +14,13 @@
     <code class="fragment-explainer--request">GET <%= request.path %></code>
   </div>
 
-  <div class="fragment-explainer--cell">
-    <div class="fragment-explainer--label">Round-trip:</div>
-    <div class="fragment-explainer--rtt">
-      <span class="text-muted">(initial load)</span>
-    </div>
-  </div>
 
   <div class="fragment-explainer--cell">
     <form id="config">
+      <div class="form-check my-0">
+        <input class="form-check-input" type="checkbox" name="fullPageLoads" value="true" id="configFullPageLoads">
+        <label class="form-check-label" for="configFullPageLoads">Full page loads</label>
+      </div>
       <div class="form-check my-0">
         <input class="form-check-input" type="checkbox" name="disableCache" value="true" id="configDisableCache">
         <label class="form-check-label" for="configDisableCache">Disable cache</label>
@@ -35,6 +33,7 @@
         <input class="form-check-input" type="checkbox" name="noPreviews" value="true" id="configNoPreviews">
         <label class="form-check-label" for="configNoPreviews">No previews</label>
       </div>
+      <div></div>
       <div class="form-check my-0">
         <input class="form-check-input" type="checkbox" name="extraLatency" value="true" id="configExtraLatency">
         <label class="form-check-label" for="configExtraLatency">Extra server delay</label>
@@ -56,5 +55,11 @@
     (<a href="#" class="fragment-explainer--reveal">reveal</a>)
   </div>
 
+  <div class="fragment-explainer--cell">
+    <div class="fragment-explainer--label">Round-trip:</div>
+    <div class="fragment-explainer--rtt">
+      <span class="text-muted">(initial load)</span>
+    </div>
+  </div>
 
 </div>

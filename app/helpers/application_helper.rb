@@ -7,4 +7,14 @@ module ApplicationHelper
   #   super(name, options, html_options, &block)
   # end
 
+  def page_head(title, &actions)
+    title_div = content_tag(:div, content_tag(:h2, title), class: 'page-head--title')
+    actions_div = content_tag(:div, class: 'page-head--actions', &(actions || proc {}))
+
+    content_tag(:div, class: 'page-head') do
+      title_div + actions_div
+    end
+
+  end
+
 end

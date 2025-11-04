@@ -1,11 +1,12 @@
 <div class="panes">
   <div class="panes--side" up-nav>
-    <% @notes.each_with_index do |note, i| %>
-      <div class="note-item" up-expand>
+    <% (@notes || []).each_with_index do |note, i| %>
+      <% item_id =  "note-item-#{note.id}" %>
+      <div class="note-item" id="<%= item_id %>" up-expand>
         <div class="note-item--title">
-          <%= link_to note.title, note, 'up-target': '.panes--content', 'up-history': true, 'up-scroll': 'target' %>
-          <% if i == 3 %>
-            <%= tour_dot(outline: { ".note-item:has(a[href='#{note_path(note)}'])" => 'context', '.panes--content' => 'success' }) do %>
+          <%= link_to note.title, note, 'up-target': '.panes--content', 'up-scroll': 'target' %>
+          <% if i == 1 %>
+            <%= tour_dot(outline: { item_id => 'context', '.panes--content' => 'success' }) do %>
               <p>This link targets the main content:</p>
 
               <%= pre_code(mark: 'up-target=".panes--content"') do %>
@@ -16,6 +17,40 @@
                   <%= note.title %>
                 </a>
               <% end %>
+            <% end %>
+          <% end %>
+          <% if i == 3 %>
+            <%= tour_dot(outline: { item_id => 'context' }) do %>
+              <p>While this links is loading, it gets the <code>up-active</code> class:</p>
+
+              <%= pre_code(mark: 'up-active') do %>
+                <a
+                  href="<%= note_path(note) %>"
+                  up-target=".panes--content"
+                  class="up-active"
+                >
+                  <%= note.title %>
+                </a>
+              <% end %>
+
+              <p>
+                Links that point to the current location get the <code>up-current</code> class:
+              </p>
+
+              <%= pre_code(mark: 'up-current') do %>
+                <a
+                  href="<%= note_path(note) %>"
+                  up-target=".panes--content"
+                  class="up-current"
+                >
+                  <%= note.title %>
+                </a>
+              <% end %>
+
+              <p>
+                Check <i>Disable cache</i> and <i>Extra server delay</i> and select some notes.
+              </p>
+
             <% end %>
           <% end %>
         </div>

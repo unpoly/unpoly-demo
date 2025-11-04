@@ -26,3 +26,8 @@
     }
   }
 }
+
+@mixin steal-space-x($width) {
+  margin-inline: -$width;
+  padding-inline: $width;
+}
