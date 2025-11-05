@@ -231,12 +231,20 @@ class FragmentOutline {
   }
 
   _updatePosition() {
-    let rect = this._fragment.getBoundingClientRect()
+    let { top, right, bottom, left } = this._fragment.getBoundingClientRect()
+
+    // Make sure the outline doesn't draw outside screen bounds
+    let outline = up.element.styleNumber(this._outlineElement, 'outline-width')
+    top = Math.max(top, outline)
+    left = Math.max(left, outline)
+    right = Math.min(right, document.documentElement.clientWidth - outline)
+    bottom = Math.min(bottom, document.documentElement.clientHeight - outline)
+
     Object.assign(this._outlineElement.style, {
-      top: rect.top + 'px',
-      left: rect.left + 'px',
-      width: rect.width + 'px',
-      height: rect.height + 'px'
+      top: top + 'px',
+      left: left + 'px',
+      width: (right - left) + 'px',
+      height: (bottom - top) + 'px'
     })
   }
 
@@ -245,21 +253,6 @@ class FragmentOutline {
     this._cleaner.clean()
   }
 }
-
-// function showFragmentOutline(fragment, options) {
-//   let outline = new FragmentOutline(fragment, options)
-//   let offDismissed
-//   let destroy = (...args) => {
-//     offDismissed()
-//     outline.destroy(...args)
-//   }
-//   offDismissed = up.on('up:layer:dismissed', ({ layer }) => {
-//     if (layer.element.matches('.tour-hint')) {
-//       destroy({ animation: 'fade-out', duration: 300 })
-//     }
-//   })
-//   return destroy
-// }
 
 
 // Notifications ///////////////////////////////////////////////////////////////////////////////////////////////////////
