@@ -22,31 +22,4 @@
     <%= link_to 'Shipping', new_shipping_path, class: 'nav-item nav-link', 'up-follow': true, 'up-placeholder': '#form-placeholder' %>
   </div>
 
-  <div class="flashes-explainer">
-    <%= tour_dot(outline: { '.flashes-explainer' => 'context' }) do %>
-      <p>
-        This element extracts notifications from any response,
-        even when the element wasn't targeted:
-      </p>
-
-      <%= pre_code(mark: 'up-flashes') do %>
-        <div up-flashes>
-          Notifications go here
-        </div>
-      <% end %>
-
-      <p>
-        A <a href="https://unpoly.com/up.compiler">compiler</a> removes notifications
-        after some seconds.
-      </p>
-    <% end %>
-
-  </div>
-
-  <div up-flashes>
-    <%= flashes %>
-<!--    <div class="flash -success">Project updated!</div>-->
-  </div>
-
-
 </nav>

@@ -58,6 +58,7 @@ class NotesController < ApplicationController
       up.layer.emit('note:saved')
       redirect_to @note, notice: 'Note saved successfully'
     else
+      flash[:error] = 'Could not save note'
       render form, status: :bad_request
     end
   end

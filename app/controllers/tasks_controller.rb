@@ -26,6 +26,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to @task, notice: 'Task updated'
     else
+      flash[:error] = 'Could not update task'
       render 'edit', status: :bad_request
     end
   end
