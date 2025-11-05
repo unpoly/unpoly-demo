@@ -135,11 +135,11 @@ b, strong, th {
 }
 
 body > main {
-  min-height: 300px;
-
-  margin-top: calc(#{$nav-height} + 1.5rem);
+  min-height: calc(100vh - #{$nav-height} - #{$fragment-explainer-height});
+  margin-top: $nav-height;
+  padding-block: 1.5rem;
   padding-inline: $body-padding-x; // area covered by main-spinner
-  margin-bottom: calc(#{$fragment-explainer-height} + 1.5rem);
+  margin-bottom: $fragment-explainer-height;
 }
 
 
