@@ -726,7 +726,7 @@ up-drawer.tour-hint-drawer {
 
 // Offline ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.offline-link {
+.offline-link:not([href="#"]) {
   text-decoration: line-through !important;
   cursor: not-allowed !important;
 }

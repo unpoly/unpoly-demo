@@ -92,16 +92,16 @@ up.on('up:request:offline', function({ request }) {
   suspectOffline(true)
 })
 
-up.on('up:fragment:offline', async function({ renderOptions, request, retry }) {
-  if (renderOptions.origin && request.method !== 'GET') {
-    let layer = await up.layer.open({ content: '#offline-modal', size: 'small' })
-    layer.on('up:click', '#retry-btn', () => retry({ confirm: false }))
-  }
-})
-
 // Don't use up:fragment:loaded, as that also fires when a page is loaded from cache.
 up.on('up:request:loaded', function() {
   suspectOffline(false)
 })
 
 scheduleTestRequest()
+
+up.on('up:fragment:offline', async function({ renderOptions, request, retry }) {
+  if (renderOptions.origin && request.method !== 'GET') {
+    let layer = await up.layer.open({ content: '#offline-modal', size: 'small' })
+    layer.on('up:click', '#retry-btn', () => retry({ confirm: false }))
+  }
+})
