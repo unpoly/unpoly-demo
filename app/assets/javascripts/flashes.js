@@ -17,9 +17,10 @@ up.compiler('.flash', function(flash, { nonce }) {
       seenFlashes.delete(seenFlashes.values().next().value)
     }
   }
-
   up.animate(flash, 'move-from-right', { duration: 125 })
-  up.util.timer(4000, () => up.destroy(flash, { animation: 'move-to-right' }))
+  let destroy = up.util.memoize(() => up.destroy(flash, { animation: 'move-to-right' }));
+  flash.addEventListener('click', destroy)
+  up.util.timer(4000, destroy)
 })
 
 window.showFlash = function(type, message) {

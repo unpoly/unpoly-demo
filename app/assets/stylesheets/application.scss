@@ -294,6 +294,7 @@ up-modal {
 
 up-modal-box {
   padding: 1.8rem 2rem;
+  border-radius: $border-radius;
 }
 
 up-modal-content {
@@ -762,6 +763,7 @@ up-drawer.tour-hint-drawer {
 }
 
 .flash {
+  cursor: pointer;
   color: white;
   font-weight: 500;
   padding: 0.5rem 1rem;
