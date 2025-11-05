@@ -23,6 +23,7 @@ $fragment-explainer-height: 64px;
 
 $navbar-nav-link-padding-x: 0.7rem;
 $form-label-font-weight: 500;
+$form-label-margin-bottom: 0.4rem;
 $font-weight-bold: 500;
 
 $success: #54b342;
@@ -788,6 +789,7 @@ up-drawer.tour-hint-drawer {
   color: #666;
   border-radius: $border-radius-xxl;
   min-width: 200px;
+  z-index: 1035;
 
   //#new-version:not([hidden]) + & {
   //  display: none;
