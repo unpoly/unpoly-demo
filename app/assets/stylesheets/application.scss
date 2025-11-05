@@ -298,6 +298,10 @@ up-modal-content {
   >*:last-child {
     margin-bottom: 0;
   }
+
+  >*>*:last-child {
+    margin-bottom: 0;
+  }
 }
 
 
@@ -711,6 +715,13 @@ up-drawer.tour-hint-drawer {
   up-drawer-backdrop {
     background: transparent;
   }
+}
+
+
+// Offline ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.offline-link {
+  text-decoration: line-through !important;
 }
 
 
