@@ -28,6 +28,8 @@ $font-weight-bold: 500;
 $success: #54b342;
 $danger: #df4819;
 
+$body-padding-x: 2rem;
+
 //$primary: #2587bb;
 
 //$unpoly-primary: #ee2020;
@@ -136,7 +138,7 @@ body > main {
   min-height: 300px;
 
   margin-top: calc(#{$nav-height} + 1.5rem);
-  padding-inline: 2rem; // area covered by main-spinner
+  padding-inline: $body-padding-x; // area covered by main-spinner
   margin-bottom: calc(#{$fragment-explainer-height} + 1.5rem);
 }
 
@@ -548,7 +550,7 @@ $panes-side-width: 350px;
 
 .fragment-explainer {
   background-color: white;
-  padding: 0.7rem 2rem;
+  padding: 0.7rem $body-padding-x;
   position: fixed;
   z-index: 2500;
   bottom: 0;
@@ -725,7 +727,7 @@ up-drawer.tour-hint-drawer {
 
 .offline-link {
   text-decoration: line-through !important;
-  cursor: not-allowed;
+  cursor: not-allowed !important;
 }
 
 
