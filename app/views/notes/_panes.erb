@@ -4,7 +4,7 @@
       <% item_id =  "note-item-#{note.id}" %>
       <div class="note-item" id="<%= item_id %>" up-expand>
         <div class="note-item--title">
-          <%= link_to note.title, note, 'up-target': '.panes--content', 'up-scroll': 'target', 'up-alias': edit_note_path(note) %>
+          <%= link_to note.title, note, 'up-target': '.panes--content', 'up-scroll': 'target', 'up-alias': edit_note_path(note), 'up-preload': (i < 2 ? 'insert' : 'hover') %>
           <% if i == 1 %>
             <%= tour_dot(outline: { item_id => 'context', '.panes--content' => 'success' }) do %>
               <p>This link targets the main content:</p>
