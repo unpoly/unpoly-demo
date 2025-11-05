@@ -115,9 +115,7 @@ a {
 
 body {
   //margin: 5.5rem spacer(4) 7rem spacer(4);
-  margin-top: calc(#{$nav-height} + 1.5rem);
-  margin-inline: 2rem;
-  margin-bottom: calc(#{$fragment-explainer-height} + 1.5rem);
+  margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -134,9 +132,14 @@ b, strong, th {
   font-weight: 500;
 }
 
-main {
+body > main {
   min-height: 300px;
+
+  margin-top: calc(#{$nav-height} + 1.5rem);
+  padding-inline: 2rem; // area covered by main-spinner
+  margin-bottom: calc(#{$fragment-explainer-height} + 1.5rem);
 }
+
 
 th[align=right] {
   text-align: right;
@@ -855,12 +858,12 @@ up-drawer.tour-hint-drawer {
   main:has(>&) {
     position: relative;
     opacity: 1;
-    filter: grayscale(0%);
+    //filter: grayscale(0%);
 
     & > *:not(.main-spinner) {
-      transition: opacity 0.3s ease-out, filter 0.3s ease-out;
+      transition: opacity 0.3s ease-out;
       opacity: 0.4;
-      filter: grayscale(100%);
+      //filter: grayscale(100%);
     }
   }
 }
