@@ -160,6 +160,9 @@ up.compiler('form#config', function(form) {
       if (form.noPreviews.checked) {
         Object.assign(event.renderOptions, up.RenderOptions.NO_PREVIEWS)
       }
+      if (form.noOverlays.checked) {
+        event.renderOptions.layer = 'origin current'
+      }
       if (form.noMotion.checked) {
         Object.assign(event.renderOptions, up.RenderOptions.NO_MOTION)
       }
@@ -265,8 +268,8 @@ class FragmentOutline {
 // })
 
 // Remove notification flashes after a few seconds.
-up.compiler('.alert', function(alert) {
-  up.util.timer(4000, () => up.destroy(alert, { animation: 'move-to-top' }))
+up.compiler('.flash', function(alert) {
+  up.util.timer(4000, () => up.destroy(alert, { animation: 'move-to-right' }))
 })
 
 

@@ -18,31 +18,6 @@
     <!--   <a href="javascript:location.reload()" class="btn btn-secondary btn-sm ms-2">Reload</a>-->
     <!-- </div>-->
 
-    <div class="flashes-explainer" up-anchored="right">
-      <%= tour_dot(outline: { '.flashes-explainer' => 'context' }) do %>
-        <p>
-          This element extracts notifications from any response,
-          even when the element wasn't targeted:
-        </p>
-
-        <%= pre_code(mark: 'up-flashes') do %>
-          <div up-flashes>
-            Notifications go here
-          </div>
-        <% end %>
-
-        <p>
-          A <a href="https://unpoly.com/up.compiler">compiler</a> removes notifications
-          after some seconds.
-        </p>
-      <% end %>
-
-    </div>
-
-    <div up-flashes up-anchored="right">
-      <%= flashes %>
-    </div>
-
     <main>
       <%= yield %>
     </main>
