@@ -61,6 +61,7 @@ class ProjectsController < ApplicationController
       up.layer.emit('project:saved')
       redirect_to @project, notice: 'Project saved successfully'
     else
+      flash[:error] = 'Could not save project'
       render form, status: :bad_request
     end
   end

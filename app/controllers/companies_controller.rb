@@ -56,6 +56,7 @@ class CompaniesController < ApplicationController
     elsif @company.save
       redirect_to @company, notice: 'Company saved successfully'
     else
+      flash[:error] = 'Could not save company'
       render form, status: :bad_request
     end
   end
