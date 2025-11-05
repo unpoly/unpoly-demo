@@ -2,7 +2,7 @@ const CLASS_OFFLINE = 'offline-link'
 const SELECTOR_LINK = 'a, [up-href]'
 const TEST_REQUEST_TIMEOUT = 10_000
 const POLL_PAUSE_ONLINE = 10_000
-const POLL_PAUSE_OFFLINE = 5_000
+const POLL_PAUSE_OFFLINE = 3_000
 
 let isOffline = false
 
@@ -15,7 +15,7 @@ function suspectOffline(newOffline) {
     showFlash('danger', 'You are offline')
     markLinks()
   } else {
-    showFlash('danger', 'You are online')
+    showFlash('success', 'You are online')
     unmarkLinks()
   }
 }
@@ -87,9 +87,12 @@ up.compiler(SELECTOR_LINK, { batch: true }, function(links) {
   }
 })
 
-up.on('up:fragment:offline', async function({ renderOptions, request, retry }) {
+// Runs when preloading
+up.on('up:request:offline', function({ request }) {
   suspectOffline(true)
+})
 
+up.on('up:fragment:offline', async function({ renderOptions, request, retry }) {
   if (renderOptions.origin && request.method !== 'GET') {
     let layer = await up.layer.open({ content: '#offline-modal', size: 'small' })
     layer.on('up:click', '#retry-btn', () => retry({ confirm: false }))
