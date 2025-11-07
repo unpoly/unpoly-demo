@@ -6,6 +6,9 @@ class PlaceholdersController < ApplicationController
   def show
   end
 
+  def note
+  end
+
   def form
   end
 

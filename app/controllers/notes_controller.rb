@@ -47,7 +47,7 @@ class NotesController < ApplicationController
   end
 
   def load_note
-    @note ||= note_scope.find(params[:id])
+    @note ||= note_scope.find(note_id)
   end
 
   def save_note(form:)
@@ -64,11 +64,15 @@ class NotesController < ApplicationController
   end
 
   def load_notes
-    @notes = note_scope.order(created_at: :desc).to_a
+    @notes = ordered_note_scope.to_a
   end
 
   def note_scope
     current_tenant.notes
+  end
+
+  def ordered_note_scope
+    note_scope.order(created_at: :desc)
   end
 
   def note_params
@@ -76,6 +80,14 @@ class NotesController < ApplicationController
       attrs.permit(:title, :body)
     else
       {}
+    end
+  end
+
+  def note_id
+    if params[:id] == 'first'
+      ordered_note_scope.first.id
+    else
+      params[:id]
     end
   end
 

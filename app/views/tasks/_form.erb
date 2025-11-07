@@ -11,6 +11,42 @@
   'up-target': target,
   'up-preview': preview,
 } do |form| %>
+  <% if task.new_record? %>
+    <div class="task--tour-dot">
+      <%= tour_dot(outline: {  target => 'success', '.task-form' => 'context' }) do %>
+        <p>
+          Adding a task <%= docs_link 'renders optimistically', '/optimistic-rendering' %>
+          without waiting for the network:
+        </p>
+
+        <%= pre_code(mark: 'up-preview="add-task"') do %>
+          <form
+            action="<%= url_for(task) %>"
+            method="post"
+            up-target="#tasks"
+            up-preview="add-task"
+          >
+            ...
+          </form>
+        <% end %>
+
+        <p>
+          The <i>preview</i> is a JavaScript description of a temporary change:
+        </p>
+
+        <%= pre_code(mark: "'add-task'") do %>
+          up.preview('add-task', function(preview) {
+            let text = preview.params.get('task[text]')
+            let newItem = up.template.clone('#task-preview', { text })
+            let form = preview.origin.closest('form')
+            preview.insert(form, 'afterend', newItem)
+            form.reset()
+          })
+        <% end %>
+
+      <% end %>
+    </div>
+  <% end %>
   <%= form.text_field :text, class: 'task-form--input form-control', placeholder: 'What needs to be done?', autofocus: autofocus, required: true %>
   <%= form.error_message :text, class: 'task-form--error' %>
   <%= form.button 'Save', class: 'task-form--save btn btn-primary btn-sm' %>

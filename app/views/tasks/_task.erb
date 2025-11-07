@@ -1,12 +1,47 @@
-<div class="task task-item <%= '-done' if task.done? %>" data-id="<%= task.id %>" draggable="true">
+<% finish_task_id = "finish-task-#{task.id}" %>
+<% unfinish_task_id = "unfinish-task-#{task.id}" %>
 
+<div class="task task-item <%= '-done' if task.done? %>" data-id="<%= task.id %>" draggable="true">
   <% if task.done? %>
-    <%= link_to '', [:unfinish, task], method: :patch, class: 'task-item--toggle',
+    <%= link_to '', unfinish_task_path(task), method: :patch, class: 'task-item--toggle', id: unfinish_task_id,
       'up-target': '.task',
       'up-preview': 'unfinish-task'
     %>
   <% else %>
-    <%= link_to '', [:finish, task], method: :patch, class: 'task-item--toggle',
+    <% if local_assigns[:finish_tour_dot] %>
+    <span class="task--tour-dot">
+      <%= tour_dot(outline: { "##{finish_task_id}" => 'context', ".task[data-id='#{task.id}']" => 'success' }) do %>
+        <p>
+          Finishing a task <%= docs_link 'renders optimistically', '/optimistic-rendering' %>
+          without waiting for the network:
+        </p>
+
+        <%= pre_code(mark: 'up-preview="finish-task"') do %>
+          <a
+            href="<%= unfinish_task_path(task) %>"
+            up-method="patch"
+            up-target=".task"
+            up-preview="finish-task"
+          >
+            ◯
+          </a>
+        <% end %>
+
+        <p>
+          The <i>preview</i> is a JavaScript description of a temporary change:
+        </p>
+
+        <%= pre_code(mark: "'finish-task'") do %>
+          up.preview('finish-task', function(preview) {
+            preview.addClass('-done')
+          })
+        <% end %>
+
+      <% end %>
+    </span>
+    <% end %>
+
+    <%= link_to '', finish_task_path(task), method: :patch, class: 'task-item--toggle', id: finish_task_id,
       'up-target': '.task',
       'up-preview': 'finish-task'
     %>
@@ -15,7 +50,7 @@
   <span class="task-item--text">
     <%= task.text %>
   </span>
-  <%= link_to 'Edit', [:edit, task], class: "task-item--edit btn btn-sm btn-secondary",
+  <%= link_to 'Edit', edit_task_path(task), class: "task-item--edit btn btn-sm btn-secondary",
     'up-preview': 'btn-spinner',
     'up-target': '.task'
   %>

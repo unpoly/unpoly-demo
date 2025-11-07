@@ -1,0 +1,13 @@
+<div class="placeholder-wave">
+  <div class="page-head">
+    <div class="page-head--title">
+      <h2><%= placeholder Faker::Book.title %></h2>
+    </div>
+    <div class="page-head--actions">
+      <span class="btn placeholder">Edit</span>
+      <span class="btn placeholder">Delete</span>
+    </div>
+  </div>
+
+  <%= simple_format Note.random_body(4).gsub(/[\w ]+. ?/) { |word| content_tag(:span, h(word), class: 'placeholder me-1 mb-1') }.html_safe %>
+</div>
