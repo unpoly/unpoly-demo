@@ -73,12 +73,16 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :budget, class: 'form-label' %>
-    <div class="input-group">
-      <%= form.text_field :budget, class: 'form-control' %>
-      <span class="input-group-append">
-        <span class="input-group-text">€</span>
-      </span>
+    <div class="row">
+      <div class="col-md-4">
+        <%= form.label :budget, class: 'form-label' %>
+        <div class="input-group">
+          <%= form.text_field :budget, class: 'form-control', autocomplete: 'off' %>
+          <span class="input-group-append">
+            <span class="input-group-text">€</span>
+          </span>
+        </div>
+      </div>
     </div>
     <%= form.error_message :budget %>
   </div>

@@ -11,7 +11,7 @@
       <p>The form uses the <code>[up-validate]</code> attribute to validate user input on the server as you're completing fields.</p>
       <p>Try entering a duplicate company name and then focus the address field.</p>
     <% end %>
-    <%= form.text_field :name, class: 'form-control' %>
+    <%= form.text_field :name, class: 'form-control', autocomplete: 'off' %>
     <%= form.error_message :name %>
   </div>
 
