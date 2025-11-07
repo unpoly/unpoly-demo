@@ -16,34 +16,44 @@
 
 
   <div class="fragment-explainer--cell">
-    <form id="config">
-      <div class="form-check my-0">
-        <input class="form-check-input" type="checkbox" name="fullPageLoads" value="true" id="configFullPageLoads">
-        <label class="form-check-label" for="configFullPageLoads">Full page loads</label>
-      </div>
-      <div class="form-check my-0">
-        <input class="form-check-input" type="checkbox" name="disableCache" value="true" id="configDisableCache">
-        <label class="form-check-label" for="configDisableCache">Disable cache</label>
-      </div>
+    <form id="mods">
       <div class="form-check my-0">
         <input class="form-check-input" type="checkbox" name="showClicks" value="true" id="configShowClicks">
         <label class="form-check-label" for="configShowClicks">Show clicks</label>
       </div>
       <div class="form-check my-0">
-        <input class="form-check-input" type="checkbox" name="noPreviews" value="true" id="configNoPreviews">
-        <label class="form-check-label" for="configNoPreviews">No previews</label>
+        <input class="form-check-input" type="checkbox" name="showFragments" value="true" id="configShowFragments">
+        <label class="form-check-label" for="configShowFragments">Show fragments</label>
       </div>
+
       <div class="form-check my-0">
-        <input class="form-check-input" type="checkbox" name="noOverlays" value="true" id="configNoOverlays">
-        <label class="form-check-label" for="configNoOverlays">No overlays</label>
+        <input class="form-check-input" type="checkbox" name="disableCache" value="true" id="configDisableCache">
+        <label class="form-check-label" for="configDisableCache">Disable cache</label>
       </div>
       <div class="form-check my-0">
         <input class="form-check-input" type="checkbox" name="extraLatency" value="true" id="configExtraLatency">
         <label class="form-check-label" for="configExtraLatency">Extra latency</label>
       </div>
+
       <div class="form-check my-0">
-        <input class="form-check-input" type="checkbox" name="showFragments" value="true" id="configShowFragments">
-        <label class="form-check-label" for="configShowFragments">Show fragments</label>
+        <input class="form-check-input" type="checkbox" name="fullPageLoads" value="true" id="configFullPageLoads">
+        <label class="form-check-label" for="configFullPageLoads">Full page loads</label>
+      </div>
+      <div>
+      </div>
+
+      <div class="form-check my-0">
+        <input class="form-check-input" type="checkbox" name="noOverlays" value="true" id="configNoOverlays">
+        <label class="form-check-label" for="configNoOverlays">No overlays</label>
+      </div>
+      <div class="form-check my-0">
+        <input class="form-check-input" type="checkbox" name="noValidation" value="true" id="configNoValidation">
+        <label class="form-check-label" for="configNoValidation">No validation</label>
+      </div>
+
+      <div class="form-check my-0">
+        <input class="form-check-input" type="checkbox" name="noPreviews" value="true" id="configNoPreviews">
+        <label class="form-check-label" for="configNoPreviews">No previews</label>
       </div>
       <div class="form-check my-0">
         <input class="form-check-input" type="checkbox" name="noMotion" value="true" id="configNoMotion">
@@ -52,13 +62,13 @@
     </form>
   </div>
 
-  <div class="fragment-explainer--cell" style="margin-left: auto">
+  <div class="fragment-explainer--cell ms-auto d-none d-lg-block">
     <div class="fragment-explainer--label">Last fragment:</div>
     <code class="fragment-explainer--target">html</code>
     (<a href="#" class="fragment-explainer--reveal">reveal</a>)
   </div>
 
-  <div class="fragment-explainer--cell">
+  <div class="fragment-explainer--cell d-none d-lg-block">
     <div class="fragment-explainer--label">Round-trip:</div>
     <div class="fragment-explainer--rtt">
       <span class="text-muted">(initial load)</span>

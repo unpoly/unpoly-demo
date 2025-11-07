@@ -1,7 +1,6 @@
 //= require unpoly
 //= require unpoly-bootstrap5
-//= require ./offline
-//= require ./flashes
+//= require_tree .
 
 // Unpoly //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -113,7 +112,7 @@ up.compiler('.fragment-explainer', function(container) {
       lastFragment = fragment
       lastOK = event.ok
       targetExplainer.innerText = up.fragment.toTarget(fragment, { verify: false })
-      if (config.showFragments.checked) revealLastFragment()
+      if (mods.showFragments.checked) revealLastFragment()
     }),
 
     up.on(revealTarget, 'click', (event) => {
@@ -139,61 +138,6 @@ up.compiler('.fragment-explainer', function(container) {
   ]
 })
 
-up.compiler('form#config', function(form) {
-
-  let pageParams = new URLSearchParams(location.search)
-  for (let checkbox of form.querySelectorAll('input[type="checkbox"]')) {
-    if (pageParams.get(checkbox.name)) checkbox.checked = true
-  }
-
-  return [
-    up.on('up:link:follow up:form:submit', function(event) {
-      if (form.fullPageLoads.checked) {
-        event.preventDefault()
-        let { url, method, params } = event.renderOptions
-        params ||= new up.Params()
-        params.set('fullPageLoads', true)
-        up.network.loadPage({ url, method, params })
-      }
-
-      if (form.disableCache.checked) {
-        event.renderOptions.cache = false
-      }
-      if (form.noPreviews.checked) {
-        Object.assign(event.renderOptions, up.RenderOptions.NO_PREVIEWS)
-      }
-      if (form.noOverlays.checked) {
-        event.renderOptions.layer = 'origin current'
-      }
-      if (form.noMotion.checked) {
-        Object.assign(event.renderOptions, up.RenderOptions.NO_MOTION)
-      }
-    }),
-
-    up.on('up:link:preload', (event) => {
-      if (form.fullPageLoads.checked || form.disableCache.checked) {
-        event.preventDefault()
-      }
-    }),
-
-    up.on('up:request:load', ({ request }) => {
-      if (form.extraLatency.checked) {
-        request.headers['X-Extra-Latency'] = 'true'
-      }
-    }),
-
-    up.on('up:click', { capture: true }, (event) => {
-      if (form.showClicks.checked) {
-        let style = {
-          top: event.clientY + "px",
-          left: event.clientX + "px"
-        }
-        let bubble = up.element.affix(document.body, '.click-bubble', { style })
-        bubble.addEventListener('animationend', () => bubble.remove());
-      }
-    })
-  ]
-})
 
 // function showInsertedFlash(fragment) {
 //   fragment = up.fragment.get(fragment)

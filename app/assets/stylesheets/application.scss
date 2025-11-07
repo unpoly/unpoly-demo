@@ -594,9 +594,11 @@ $panes-side-width: 350px;
   color: #444;
 }
 
-#config {
+#mods {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-auto-flow: column; /* fill down the column first */
+  grid-template-rows: repeat(2, auto); /* two rows per column */
+  grid-auto-columns: 1fr; /* each column same width (or use a fixed px) */
   column-gap: 1em;
 }
 
