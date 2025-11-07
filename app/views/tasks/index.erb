@@ -3,8 +3,8 @@
 <div id="tasks" class="mt-5">
   <%= render 'tasks/form', task: Task.new %>
 
-  <% @tasks.each do |task| %>
-    <%= render 'tasks/task', task: task %>
+  <% @tasks.each_with_index do |task, i| %>
+    <%= render 'tasks/task', task: task, finish_tour_dot: (i == 0) %>
   <% end %>
 </div>
 

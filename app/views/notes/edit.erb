@@ -63,10 +63,10 @@
               up-validate>
           </fieldset>
         <% end %>
-        <p>When the field is blurred, the surrounding fieldset is re-rendered by the server. This shows eventual error messages.</p>
-        <p>Try entering a duplicate note title and then focus the body field.</p>
+        <p>When the field is changed, its fieldset is re-rendered by the server. This shows eventual error messages.</p>
+        <p>Try entering an empty or duplicate title.</p>
       <% end %>
-      <%= form.text_field :title, class: 'form-control' %>
+      <%= form.text_field :title, class: 'form-control', 'up-validate': true, 'up-watch-event': 'input', 'up-keep': true %>
       <%= form.error_message :title %>
     </div>
 

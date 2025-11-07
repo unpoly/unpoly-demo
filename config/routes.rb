@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get 'placeholders/table', to: 'placeholders#table'
   get 'placeholders/show', to: 'placeholders#show'
   get 'placeholders/form', to: 'placeholders#form'
+  get 'placeholders/note', to: 'placeholders#note'
 
   get 'verify_tenant', to: 'tenants#verify', as: :verify_tenant
 end
