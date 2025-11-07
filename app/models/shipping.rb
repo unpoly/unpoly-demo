@@ -7,7 +7,7 @@ class Shipping < ActiveType::Object
   validates :country, presence: true
   validates :continent, presence: true
 
-  has_defaults continent: 'Europe', country: 'France', weight: 234
+  has_defaults continent: 'Europe', country: 'Austria', weight: 10
 
   before_validation :clear_invalid_country
 

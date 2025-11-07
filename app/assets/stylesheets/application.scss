@@ -30,6 +30,7 @@ $success: #54b342;
 $danger: #df4819;
 
 $body-padding-x: 2rem;
+$body-padding-y: 1.5rem;
 
 //$primary: #2587bb;
 
@@ -138,7 +139,7 @@ b, strong, th {
 body > main {
   min-height: calc(100vh - #{$nav-height} - #{$fragment-explainer-height});
   margin-top: $nav-height;
-  padding-block: 1.5rem;
+  padding-block: $body-padding-y;
   padding-inline: $body-padding-x; // area covered by main-spinner
   margin-bottom: $fragment-explainer-height;
 }
@@ -295,6 +296,10 @@ up-modal {
 up-modal-box {
   padding: 1.8rem 2rem;
   border-radius: $border-radius;
+
+  up-modal[size="medium"][nesting="1"] & {
+    width: 680px;
+  }
 }
 
 up-modal-content {
@@ -343,7 +348,7 @@ $panes-side-width: 350px;
   }
 
   &.up-current {
-    box-shadow: inset 0 5px 15px -6px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 5px 15px -6px rgba(0, 0, 0, 0.6);
     color: white;
     background-color: $primary;
 
@@ -353,12 +358,17 @@ $panes-side-width: 350px;
   }
 
   &.up-active {
-    box-shadow: inset 0 5px 10px -6px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 5px 10px -6px rgba(0, 0, 0, 0.3);
     background-color: #fc3;
     $stripe-color: #fc3;
     $stripe-color: #e8e8e8;
     @include stripe-animation($stripe-color, darken($stripe-color, 3%));
   }
+}
+
+#note-body-textarea {
+  // Allow some space for errors
+  height: calc(100dvh - #{$nav-height} - #{$body-padding-y} - 270px - #{$body-padding-y} - #{$fragment-explainer-height});
 }
 
 .page-head {
