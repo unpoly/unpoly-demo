@@ -13,7 +13,7 @@
 } do |form| %>
   <% if task.new_record? %>
     <div class="task--tour-dot">
-      <%= tour_dot(outline: {  target => 'success', '.task-form' => 'context' }) do %>
+      <%= tour_dot(outline: {  target => 'success', '.task-form' => 'context' }, size: 'large') do %>
         <p>
           Adding a task <%= docs_link 'renders optimistically', '/optimistic-rendering' %>
           without waiting for the network:
@@ -34,14 +34,27 @@
           The <i>preview</i> is a JavaScript description of a temporary change:
         </p>
 
-        <%= pre_code(mark: "'add-task'") do %>
+        <%= pre_code(mark: ["'add-task'", "'#task-preview'"]) do %>
           up.preview('add-task', function(preview) {
             let text = preview.params.get('task[text]')
-            let newItem = up.template.clone('#task-preview', { text })
+            let item = up.template.clone('#task-preview', { text })
             let form = preview.origin.closest('form')
-            preview.insert(form, 'afterend', newItem)
+            preview.insert(form, 'afterend', item)
             form.reset()
           })
+        <% end %>
+
+        <p>
+          The server-rendered template is embedded into the layout:
+        </p>
+
+        <%= pre_code(mark: '"task-preview"') do %>
+          <script id="task-preview" type="text/minimustache">
+            <div class="task task-item -previewing">
+              <span class="task-item--toggle">◯</span>
+              <span class="task-item--text">{{text}}</span>
+            </div>
+          </script>
         <% end %>
 
       <% end %>
