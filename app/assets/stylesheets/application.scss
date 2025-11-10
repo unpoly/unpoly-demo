@@ -748,7 +748,12 @@ up-drawer.tour-hint-drawer {
     up-drawer-box {
       width: 400px;
     }
+  }
 
+  &[size=large] {
+    up-drawer-box {
+      width: 520px;
+    }
   }
 
 
