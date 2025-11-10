@@ -2,6 +2,7 @@
 //= require unpoly-bootstrap5
 //= require roboto
 //= require roboto-mono
+//= require dist/css/tom-select.bootstrap5
 
 
 // Theme ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -385,7 +386,7 @@ $panes-side-width: 350px;
 
 #note-body-textarea {
   // Allow some space for errors
-  height: calc(100dvh - #{$nav-height} - #{$body-padding-y} - 270px - #{$body-padding-y} - #{$fragment-explainer-height});
+  height: calc(100dvh - #{$nav-height} - #{$body-padding-y} - 350px - #{$body-padding-y} - #{$fragment-explainer-height});
 }
 
 .page-head {

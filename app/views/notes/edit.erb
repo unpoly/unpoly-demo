@@ -71,6 +71,37 @@
     </div>
 
     <div class="form-group">
+      <%= form.label :tags, class: 'form-label' %>
+      <%= tour_dot(outline: { '.ts-wrapper.tag-picker' => 'context' }, size: 'large') do %>
+        <p>This combo-box is a multi-select in the HTML:</p>
+
+        <%= pre_code(mark: 'class="tag-picker"') do %>
+          <select multiple name="tags" class="tag-picker">
+            <option>foo</option>
+            <option select>bar</option>
+            <option>baz</option>
+            ...
+          </select>
+        <% end %>
+
+        <p>
+          A <%= docs_link 'compiler', '/enhancing-elements' %> enhances the select using
+          the <%= link_to 'Tom Select', 'https://tom-select.js.org/', target: '_blank' %> library:
+        </p>
+
+        <%= pre_code(mark: '.tag-picker') do %>
+          up.compiler('.tag-picker', function(element) {
+            let tomSelect = new TomSelect(element)
+            return () => tomSelect.destroy()
+          })
+        <% end   %>
+
+      <% end %>
+      <%= form.select :tags, options_for_select(Note::TAGS, @note.tags), { }, class: 'form-select tag-picker', multiple: true, size: 6 %>
+      <%= form.error_message :tags %>
+    </div>
+
+    <div class="form-group">
       <%= form.label :body, class: 'form-label' %>
       <%= form.text_area :body, class: 'form-control', id: 'note-body-textarea', rows: 10 %>
       <%= form.error_message :body %>
