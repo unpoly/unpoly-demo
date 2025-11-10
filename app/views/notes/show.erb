@@ -15,5 +15,12 @@
   <% end %>
 
   <%= simple_format @note.body %>
+
+  <p class="mt-4">
+    <% @note.tags.each do |tag| %>
+      <span class="badge text-bg-secondary"><%= tag %></span>
+    <% end %>
+  </p>
+
 <% end %>
 

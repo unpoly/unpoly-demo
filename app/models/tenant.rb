@@ -52,6 +52,7 @@ class Tenant < ApplicationRecord
       notes.create!(
         title: Faker::Book.unique.title,
         body: Note.random_body,
+        tags: Note::TAGS.sample(rand(1..3)),
         created_at: rand(100).hours.ago
       )
     end
@@ -65,6 +66,27 @@ class Tenant < ApplicationRecord
       #{Faker::Address.country}
     ADDRESS
   end
+  
+  # def sample_tag
+  #   sources = [
+  #     { klass: Faker::Book, method: :genre },
+  #     { klass: Faker::Hobby, method: :activity },
+  #     { klass: Faker::Emotion, method: :adjective },
+  #     { klass: Faker::Commerce, method: :department },
+  #   ]
+  #
+  #   source = sources.sample
+  #   prose = source[:klass].send(source[:method])
+  #   tagify(prose)
+  # end
+  #
+  # def tagify(string)
+  #   string
+  #     .downcase
+  #     .gsub(/[^\w]+/, '-')
+  #     .sub(/\A-+/, '')
+  #     .sub(/-+\z/, '')
+  # end
 
 end
 

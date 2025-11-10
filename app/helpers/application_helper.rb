@@ -8,7 +8,7 @@ module ApplicationHelper
   # end
 
   def docs_link(label, path, **kwargs, &block)
-    link_to(label, "https://unpoly.com" + path, **kwargs, &block)
+    link_to(label, "https://unpoly.com" + path, target: '_blank', **kwargs, &block)
   end
 
   def page_head(title, &actions)

@@ -77,7 +77,7 @@ class NotesController < ApplicationController
 
   def note_params
     if (attrs = params[:note])
-      attrs.permit(:title, :body)
+      attrs.permit(:title, :body, :tags => [])
     else
       {}
     end
