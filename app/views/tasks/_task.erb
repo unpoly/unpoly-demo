@@ -32,7 +32,7 @@
         </p>
 
         <%= pre_code(mark: "'finish-task'") do %>
-          up.preview('finish-task', function(preview) {
+          up.preview('finish-task', (preview) => {
             preview.addClass('-done')
           })
         <% end %>

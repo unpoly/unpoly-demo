@@ -12,12 +12,15 @@ up.compiler('form#mods', function(form) {
       if (form.disableCache.checked) {
         event.renderOptions.cache = false
       }
+
       if (form.noPreviews.checked) {
         Object.assign(event.renderOptions, up.RenderOptions.NO_PREVIEWS)
       }
-      if (form.noOverlays.checked) {
+
+      if (form.noOverlays.checked && !event.target.matches('.tour-dot')) {
         event.renderOptions.layer = 'origin current'
       }
+
       if (form.noMotion.checked) {
         Object.assign(event.renderOptions, up.RenderOptions.NO_MOTION)
       }

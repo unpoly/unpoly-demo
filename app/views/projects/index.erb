@@ -48,7 +48,7 @@
     </thead>
 
     <tbody>
-      <% @projects.each do |project| %>
+      <% @projects.each_with_index do |project, i| %>
         <tr>
           <td>
             <%= link_to project.name, project,
@@ -57,6 +57,26 @@
               'up-on-accepted': "up.reload('#projects', { placeholder: '#table-placeholder' })",
               'up-placeholder': '#show-placeholder'
             %>
+
+            <%= tour_dot(outline: { "a[href='#{project_path(project)}']" => 'context' }) do %>
+              <p>
+                This links opens a modal overlay:
+              </p>
+              <%= pre_code(mark: 'up-layer="new"') do %>
+                <a
+                  href="<%= project_path(project) %>"
+                  up-layer="new"
+                >
+                  <%= project.name %>
+                </a>
+              <% end %>
+
+              <p>
+                Any existing page can be rendered into an overlay.
+                The server does not need extra routes.
+              </p>
+            <% end if i == 0 %>
+
           </td>
           <td>
             <%= project.company.name %>
