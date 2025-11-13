@@ -32,12 +32,14 @@ module TourHelper
       href: '#',
       # 'up-layer': 'root',
       # 'up-peel': 'false',
+      'up-follow': true,
       'up-layer': 'new drawer',
       'up-fragment': '' + html, # force-escape the HTML string by making it unsafe
       'up-position': options[:position],
       # 'up-align': options.fetch(:align, 'top'),
       'up-class': 'tour-hint-drawer',
       'up-size': options[:size],
+      'up-clickable': true,
     }.compact
 
     # This is a hint to hide this dot on the root layer (see application.sass).
@@ -49,7 +51,7 @@ module TourHelper
     #   attrs['up-size'] = size
     # end
 
-    content_tag(:a, '', attrs)
+    content_tag(:span, '', attrs)
   end
 
   def pre_code(**options, &block)

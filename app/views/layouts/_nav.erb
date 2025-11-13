@@ -1,25 +1,66 @@
 <nav class="navbar navbar-expand navbar-light bg-light fixed-top">
   <%# link_to 'Unpoly Demo', root_path, class: 'navbar-brand', 'up-follow': true, 'up-placeholder': '#index-placeholder' %>
   <div class="navbar-nav">
-    <span class="nav-link">
-      <%= tour_dot(outline: { ':main' => 'success', '.navbar-nav a[href*=companies]' => 'context' }) do %>
-        <p>Navigation links have an <code>[up-follow]</code> attribute:</p>
 
-          <pre><code>&lt;a href="/companies"
-  <mark>up-follow</mark>&gt;
-  Companies
-&lt;/a&gt;</code></pre>
-
-          <p>Clicking such links only updates a page fragment. The remaining DOM is not changed.</p>
-
-          <p>Unpoly links can update arbitrary fragments, identified by CSS selectors. The default selector is the <code>&lt;main&gt;</code> element.</p>
-      <% end %>
-    </span>
     <%= link_to 'Notes', notes_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => note_path('*'), 'up-preview': 'main-spinner' %>
-    <%= link_to 'Companies', companies_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => company_path('*'), 'up-placeholder': '#index-placeholder { rows: 5 }' %>
-    <%= link_to 'Projects', projects_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => project_path('*'), 'up-placeholder': '#index-placeholder' %>
+
+    <%= link_to companies_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => company_path('*'), 'up-placeholder': '#index-placeholder { rows: 5 }' do %>
+      <%= tour_dot(outline: { ':main' => 'success', '.navbar-nav a[href*=companies]' => 'context' }) do %>
+        <p>Navigation links swap a fragment within the current page:</p>
+
+        <%= pre_code(mark: 'up-follow') do %>
+          <a
+            href="/companies"
+            up-follow
+          >
+            Companies
+          </a>
+        <% end %>
+
+        <p>Unpoly links can update arbitrary fragments, identified by CSS selectors. The default selector is the <code>&lt;main&gt;</code> element.</p>
+
+        <p>Try checking <i>Show fragments</i> and click the link to see what is updated.</p>
+      <% end %>
+
+      <span>Companies</span>
+    <% end %>
+
+    <%= link_to projects_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => project_path('*'), 'up-placeholder': '#index-placeholder' do %>
+      <%= tour_dot(outline: { ':main' => 'success', '.navbar-nav a[href*=projects]' => 'context' }) do %>
+        <p>This link shows a placeholder skeleton why it is loading:</p>
+
+        <%= pre_code(mark: 'up-placeholder="#index-placeholder"') do %>
+          <a
+            href="/projects"
+            up-follow
+            up-placeholder="#index-placeholder"
+          >
+            Projects
+          </a>
+        <% end %>
+
+        <p>The placeholder is a server-rendered template that is embedded into the layout:</p>
+
+        <%= pre_code(mark: 'index-placeholder') do %>
+          <template id="index-placeholder">
+            <div class="placeholder-wave">
+              ...
+            </div>
+          </template>>
+        <% end %>
+
+        <p>
+          Links and forms can define <%= docs_link 'arbitrary loading state', '/loading-state' %>.
+        </p>
+      <% end %>
+
+      <span>Projects</span>
+    <% end %>
+
     <%= link_to 'Tasks', tasks_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => task_path('*'), 'up-preview': 'main-spinner' %>
+
     <%= link_to 'Shipping', new_shipping_path, class: 'nav-item nav-link', 'up-follow': true, 'up-placeholder': '#form-placeholder' %>
+
   </div>
 
 </nav>

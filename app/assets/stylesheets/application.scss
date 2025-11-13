@@ -343,7 +343,7 @@ up-modal-content {
 
 $panes-side-width: 350px;
 
-.panes--side {
+.panes-side {
   position: fixed;
   overflow-y: scroll;
   left: 0;
@@ -354,7 +354,7 @@ $panes-side-width: 350px;
   @include pretty-scrollbars;
 }
 
-.panes--content {
+.panes-content {
   margin-left: $panes-side-width;
 }
 
@@ -376,7 +376,7 @@ $panes-side-width: 350px;
     color: white;
     background-color: $primary;
 
-    .note-item--age {
+    .note-item-age {
       color: #ccc;
     }
   }
@@ -414,11 +414,11 @@ $panes-side-width: 350px;
 }
 
 
-.note-item--title {
+.note-item-title {
   font-weight: 500;
 }
 
-.note-item--age {
+.note-item-age {
   font-size: 0.8em;
   color: #777;
 }
@@ -699,11 +699,11 @@ $panes-side-width: 350px;
 $tour-dot-color: $green;
 
 .tour-dot {
-  margin: 0 0.4rem;
+  margin: 0 0.35rem;
   display: inline-block;
   vertical-align: middle;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: $tour-dot-color;
   cursor: pointer;
@@ -712,9 +712,18 @@ $tour-dot-color: $green;
   //filter: grayscale(50%);
   opacity: 0.6;
 
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
   &:hover {
     animation: none;
   }
+
   &[overlay-only] {
     display: none;
 
