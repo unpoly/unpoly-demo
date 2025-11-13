@@ -14,7 +14,7 @@ up.link.config.preloadSelectors.unshift('a[href]:is([up-follow], [up-target])')
 // Unpoly can use this to only update the affected a group when validating.
 up.form.config.groupSelectors.unshift('.form-group')
 
-up.fragment.config.autoHistoryTargets.unshift('.panes--content')
+up.fragment.config.autoHistoryTargets.unshift('.panes-content')
 
 // Since we're rendering instant loading state for all interactions in the demo,
 // wait longer until we show the progress bar.

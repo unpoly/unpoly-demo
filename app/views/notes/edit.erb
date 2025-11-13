@@ -5,7 +5,7 @@
         Edit note #<%= @note.id %>
         <%= tour_dot(
           outline: {
-            '.panes--content' => 'success',
+            '.panes-content' => 'success',
             "#note-item-#{@note.id}" => 'success',
             '#note-form' => 'failure',
           },
@@ -16,7 +16,7 @@
             A failed submission will re-render the form.
           </p>
 
-          <% code_target = ".panes--content, #note-item-#{@note.id}" %>
+          <% code_target = ".panes-content, #note-item-#{@note.id}" %>
           <% code_fail_target = "form" %>
 
           <%= pre_code(mark: [%(up-target="#{code_target}"), %(up-fail-target="#{code_fail_target}")]) do %>
@@ -43,7 +43,7 @@
   <%= form_for @note, html: {
     id: 'note-form',
     'up-submit': true,
-    'up-target': ".panes--content, #note-item-#{@note.id}:maybe",
+    'up-target': ".panes-content, #note-item-#{@note.id}:maybe",
     'up-disable': true,
     'up-preview': 'btn-spinner',
   } do |form| %>
@@ -117,7 +117,7 @@
 
       <div>
         <%= link_to 'Cancel', notes_path, class: 'btn btn-outline-secondary',
-          'up-target': '.panes--content',
+          'up-target': '.panes-content',
           'up-preview': 'main-spinner'
         %>
       </div>
