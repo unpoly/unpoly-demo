@@ -1,10 +1,10 @@
 <h2 class="mb-4">
-  New project
+  <span>New project</span>
 
   <% if up.context[:from_company] %>
-    <%= tour_dot do %>
+    <%= tour_dot(outline: { 'up-modal-box' => 'context' }, size: 'small') do %>
       <p>
-        This overlay reuses the form template that is also used for the
+        This overlay reuses the HTML for the
         <%= link_to 'Projects', projects_path, 'up-layer': 'root' %> section
         in the main navigation.
       </p>

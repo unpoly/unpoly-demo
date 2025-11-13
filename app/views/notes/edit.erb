@@ -1,44 +1,5 @@
 <%= render 'panes' do %>
-  <div class="page-head">
-    <div class="page-head--title">
-      <h2>
-        Edit note #<%= @note.id %>
-        <%= tour_dot(
-          outline: {
-            '.panes-content' => 'success',
-            "#note-item-#{@note.id}" => 'success',
-            '#note-form' => 'failure',
-          },
-          position: 'right',
-        ) do %>
-          <p>
-            This form updates the note elements with the server response.
-            A failed submission will re-render the form.
-          </p>
-
-          <% code_target = ".panes-content, #note-item-#{@note.id}" %>
-          <% code_fail_target = "form" %>
-
-          <%= pre_code(mark: [%(up-target="#{code_target}"), %(up-fail-target="#{code_fail_target}")]) do %>
-            <form
-              method="post",
-              action="<%= note_path(@note) %>"
-              up-target="<%= code_target %>"
-              up-fail-target="<%= code_fail_target %>"
-            >
-              ...
-            </form>
-          <% end %>
-
-          <p>
-            For Unpoly to be able to detect a failed submission, the backend must respond with a status code
-            like <code>422 Unprocessable Entity</code>.
-          </p>
-
-        <% end %>
-      </h2>
-    </div>
-  </div>
+  <%= page_head "Edit note #{@note.id}" %>
 
   <%= form_for @note, html: {
     id: 'note-form',
@@ -108,10 +69,41 @@
 
     <div class="d-flex align-items-center mt-4">
       <div class="flex-grow-1">
-        <%= form.button "Save", class: 'btn btn-primary' %>
+        <%= form.button "Save", class: 'btn btn-primary', id: 'save-btn' %>
 
-        <%= tour_dot(overlay_only: true) do %>
-          <p>Saving invalid fields will re-render the <code>&lt;form&gt;</code> element.</p>
+        <%= tour_dot(
+          outline: {
+            '.panes-content' => 'success',
+            "#note-item-#{@note.id}" => 'success',
+            '#note-form' => 'failure',
+            '#save-btn' => 'context',
+          },
+          position: 'right',
+        ) do %>
+          <p>
+            This form updates the note elements with the server response.
+            A failed submission will re-render the form.
+          </p>
+
+          <% code_target = ".panes-content, #note-item-#{@note.id}" %>
+          <% code_fail_target = "form" %>
+
+          <%= pre_code(mark: [%(up-target="#{code_target}"), %(up-fail-target="#{code_fail_target}")]) do %>
+            <form
+              method="post",
+              action="<%= note_path(@note) %>"
+              up-target="<%= code_target %>"
+              up-fail-target="<%= code_fail_target %>"
+            >
+              ...
+            </form>
+          <% end %>
+
+          <p>
+            For Unpoly to be able to detect a failed submission, the backend must respond with a status code
+            like <code>422 Unprocessable Entity</code>.
+          </p>
+
         <% end %>
       </div>
 

@@ -1,11 +1,21 @@
 <% @names.each_with_index do |name, i| %>
+  <% btn_id = "suggest-name-btn-#{name}" %>
 
-  <%= tour_dot do %>
+  <%= tour_dot(outline: { "##{btn_id}" => 'context' }) do %>
     <p>
-      Each suggestion button has an <code>[up-emit="name:select"]</code> attribute.
-      When clicked it emits an <code>name:select</code> event on
-      the popup element.
+      Each suggestion button emits an <code>name:select</code> event on
+      the popup element:
     </p>
+
+    <%= pre_code(mark: 'up-emit="name:select"') do %>
+      <a
+        up-emit="name:select"
+        up-emit-props='{ name: "<%= name %>" }'
+      >
+        <%= name %>
+      </a>
+    <% end %>
+
     <p>
       The link that opened this popup is awaiting this event
       via its <code>[up-accept-event]</code> attribute. When the element
@@ -17,6 +27,7 @@
   <a up-emit="name:select"
      up-emit-props="<%= { name: name }.to_json %>"
      class="btn btn-info text-light mb-2 me-1"
+     id="<%= btn_id %>"
      tabindex="0">
     <%= name %>
   </a>

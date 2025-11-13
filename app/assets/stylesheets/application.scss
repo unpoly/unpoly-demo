@@ -233,6 +233,7 @@ $fragment-outline-label-height: 32px;
 
 .fragment-outline {
   position: fixed;
+  pointer-events: none;
   outline: $fragment-outline-width solid orange;
   background-color: rgba(25, 200, 20, 0.2);
   border-radius: 2px;
@@ -759,6 +760,12 @@ $tour-dot-color: $green;
 }
 
 up-drawer.tour-hint-drawer {
+
+  &[size=small] {
+    up-drawer-box {
+      width: 260px;
+    }
+  }
 
   &[size=medium] {
     up-drawer-box {
