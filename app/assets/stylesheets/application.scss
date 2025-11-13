@@ -73,7 +73,7 @@ $body-padding-y: 1.5rem;
 //}
 
 
-@mixin stripe-animation($color1, $color2, $size: 20000%) {
+@mixin stripe-animation($color1, $color2, $size: 2000%) {
   background-image: repeating-linear-gradient(
     -45deg,
     $color1,
@@ -82,7 +82,7 @@ $body-padding-y: 1.5rem;
     $color2 2rem
   );
   background-size: $size $size;
-  animation: barberpole 200s linear infinite;
+  animation: barberpole 250s linear infinite;
 }
 
 @keyframes barberpole {
@@ -154,6 +154,10 @@ th[align=right] {
 .field_with_errors {
   display: contents;
 
+  .input-group:has(&) {
+    flex-wrap: nowrap;
+  }
+
   // For some reason display: contents does not work here.
   .input-group & {
     display: inline-block;
@@ -216,6 +220,8 @@ $fragment-outline-label-height: 32px;
 
   .fragment-outline--label {
     background-color: $color;
+    white-space: nowrap;
+    max-width: 90%;
   }
 }
 
@@ -630,7 +636,7 @@ $panes-side-width: 350px;
   display: grid;
   grid-auto-flow: column; /* fill down the column first */
   grid-template-rows: repeat(2, auto); /* two rows per column */
-  grid-auto-columns: 1fr; /* each column same width (or use a fixed px) */
+  //grid-auto-columns: 1fr; /* each column same width (or use a fixed px) */
   column-gap: 1em;
 }
 
@@ -761,6 +767,10 @@ up-drawer.tour-hint-drawer {
   up-drawer-backdrop {
     background: transparent;
   }
+}
+
+up-drawer-box {
+  padding-bottom: 20px + $fragment-explainer-height;
 }
 
 

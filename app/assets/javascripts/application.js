@@ -112,6 +112,9 @@ class FragmentOutline {
   }
 
   _render() {
+    this._fragment.appFragmentOutline?.destroy({ animation: false })
+    this._fragment.appFragmentOutline = this
+
     let layer = up.layer.get(this._fragment)
     this._outlineElement = layer.affix(`.fragment-outline.-${this._nature}`)
     if (this._label) {
@@ -133,16 +136,24 @@ class FragmentOutline {
     left = Math.max(left, outline)
     right = Math.min(right, document.documentElement.clientWidth - outline)
     bottom = Math.min(bottom, document.documentElement.clientHeight - outline)
+    let width = right - left
+    let height = bottom - top
 
     Object.assign(this._outlineElement.style, {
       top: top + 'px',
       left: left + 'px',
-      width: (right - left) + 'px',
-      height: (bottom - top) + 'px'
+      width: width + 'px',
+      height: height + 'px'
     })
+
+    if (this._labelElement) {
+      up.element.toggle(this._labelElement, width >= 200)
+    }
   }
 
   destroy({ animation = 'fade-out', duration = 500 } = {}) {
+    if (this._destroyed) return
+    this._destroyed = true
     up.destroy(this._outlineElement, { animation, duration })
     this._cleaner.clean()
   }
@@ -224,6 +235,7 @@ up.preview('add-task', function(preview) {
   let newItem = up.template.clone('#task-preview', { text })
   let form = preview.origin.closest('form')
   preview.insert(form, 'afterend', newItem)
+  // showFlash('success', 'Task added!')
   form.reset()
 })
 

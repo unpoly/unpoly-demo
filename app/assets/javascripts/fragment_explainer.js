@@ -16,8 +16,8 @@ up.compiler('.fragment-explainer', function(container) {
   return [
     up.on('up:fragment:inserted', (event, fragment) => {
       fragmentCount++
-      if (fragment.matches('[up-hungry]')) return
-      if (fragment.matches('.tour-hint')) return
+      if (fragment.matches('[up-hungry]:not(#open-task-count)')) return
+      if (fragment.matches('.tour-hint, .tour-hint-drawer')) return
       if (fragment.querySelector('.placeholder')) return
       if (fragment.className.includes('spinner')) return
       if (fragment.matches('up-modal, up-modal main, up-drawer, up-drawer main, up-popup, up-popup main')) fragment = up.layer.current.getBoxElement()

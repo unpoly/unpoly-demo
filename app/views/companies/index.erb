@@ -83,9 +83,23 @@
               'up-on-dismissed': "up.reload('#companies', { placeholder: '#table-placeholder { rows: 5 }' })"
             %>
 
-            <%= tour_dot do %>
-              The link to the company details has an <code>[up-layer=new]</code> attribute.
-              This causes the link destination to open in an overlay.
+            <%= tour_dot(outline: { "a[href='#{company_path(company)}']" => 'context' }) do %>
+              <p>
+                This links opens a modal overlay:
+              </p>
+              <%= pre_code(mark: 'up-layer="new"') do %>
+                <a
+                  href="<%= company_path(company) %>"
+                  up-layer="new"
+                >
+                  <%= company.name %>
+                </a>
+              <% end %>
+
+              <p>
+                Any existing page can be rendered into an overlay.
+                The server does not need extra routes.
+              </p>
             <% end if i == 0 %>
           </td>
         </tr>

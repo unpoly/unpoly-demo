@@ -8,7 +8,6 @@
             '.panes--content' => 'success',
             "#note-item-#{@note.id}" => 'success',
             '#note-form' => 'failure',
-            'button[type=submit]' => 'context'
           },
           position: 'right',
         ) do %>
@@ -66,7 +65,7 @@
         <p>When the field is changed, its fieldset is re-rendered by the server. This shows eventual error messages.</p>
         <p>Try entering an empty or duplicate title.</p>
       <% end %>
-      <%= form.text_field :title, class: 'form-control', 'up-validate': true, 'up-watch-event': 'input', 'up-keep': true %>
+      <%= form.text_field :title, class: 'form-control', 'up-validate': true, 'up-watch-event': 'input', 'up-watch-delay': 75, 'up-keep': true, autocomplete: 'off' %>
       <%= form.error_message :title %>
     </div>
 
@@ -125,6 +124,5 @@
     </div>
 
   <% end %>
-
 
 <% end %>
