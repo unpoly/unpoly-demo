@@ -7,6 +7,7 @@ up.compiler('.fragment-explainer', function(container) {
   let revealTarget = container.querySelector('.fragment-explainer--reveal')
   let requestExplainer = container.querySelector('.fragment-explainer--request')
   let rttExplainer = container.querySelector('.fragment-explainer--rtt')
+  let queueExplainer = container.querySelector('.fragment-explainer--queue')
 
   function revealLastFragment() {
     let outline = new FragmentOutline(lastFragment, { nature: lastOK ? 'success' : 'failure' })
@@ -41,11 +42,22 @@ up.compiler('.fragment-explainer', function(container) {
       if (revalidating) return
 
       let rtt = Math.max(response.loadedAt - request.builtAt, 0)
-      let info = `${rtt} ms`
+      let info
       if (request.fromCache) {
-        info += ' <span class="text-muted">(cache)</span>'
+        info = '<span class="text-muted">(cache)</span>'
+      } else {
+        info = `${rtt} ms`
       }
       rttExplainer.innerHTML = info
+    }),
+
+    up.on('up:request:load up:request:loaded up:request:aborted up:request:offline', () => {
+      up.util.task(() => {
+        let count = up.network.queue.size
+        let label = '⏳'.repeat(count) || '&nbsp;'
+        queueExplainer.innerHTML = label
+      })
     })
+
   ]
 })

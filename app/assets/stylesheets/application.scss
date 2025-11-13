@@ -590,22 +590,24 @@ $panes-side-width: 350px;
 // Fragment explainer //////////////////////////////////////////////////////////////////////////////////////////////////
 
 .fragment-explainer {
+  height: $fragment-explainer-height;
   background-color: white;
   padding: 0.7rem $body-padding-x;
   position: fixed;
   z-index: 2500;
   bottom: 0;
-  font-size: 0.9rem;
+  font-size: clamp(0.7rem, 1.3vw, 1.0rem);
   left: 0;
   width: 100vw;
   border-top: 1px solid $gray-500;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
-  gap: 0.6rem 1.7rem;
-  flex-wrap: wrap;
+  gap: 0.6em 1.7em;
+  flex-wrap: nowrap;
   line-height: 1.35;
   justify-content: flex-start;
   align-items: center;
+
 
   .form-check {
     min-height: 0;
@@ -618,7 +620,7 @@ $panes-side-width: 350px;
 
 .fragment-explainer--cell {
   flex: 0 1 auto;
-  min-width: calc(min(100px, 13vw));
+  //min-width: calc(min(100px, 13vw));
 
   a {
     text-decoration: underline;

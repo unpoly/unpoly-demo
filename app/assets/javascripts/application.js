@@ -7,8 +7,8 @@
 
 // Accelerate all links so the demo feels snappy.
 // We still assign out [up-follow] manually so there's less magic for demo viewers.
-up.link.config.instantSelectors.unshift('a[href]:is([up-follow], [up-target])')
-up.link.config.preloadSelectors.unshift('a[href]:is([up-follow], [up-target])')
+up.link.config.instantSelectors.unshift(':is([up-expand], a[href]):is([up-follow], [up-target])')
+up.link.config.preloadSelectors.unshift(':is([up-expand], a[href]):is([up-follow], [up-target])')
 
 // We use a .form-group to contain each (label, input, error, help) tuple.
 // Unpoly can use this to only update the affected a group when validating.

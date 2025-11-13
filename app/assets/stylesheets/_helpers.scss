@@ -31,3 +31,15 @@
   margin-inline: -$width;
   padding-inline: $width;
 }
+
+@mixin wider_than($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin narrower_than($width) {
+  @media (max-width: $width - 1) {
+    @content;
+  }
+}
