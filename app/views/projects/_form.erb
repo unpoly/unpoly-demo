@@ -1,6 +1,5 @@
 <%= form_for @project, html: {
   'up-submit': true,
-  'up-validate': true,
   'up-disable': true,
   'up-preview': 'btn-spinner',
 } do |form| %>
@@ -8,23 +7,35 @@
   <div class="form-group">
     <%= form.label :name, class: 'form-label' %>
     <div class="input-group">
-      <%= form.text_field :name, class: 'form-control', autocomplete: 'off' %>
-      <span class="input-group-text">
-        <%= tour_dot() do %>
+      <%= form.text_field :name, class: 'form-control', autocomplete: 'off', id: 'name-field' %>
+      <div class="input-group-text">
+        <%= tour_dot(outline: { '#suggest-name-btn' => 'context', '#name-field' => 'success' }, size: 'large') do %>
           <p>
-            The button opens a popup with suggestions for a project name.
+            The button opens a popup with suggestions for a project name:
           </p>
+
+          <%= pre_code(mark: 'up-layer="new popup"') do %>
+            <a
+              href="<%= suggest_name_projects_path %>"
+              up-layer="new popup"
+              up-accept-event="name:select"
+              up-on-accepted="
+                up.fragment.get('#name-field').value = value.name
+              "
+            >
+              Suggest name
+            </a>
+          <% end %>
+
           <p>
             When a suggestion is clicked, the choice is communicated
             back to the project form via a custom <code>name:select</code> event.</p>
-          <p>
-            The <i>Suggest name</i> link has an <code>[up-on-accepted]</code>
-            attribute that copies the suggestion into the project form.
           </p>
         <% end %>
-      </span>
+      </div>
 
       <%= link_to suggest_name_projects_path,
+        id: 'suggest-name-btn',
         class: 'btn btn-outline-secondary',
         'up-preview': 'popup-spinner',
         'up-layer': 'new popup',
@@ -41,19 +52,31 @@
     <%= form.label :company_id, class: 'form-label' %>
 
     <div class="input-group">
-      <%= form.collection_select :company_id, current_tenant.companies.order(:name), :id, :name, { include_blank: '<Select a company>' }, class: 'form-select' %>
+      <%= form.collection_select :company_id, current_tenant.companies.order(:name), :id, :name, { include_blank: '<Select a company>' }, class: 'form-select', id: 'company-field' %>
       <span class="input-group-text">
-        <%= tour_dot() do %>
+        <%= tour_dot(outline: { '#new-company-btn': 'context', '#company-field' => 'success' }, size: 'large') do %>
           <p>
             A new company can be created in an overlay while the incomplete project form
-            stays open in the background.
-          </p>
-          <p>
-            The <i>New company</i> also defines a <i>close condition</i> using an <code>[up-accept-location]</code> attribute.
-            This causes the overlay to automatically close when it reaches the URL of a newly created company.
+            stays open in the background:
           </p>
 
+          <%= pre_code(mark: 'up-layer="new"') do %>
+            <a
+              href="<%= new_company_path %>"
+              up-layer="new"
+              up-accept-location="<%= company_path('$id') %>"
+              up-on-accepted="
+                up.validate('#company-field', {
+                  params: { company_id: value.id }
+                })
+              "
+            >
+              New company
+            </a>
+          <% end %>
+
           <p>
+            When the overlay reaches the URL of a persisted company, it closes automatically.
             When a company was created successfully, the overlay is automatically closed.
             The project form reloads the company select box so the new company appears
             as an option.
@@ -62,10 +85,11 @@
       </span>
       <%= link_to 'New company', new_company_path,
         class: 'btn btn-outline-secondary',
+        id: 'new-company-btn',
         'up-placeholder': '#form-placeholder',
         'up-layer': 'new',
         'up-accept-location': company_path('$id'),
-        'up-on-accepted': "up.validate('#company-form-group', { params: { 'project[company_id]': value.id }, placeholder: '#form-placeholder' })"
+        'up-on-accepted': "up.validate('#company-field', { params: { 'project[company_id]': value.id }, placeholder: '#form-placeholder' })"
       %>
     </div>
 
@@ -89,10 +113,10 @@
 
   <div class="d-flex align-items-center mt-4">
     <div class="flex-grow-1">
-      <%= form.button "Save", class: 'btn btn-primary' %>
+      <%= form.button "Save", class: 'btn btn-primary', id: 'save-btn' %>
 
       <% if @project.new_record? %>
-        <%= tour_dot(overlay_only: true) do %>
+        <%= tour_dot(overlay_only: true, outline: { '#save-btn': 'context', 'form' => 'failure' }) do %>
           <p>Saving an invalid form will re-render validation errors in the same overlay.</p>
           <p>Links and forms always render in the same layer unless another layer is targeted explicitly.</p>
         <% end %>

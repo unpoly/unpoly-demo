@@ -6,8 +6,8 @@
   <div class="col-sm-auto">
     <%= tour_dot(outline: { '#search-companies-form' => 'context', '#companies' => 'success' }) do %>
       <p>
-        The search form has an <code>[up-target="#companies"]</code> attribute.
-        This causes the submission results to update the <code>&lt;div id="companies"&gt;</code> element below.
+        The search form submits automatically when changed.
+        It only updates the list of companies below.
       </p>
 
       <%= pre_code(mark: ['up-target="#companies"', 'up-autosubmit']) do %>
@@ -21,12 +21,11 @@
       <% end %>
 
       <p>
-        The form also has an <code>[up-autosubmit]</code> attribute.
-        This automatically submits the user while the user is typing.
+        Try checking <i>Show fragments</i> and enter a query.
       </p>
 
       <p>
-        Forms and links assigned an <code>.up-active</code> class while loading.
+        Forms and links are assigned an <code>up-active</code> class while loading.
         We use this class for the stripe animation on the search field.
       </p>
     <% end %>
@@ -41,21 +40,30 @@
   </div>
 
   <div class="col-sm-auto">
-    <%= tour_dot() do %>
+    <%= tour_dot(outline:  { '#new-company-btn' => 'context', '#companies' => 'success' }) do %>
       <p>
-        The <i>New company</i> button has an <code>[up-layer=new]</code> attribute.
-        This causes the link destination to open in an overlay.
+        The <i>New company</i> button opens in an overlay:
       </p>
+
+      <%= pre_code(mark: 'up-layer="new"') do %>
+        <a
+          href="<%= new_company_path %>"
+          up-layer="new"
+          up-accept-location="<%= company_path('$id') %>"
+          up-on-accepted="up.reload('#companies')"
+        >
+          New company
+        </a>
+      <% end %>
+
       <p>
-        The button also defines a <i>close condition</i> using an <code>[up-accept-location]</code> attribute.
-        This causes the overlay to automatically close when it reaches the URL of a newly created company.
-      </p>
-      <p>
-        The <code>[up-on-accepted]</code> attribute causes the company list below to reload when the overlay closes.
+        When the overlay reaches the URL of a persisted company, it closes automatically.
+        The project form reloads the company select so the new company appears
+        as an option.
       </p>
     <% end %>
 
-    <%= link_to 'New company', new_company_path, class: 'btn btn-primary',
+    <%= link_to 'New company', new_company_path, class: 'btn btn-primary', id: 'new-company-btn',
       'up-layer': 'new',
       'up-placeholder': '#form-placeholder',
       'up-accept-location': company_path('$id'),

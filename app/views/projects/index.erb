@@ -4,16 +4,16 @@
   </div>
 
   <div class="col-sm-auto">
-    <%= tour_dot(outline: { '#new-project-btn' => 'context' }) do %>
+    <%= tour_dot(outline: { '#new-project-btn' => 'context', '#projects' => 'success' }) do %>
       <p>
-        The <i>New project</i> link opens its response in an overlay:
+        This buttons opens its response in an overlay:
       </p>
 
       <%= pre_code(mark: 'up-layer="new"') do %>
         <a
           href="/projects/new"
           up-layer="new"
-          up-accept-location="/projects/$id"
+          up-accept-location="<%= project_path('$id') %>"
           up-on-accepted="up.reload('#projects')"
         >
           New Project
@@ -21,11 +21,8 @@
       <% end %>
 
       <p>
-        The button also defines a <i>close condition</i> using an <code>[up-accept-location]</code> attribute.
-        This causes the overlay to automatically close when it reaches the URL of a newly created project.
-      </p>
-      <p>
-        The <code>[up-on-accepted]</code> attribute causes the project list below to reload when the overlay closes.
+        When the overlay reaches the URL of a persisted company, it closes automatically.
+        The list of projects is reloaded to show the new project.
       </p>
     <% end %>
 

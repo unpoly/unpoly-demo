@@ -4,9 +4,9 @@
       Project #<%= @project.id %>
 
       <% if up.context[:from_company] %>
-        <%= tour_dot do %>
+        <%= tour_dot(outline: { 'up-modal-box' => 'context' }, size: 'small') do %>
           <p>
-            This overlay reuses the template that is also used for the
+            This overlay reuses the HTML for the
             <%= link_to 'Projects', projects_path, 'up-layer': 'root' %> section
             in the main navigation.
           </p>
@@ -16,12 +16,13 @@
   </div>
 
   <div class="col-sm-auto">
-    <%= tour_dot(overlay_only: true) do %>
+    <%= tour_dot(overlay_only: true, outline: { '#edit-btn': 'context' }, size: 'small') do %>
       <p>Note how the <i>Edit</i> link renders within this overlay.</p>
       <p>Links and forms always update their own layer unless another layer is targeted explicitly.</p>
     <% end %>
 
     <%= link_to 'Edit', [:edit, @project],
+      id: 'edit-btn',
       class: 'btn btn-primary',
       'up-follow': true,
       'up-preview': 'main-spinner'
@@ -42,9 +43,19 @@
 
   <dt>Company</dt>
   <dd>
-    <%= link_to @project.company.name, @project.company, 'up-layer': 'swap', 'up-dismiss-location': projects_path %>
-    <%= tour_dot do %>
-      <p>This link uses an <code>[up-layer=swap]</code> attribute to replace this overlay instead of stacking on top of it.</p>
+    <%= link_to @project.company.name, @project.company, 'up-layer': 'swap', 'up-dismiss-location': projects_path, id: 'company-link' %>
+    <%= tour_dot(outline: { '#company-link' => 'context' }) do %>
+      <p>This link replaces this overlay instead of stacking on top of it:</p>
+
+      <%= pre_code(mark: 'up-layer="swap"') do %>
+        <a
+          href="<%= company_path(@project.company) %>"
+          up-layer="swap"
+        >
+          <%= @project.company.name %>
+        </a>
+      <% end %>
+
     <% end %>
   </dd>
 

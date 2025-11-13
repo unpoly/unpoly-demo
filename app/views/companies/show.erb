@@ -4,13 +4,14 @@
   </div>
 
   <div class="col-sm-auto">
-    <%= tour_dot(overlay_only: true) do %>
+    <%= tour_dot(overlay_only: true, outline: { '#edit-btn' => 'context '}, size: 'small') do %>
       <p>Note how the <i>Edit</i> link renders within this overlay.</p>
       <p>Links and forms always update their own layer unless another layer is targeted explicitly.</p>
     <% end %>
 
     <%= link_to 'Edit', [:edit, @company],
       class: 'btn btn-primary',
+      id: 'edit-btn',
       'up-follow': true,
       'up-preview': 'main-spinner'
     %>
@@ -44,16 +45,28 @@
 
   <div class="col-sm-auto">
     <div class="col-sm-auto">
-      <%= tour_dot() do %>
+      <%= tour_dot(outline: { '#add-project-btn': 'context', '#projects' => 'success' }) do %>
         <p>
-          This button re-uses the project form that we already built for the <i>Projects</i> tab.
+          This button re-uses the project form from the <i>Projects</i> tab:
         </p>
 
-        <p>
-          When a new project was created, the overlay closes and the project list is reloaded.
-        </p>
+        <%= pre_code(mark: 'up-layer="new"') do %>
+          <a
+            href="/projects/new"
+            up-layer="new"
+            up-accept-location="<%= project_path('$id') %>"
+            up-on-accepted="up.reload('#projects')"
+          >
+            New Project
+          </a>
+        <% end %>
+
+
+
       <% end %>
-      <%= link_to 'Add project', new_project_path(project: { company_id: @company.id }), class: 'btn btn-primary btn-sm',
+      <%= link_to 'Add project', new_project_path(project: { company_id: @company.id }),
+        class: 'btn btn-primary btn-sm',
+        id: 'add-project-btn',
         'up-layer': 'new',
         'up-placeholder': '#form-placeholder',
         'up-accept-location': project_path('$id'),
@@ -75,14 +88,16 @@
         <% @company.projects.natural_sort_by(&:name).each_with_index do |project, i| %>
           <tr>
             <td>
+              <% link_id = "project-link-#{project.id}" %>
               <%= link_to project.name, project,
+                id: link_id,
                 'up-layer': 'new',
                 'up-placeholder': '#show-placeholder',
                 'up-dismiss-event': 'project:destroyed',
                 'up-on-dismissed': "up.reload('#projects', { placeholder: '#table-placeholder { rows: 5 }' })",
                 'up-context': { from_company: true }.to_json
               %>
-              <%= tour_dot(overlay_only: true) do %>
+              <%= tour_dot(overlay_only: true, outline: { "##{link_id}" => 'context' }, size: 'small') do %>
                 <p>Opening the project will open another modal over this one.</p>
                 <p>Overlays can be stacked infinitely.</p>
               <% end if i == 0%>
