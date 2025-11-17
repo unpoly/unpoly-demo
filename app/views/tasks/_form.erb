@@ -36,7 +36,7 @@
 
         <%= pre_code(mark: ["'add-task'", "'#task-preview'"]) do %>
           up.preview('add-task', function(preview) {
-            let text = preview.params.get('task[text]')
+            let text = preview.params.get('text')
             let item = up.template.clone('#task-preview', { text })
             let form = preview.origin.closest('form')
             preview.insert(form, 'afterend', item)

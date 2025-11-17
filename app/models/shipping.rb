@@ -42,7 +42,7 @@ class Shipping < ActiveType::Object
     sender_coords = [sender_country_details.latitude, sender_country_details.longitude]
     receiver_coords = [country_details.latitude, country_details.longitude]
     distance = Haversine.distance(*sender_coords, *receiver_coords)
-    [distance.to_kilometers, 500].min
+    [distance.to_kilometers, 100].max
   end
 
   private
