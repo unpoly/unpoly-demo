@@ -4,7 +4,7 @@
   <%= render 'tasks/form', task: Task.new %>
 
   <% @tasks.each_with_index do |task, i| %>
-    <%= render 'tasks/task', task: task, finish_tour_dot: (i == 0) %>
+    <%= render 'tasks/task', task: task, finish_tour_dot: (i == 2) %>
   <% end %>
 </div>
 

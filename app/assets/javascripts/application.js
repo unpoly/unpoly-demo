@@ -231,7 +231,7 @@ up.preview('unfinish-task', function(preview) {
 })
 
 up.preview('add-task', function(preview) {
-  let text = preview.params.get('text')
+  let text = preview.params.get('task[text]')
   let newItem = up.template.clone('#task-preview', { text })
   let form = preview.origin.closest('form')
   preview.insert(form, 'afterend', newItem)
