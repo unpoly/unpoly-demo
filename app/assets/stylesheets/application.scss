@@ -678,6 +678,7 @@ $panes-side-width: 350px;
   border-radius: 50%;
   animation: click-bubble 0.3s ease-out;
   z-index: 999999;
+  pointer-events: none;
 }
 
 @keyframes click-bubble {

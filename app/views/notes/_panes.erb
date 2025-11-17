@@ -7,8 +7,8 @@
           <%= link_to note.title, note,
             'up-target': '.panes-content',
             'up-scroll': 'target',
-            'up-alias': edit_note_path(note),
-            'up-placeholder': '#note-placeholder'
+            'up-alias': edit_note_path(note)
+            # 'up-placeholder': '#note-placeholder'
           %>
           <% if i == 1 %>
             <%= tour_dot(outline: { "##{item_id}" => 'context', '.panes-content' => 'success' }) do %>
@@ -25,7 +25,7 @@
             <% end %>
           <% end %>
           <% if i == 3 %>
-            <%= tour_dot(outline: { item_id => 'context' }) do %>
+            <%= tour_dot(outline: { "##{item_id}" => 'context' }) do %>
               <p>While this links is loading, it gets the <code>up-active</code> class:</p>
 
               <%= pre_code(mark: 'up-active') do %>
