@@ -16,8 +16,14 @@
   </div>
 
   <div class="col-sm-auto">
-    <%= tour_dot(overlay_only: true, outline: { '#edit-btn': 'context' }, size: 'small') do %>
-      <p>Note how the <i>Edit</i> link renders within this overlay.</p>
+    <%= tour_dot(overlay_only: true, outline: { '#edit-btn': 'context' }, size: 'medium') do %>
+      <p>Note how the <i>Edit</i> link renders within this overlay, without additional attributes:</p>
+
+      <%= pre_code(mark: 'up-target=".panes-content"') do %>
+        <a href="<%= edit_project_path(@project) %>">
+          Edit
+        </a>
+      <% end %>
       <p>Links and forms always update their own layer unless another layer is targeted explicitly.</p>
     <% end %>
 
