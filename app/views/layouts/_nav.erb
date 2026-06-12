@@ -4,7 +4,11 @@
 
     <%= link_to 'Notes', notes_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => note_path('*'), 'up-preview': 'main-spinner' %>
 
+    <span class="nav-item-separator"></span>
+
     <%= link_to companies_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => company_path('*'), 'up-placeholder': '#index-placeholder { rows: 5 }' do %>
+      <span>Companies</span>
+
       <%= tour_dot(outline: { ':main' => 'success', '.navbar-nav a[href*=companies]' => 'context' }) do %>
         <p>Navigation links swap a fragment within the current page:</p>
 
@@ -22,10 +26,12 @@
         <p>Try checking <i>Show fragments</i> and click the link to see what is updated.</p>
       <% end %>
 
-      <span>Companies</span>
     <% end %>
 
     <%= link_to projects_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => project_path('*'), 'up-placeholder': '#index-placeholder' do %>
+
+      <span>Projects</span>
+
       <%= tour_dot(outline: { ':main' => 'success', '.navbar-nav a[href*=projects]' => 'context' }) do %>
         <p>This link shows a placeholder skeleton why it is loading:</p>
 
@@ -38,6 +44,8 @@
             Projects
           </a>
         <% end %>
+
+        <p>Try checking <i>Disable cache</i> and <i>Extra latency</i> to observe the loading state.</p>
 
         <p>The placeholder is a server-rendered template that is embedded into the layout:</p>
 
@@ -54,10 +62,13 @@
         </p>
       <% end %>
 
-      <span>Projects</span>
     <% end %>
 
+    <span class="nav-item-separator"></span>
+
     <%= link_to 'Tasks', tasks_path, class: 'nav-item nav-link', 'up-follow': true, 'up-alias' => task_path('*'), 'up-preview': 'main-spinner' %>
+
+    <span class="nav-item-separator"></span>
 
     <%= link_to 'Shipping', new_shipping_path, class: 'nav-item nav-link', 'up-follow': true, 'up-placeholder': '#form-placeholder' %>
 

@@ -119,6 +119,14 @@ a {
   }
 }
 
+.nav-item-separator {
+  width: 1px;
+  height: 2rem;
+  background-color: #ccc;
+  margin: 0 0.5rem;
+  align-self: center;
+}
+
 body {
   //margin: 5.5rem spacer(4) 7rem spacer(4);
   margin: 0;
@@ -703,7 +711,7 @@ $panes-side-width: 350px;
 $tour-dot-color: $green;
 
 .tour-dot {
-  margin: 0 0.35rem;
+  margin: -0.12rem 0.35rem 0 0.35rem;
   display: inline-block;
   vertical-align: middle;
   width: 8px;
