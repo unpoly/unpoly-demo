@@ -23,7 +23,11 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress CSS using a preprocessor.
-  # config.assets.css_compressor = :sass
+  # NOTE: sass-rails defaults this to :sass, which runs the SassC (libsass)
+  # minifier over the whole bundle. libsass mis-parses plain-CSS max()/min()
+  # with CSS custom properties (e.g. tom-select's `max(var(--ts-pr-caret), …)`)
+  # and aborts precompile. Disable it; our CSS is already small/minified.
+  config.assets.css_compressor = nil
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
@@ -110,7 +114,8 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  Sprockets.register_compressor 'application/javascript', :terser, Terser::Compressor
-  config.assets.js_compressor = :terser
+  # Minification disabled on purpose: this is a learning demo, so we serve
+  # readable JS/CSS. (CSS compressor is likewise disabled above.)
+  config.assets.js_compressor = nil
 
 end

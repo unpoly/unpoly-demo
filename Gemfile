@@ -39,7 +39,7 @@ gem 'database_cleaner'
 
 gem 'whenever', require: false
 
-gem 'terser'
+# gem 'terser'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
