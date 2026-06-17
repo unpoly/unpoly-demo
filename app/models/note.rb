@@ -1,6 +1,8 @@
 class Note < ApplicationRecord
+  MIN_TITLE_LENGTH = 10
+
   belongs_to :tenant
-  validates :title, presence: true, length: { minimum: 10 }, uniqueness: { case_sensitive: false, scope: :tenant_id }
+  validates :title, presence: true, length: { minimum: MIN_TITLE_LENGTH }, uniqueness: { case_sensitive: false, scope: :tenant_id }
   validates :body, presence: true, length: { minimum: 30 }
 
   TAGS = %w[
@@ -63,6 +65,13 @@ class Note < ApplicationRecord
     paragraph_count.times.map {
       Faker::Lorem.paragraph(sentence_count: 6,  random_sentences_to_add: 10)
     }.join("\n\n")
+  end
+
+  def self.random_title
+    loop do
+      title = Faker::Book.unique.title
+      return title if title.length >= MIN_TITLE_LENGTH
+    end
   end
 
 end

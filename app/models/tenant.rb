@@ -50,7 +50,7 @@ class Tenant < ApplicationRecord
 
     30.times do
       notes.create!(
-        title: Faker::Book.unique.title,
+        title: Note.random_title,
         body: Note.random_body,
         tags: Note::TAGS.sample(rand(1..3)),
         created_at: rand(100).hours.ago
@@ -66,7 +66,7 @@ class Tenant < ApplicationRecord
       #{Faker::Address.country}
     ADDRESS
   end
-  
+
   # def sample_tag
   #   sources = [
   #     { klass: Faker::Book, method: :genre },
