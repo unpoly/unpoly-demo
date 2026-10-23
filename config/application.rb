@@ -16,11 +16,12 @@ module UnpolyDemoLayers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    # Restore config/secrets.yml, which was removed in Rails 7.2
     config.require_master_key = false
-
-    # Rails 7.2 no longer reads config/secrets.yml, but our servers still provide one.
-    if (secret_key_base = config_for(:secrets)&.secret_key_base)
-      config.secret_key_base = secret_key_base
+    config.secrets = config_for(:secrets)
+    config.secret_key_base = config.secrets.secret_key_base
+    def secrets
+      config.secrets
     end
   end
 end
