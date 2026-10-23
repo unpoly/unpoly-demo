@@ -33,8 +33,9 @@ jobs:
         with:
           bundler-cache: true
 
+      # db/schema.rb is not checked in
       - name: Set up database
-        run: bin/rails db:create db:schema:load
+        run: bin/rails db:create db:migrate
 
       - name: Run specs
         run: bundle exec rspec
