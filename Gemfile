@@ -4,7 +4,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0'
 gem 'pg'
-gem 'sqlite3'
+
+# json 3 removed the quirks_mode option that Rails 6.1 passes when encoding JSON
+gem 'json', '< 3'
+
 # Use Puma as the app server
 gem 'puma'
 # Use SCSS for stylesheets
@@ -27,7 +30,8 @@ gem 'bootstrap', '>=5.0.0'
 
 gem 'minidusen'
 
-gem 'active_type'
+# active_type 2.7+ requires Rails 7
+gem 'active_type', '< 2.7'
 gem 'memoized'
 
 gem 'haversine'
