@@ -13,7 +13,7 @@ class Tenant < ApplicationRecord
   scope :for_current_schema, -> { where(schema_version: schema_version)}
 
   def self.schema_version
-    connection.migration_context.current_version
+    connection_pool.migration_context.current_version
   end
 
   def self.clean!

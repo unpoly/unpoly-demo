@@ -44,6 +44,10 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # sass-rails defaults this to :sass, whose libsass minifier cannot parse
+  # tom-select's plain-CSS max(). See config/environments/production.rb.
+  config.assets.css_compressor = nil
+
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 end

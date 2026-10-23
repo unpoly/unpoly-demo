@@ -2,9 +2,10 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 7.2.0'
+gem 'sprockets-rails'
 gem 'pg'
-gem 'sqlite3'
+
 # Use Puma as the app server
 gem 'puma'
 # Use SCSS for stylesheets
@@ -12,8 +13,6 @@ gem 'sass-rails'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
-
-gem 'coffee-script'
 
 gem 'faker'
 
