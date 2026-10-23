@@ -44,5 +44,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
-          path: tmp/screenshots
+          path: tmp/capybara
           if-no-files-found: ignore
